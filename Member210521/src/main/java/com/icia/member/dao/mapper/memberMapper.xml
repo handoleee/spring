@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="mm"> 
+ <insert id="memberjoin" parameterType="memberdto">
+	INSERT INTO MEMBER210521(MID, MPASSWORD, MNAME, MEMAIL) VALUES(#{mid}, #{mpassword}, #{mname}, #{memail})
+	</insert> 
+	
+	 <select id="memberlist" resultType="memberdto">
+	SELECT*FROM MEMBER210521 ORDER BY MID ASC
+	</select> 
+	<!-- 전달할 타입 string 가져가야할 타입 resultType -->
+	<select id="memberview" parameterType="String" resultType="memberdto">
+	SELECT*FROM MEMBER210521 WHERE MID=#{mid}
+	</select>
+	
+ </mapper>
