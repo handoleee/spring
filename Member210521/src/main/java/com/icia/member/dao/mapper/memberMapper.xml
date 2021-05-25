@@ -4,15 +4,31 @@
  
  <mapper namespace="mm"> 
  <insert id="memberjoin" parameterType="memberdto">
-	INSERT INTO MEMBER210521(MID, MPASSWORD, MNAME, MEMAIL) VALUES(#{mid}, #{mpassword}, #{mname}, #{memail})
+	INSERT INTO MEMBER210525(MID, MPASSWORD, MNAME, MEMAIL) VALUES(#{mid}, #{mpassword}, #{mname}, #{memail})
 	</insert> 
 	
 	 <select id="memberlist" resultType="memberdto">
-	SELECT*FROM MEMBER210521 ORDER BY MID ASC
+	SELECT*FROM MEMBER210525 ORDER BY MID ASC
 	</select> 
 	<!-- 전달할 타입 string 가져가야할 타입 resultType -->
 	<select id="memberview" parameterType="String" resultType="memberdto">
-	SELECT*FROM MEMBER210521 WHERE MID=#{mid}
+	SELECT*FROM MEMBER210525 WHERE MID=#{mid}
 	</select>
 	
+	<!-- mid, mpassword가 모두 일치해야 mid 셀렉값이 있음 -->
+	<select id="memberlogin" parameterType="memberdto" resultType="String">
+	SELECT MID FROM MEMBER210525 WHERE MID=#{mid} AND MPASSWORD=#{mpassword}
+	</select>
+	
+	<select id="memberupdate" parameterType="String" resultType="memberdto">
+	SELECT*FROM MEMBER210525 WHERE MID=#{mid}
+	</select>
+	
+	<update id="updateprocess" parameterType="memberdto">
+	UPDATE MEMBER210525 SET MEMAIL=#{memail} WHERE MID=#{mid}
+	</update>
+	
+	<delete id="memberdelete" parameterType="String">
+	DELETE FROM MEMBER210525 WHERE MID=#{mid}
+	</delete>
  </mapper>
