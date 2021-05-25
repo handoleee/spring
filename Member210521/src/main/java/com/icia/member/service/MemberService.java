@@ -16,8 +16,6 @@ public class MemberService {
 	private MemberDAO mdao;
 	
 	private ModelAndView mav;
-	
-	private ModelAndView mv;
 
 	public ModelAndView memberJoin(MemberDTO member) {
 		mav = new ModelAndView();
@@ -47,7 +45,7 @@ public class MemberService {
 	 return mav; }
 
 	public ModelAndView memberView(String mid) {
-		mv = new ModelAndView();
+		mav = new ModelAndView();
 		// 한명 회원에 대한 정보만 필요하기 때문에 DTO 타입의 객체로 리턴을 받음
 		MemberDTO member = mdao.memberView(mid);
 		
