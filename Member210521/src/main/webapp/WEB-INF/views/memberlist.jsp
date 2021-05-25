@@ -14,6 +14,9 @@ border-collapse : collapse;}
 </head>
 <body>
 <h2>memberlist.jsp</h2>
+
+로그인아이디 : ${sessionScope.loginMember}<br>
+
 	<table>
 		<tr>
 			<th>아이디</th>
@@ -21,6 +24,7 @@ border-collapse : collapse;}
 			<th>이름</th>
 			<th>이메일</th>
 			<th>상세조회</th>
+			<th>삭제</th>
 		</tr>
 		<c:forEach var="member" items="${memberList}">
 		<tr>
@@ -32,8 +36,18 @@ border-collapse : collapse;}
 			<td><a href="memberview?mid=${member.mid}">조회</a></td>
 			<!--http://localhost:8081/member/memberview?mid=bb 
 				memberview라는 주소를 요청하면서 mid 파라미터에 aa를 담아서 간다-->
-			</tr>
+			<td><button onclick="deletefn('${member.mid}')">삭제</button></td>
+		</tr>
 		</c:forEach>
 	</table>
+	
+	<script>
+	function deletefn(id) {
+		console.log('삭제할아이디'+id);
+		location.href="memberdelete?mid="+id;
+		// location.href="memberdelete?mid=+id"; (X)
+		
+	}
+	</script>
 </body>
 </html>
