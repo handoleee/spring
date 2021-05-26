@@ -43,5 +43,8 @@ public class MemberDAO {
 		sql.delete("mm.memberdelete",mid);
 		
 	}
-
+	
+	public String idCheck(String mid) {
+		return sql.selectOne("mm.idcheck", mid);
+	}
 }

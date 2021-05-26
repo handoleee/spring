@@ -3,7 +3,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="mm"> 
- <insert id="memberjoin" parameterType="memberdto">
+ 	<insert id="memberjoin" parameterType="memberdto">
 	INSERT INTO MEMBER210525(MID, MPASSWORD, MNAME, MEMAIL) VALUES(#{mid}, #{mpassword}, #{mname}, #{memail})
 	</insert> 
 	
@@ -31,4 +31,8 @@
 	<delete id="memberdelete" parameterType="String">
 	DELETE FROM MEMBER210525 WHERE MID=#{mid}
 	</delete>
+	
+	<select id="idcheck" parameterType="String" resultType="String">
+	SELECT MID FROM MEMBER210525 WHERE MID=#{mid}
+	</select>
  </mapper>

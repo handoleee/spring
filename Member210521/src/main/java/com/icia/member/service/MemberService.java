@@ -140,4 +140,25 @@ public class MemberService {
 		
 		return mav;
 	}
+	
+	public String idCheck(String mid) {
+		String checkResult =  mdao.idCheck(mid);
+		/*
+		 * checkResult에 값이 담겨 온다면 해당 아이디가 DB에 존재한다는 것(사용불가)
+		 * checkResult에 값이 없다면 해당 아이디가 DB에 존재하지 않는다는 것(사용가능)
+		 */	
+		String result="";
+		if(checkResult == null) {
+			result = "ok";
+		} else {
+			result = "no";
+		}
+		System.out.println("서비스클래스 체크결과 "+result);
+		return result;
+	}
+
+	public MemberDTO memberViewAjax(String mid) {
+		MemberDTO member = mdao.memberView(mid);
+		return member;
+	}
 }
