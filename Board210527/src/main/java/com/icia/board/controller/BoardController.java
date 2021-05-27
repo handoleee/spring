@@ -17,11 +17,13 @@ public class BoardController {
 	
 	private ModelAndView mav;
 	
-	@RequestMapping(value="/bwpage")
-	public String bwPage() {
+	// 글쓰기 화면 띄우는 메소드
+	@RequestMapping(value="/writepage")
+	public String writePage() {
 		return "boardwrite";
 	}
 	
+	// 글쓰기 처리를 하는 메소드
 	@RequestMapping(value="/boardwrite")
 	public ModelAndView boardWrite(@ModelAttribute BoardDTO board) {
 		mav = bs.boardWrite(board);

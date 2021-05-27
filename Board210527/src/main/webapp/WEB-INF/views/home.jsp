@@ -10,7 +10,7 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-<a href="bwpage">글쓰기</a>
+<a href="writepage">글쓰기</a>
 <a href="boardlist">글목록</a>
 </body>
 </html>

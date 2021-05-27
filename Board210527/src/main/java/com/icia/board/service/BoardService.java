@@ -19,7 +19,15 @@ public class BoardService {
 	
 	public ModelAndView boardWrite(BoardDTO board) {
 		mav = new ModelAndView();
-		bdao.boardWrite(board);
+		int writeResult = bdao.boardWrite(board);
+		
+		// 글쓰기 성공 : 목록 출력(목록출력을 담당하는 컨트롤러의 주소를 요청해야함)
+		// 글쓰기 실패 : boarewrite.jsp를 띄움
+		if(writeResult > 0) {
+			mav.setViewName("redirect:/boardlist");
+		} else {
+			mav.setViewName("boardwrite");
+		}
 		return mav;
 	}
 
