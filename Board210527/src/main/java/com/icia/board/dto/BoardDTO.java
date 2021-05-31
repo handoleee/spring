@@ -1,20 +1,102 @@
 package com.icia.board.dto;
 
-import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
-//@Data
-// getter, setter, toString, ìƒì„±ìë¥¼ ìë™ìœ¼ë¡œ ë§Œë“¤ì–´ì¤Œ
-// Getter, Setter, ToString ì„ íƒí•´ì„œ ë„£ê¸°ë„ ê°€ëŠ¥ dataê°€ ì œì¼ í¼
 public class BoardDTO {
-	
+
 	private int bnumber;
 	private String btitle;
 	private String bpassword;
 	private String bwriter;
 	private String bcontents;
 	private String bdate;
-	private int bhits; 
+	private int bhits;
+	
+	// ÆÄÀÏÀ» ´ã±â À§ÇÑ ÇÊµå(boardwrite.jsp¿¡¼­ Controller·Î Àü´ŞÇÒ ¶§)
+	private MultipartFile bfile;
+		
+	// ÆÄÀÏ¸íÀ» ´ã±â À§ÇÑ ÇÊµå
+	private String bfilename;
+
+	public int getBnumber() {
+		return bnumber;
+	}
+
+	public void setBnumber(int bnumber) {
+		this.bnumber = bnumber;
+	}
+
+	public String getBtitle() {
+		return btitle;
+	}
+
+	public void setBtitle(String btitle) {
+		this.btitle = btitle;
+	}
+
+	public String getBpassword() {
+		return bpassword;
+	}
+
+	public void setBpassword(String bpassword) {
+		this.bpassword = bpassword;
+	}
+
+	public String getBwriter() {
+		return bwriter;
+	}
+
+	public void setBwriter(String bwriter) {
+		this.bwriter = bwriter;
+	}
+
+	public String getBcontents() {
+		return bcontents;
+	}
+
+	public void setBcontents(String bcontents) {
+		this.bcontents = bcontents;
+	}
+
+	public String getBdate() {
+		return bdate;
+	}
+
+	public void setBdate(String bdate) {
+		this.bdate = bdate;
+	}
+
+	public int getBhits() {
+		return bhits;
+	}
+
+	public void setBhits(int bhits) {
+		this.bhits = bhits;
+	}
+
+	public MultipartFile getBfile() {
+		return bfile;
+	}
+
+	public void setBfile(MultipartFile bfile) {
+		this.bfile = bfile;
+	}
+
+	public String getBfilename() {
+		return bfilename;
+	}
+
+	public void setBfilename(String bfilename) {
+		this.bfilename = bfilename;
+	}
+
+	@Override
+	public String toString() {
+		return "BoardDTO [bnumber=" + bnumber + ", btitle=" + btitle + ", bpassword=" + bpassword + ", bwriter="
+				+ bwriter + ", bcontents=" + bcontents + ", bdate=" + bdate + ", bhits=" + bhits + ", bfilename="
+				+ bfilename + "]";
+	}
+	
+	
 	
 }
-	
-	

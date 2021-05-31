@@ -3,22 +3,40 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="bm"> 
-<insert id="boardwrite" parameterType="boarddto">
+	<insert id="boardwrite" parameterType="boarddto">
 	INSERT INTO BOARD210527(
-		BNUMBER, BTITLE, BPASSWORD, BWRITER, BCONTENTS, BDATE, BHITS) 
-		VALUES(BOARD210527_SEQ.NEXTVAL, #{btitle}, #{bpassword}, #{bwriter}, #{bcontents}, SYSDATE, 0) 
+	BNUMBER, BTITLE, BPASSWORD, BWRITER, BCONTENTS, BDATE, BHITS) 
+	VALUES (BOARD210527_SEQ.NEXTVAL, #{btitle}, #{bpassword}, #{bwriter}, #{bcontents}, SYSDATE, 0)
+	</insert>
 	
-</insert>
- 
-<!-- <insert id="boardwrite" parameterType="boarddto">
-		INSERT INTO BOARD210527(
-		BNUMBER, BTITLE, BPASSWORD, BWRITER, BCONTENTS, BDATE, BHITS) 
-		VALUES(BOARD210527_SEQ.NEXTVAL, #{btitle}, #{bpassword}, #{bwriter}, #{bcontents}, SYSDATE, 0)
-</insert> -->
+	<select id="boardlist" resultType="boarddto">
+	SELECT*FROM BOARD210527
+	</select>
+	
+	<select id="boardview" parameterType="int" resultType="boarddto">
+	SELECT*FROM BOARD210527 WHERE BNUMBER=#{bnumber}
+	</select>
+	
+	<update id="boardhits" parameterType="int">
+	UPDATE BOARD210527 SET BHITS = BHITS+1 WHERE BNUMBER=#{bnumber}
+	</update>
+	
+	<select id="boardupdate" parameterType="int" resultType="boarddto">
+	SELECT*FROM BOARD210527 WHERE BNUMBER=#{bnumber}
+	</select>
 
-<select id="boardlist" resultType="boarddto">
-SELECT*FROM BOARD210527 
-</select>
+	<update id="updateprocess" parameterType="boarddto">
+		UPDATE BOARD210527 SET BTITLE=#{btitle}, BCONTENTS=#{bcontents} WHERE BNUMBER=#{bnumber}
+	</update>
+	
+	<delete id="boarddelete" parameterType="int">
+		DELETE FROM BOARD210527 WHERE BNUMBER=#{bnumber}
+	</delete>
+	
+	<insert id="boardwritefile" parameterType="boarddto">
+	INSERT INTO BOARD210527(BNUMBER, BTITLE, BPASSWORD, BWRITER, BCONTENTS, BDATE, BHITS, BFILENAME) 
+		VALUES(BOARD210527_SEQ.NEXTVAL, #{btitle}, #{bpassword}, #{bwriter}, #{bcontents}, SYSDATE, 0, #{bfilename}) 
+	</insert>
  </mapper>
  
  

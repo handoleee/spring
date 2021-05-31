@@ -1,9 +1,12 @@
 package com.icia.board.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.board.dao.BoardDAO;
@@ -21,22 +24,93 @@ public class BoardService {
 		mav = new ModelAndView();
 		int writeResult = bdao.boardWrite(board);
 		
-		// ê¸€ì“°ê¸° ì„±ê³µ : ëª©ë¡ ì¶œë ¥(ëª©ë¡ì¶œë ¥ì„ ë‹´ë‹¹í•˜ëŠ” ì»¨íŠ¸ë¡¤ëŸ¬ì˜ ì£¼ì†Œë¥¼ ìš”ì²­í•´ì•¼í•¨)
-		// ê¸€ì“°ê¸° ì‹¤íŒ¨ : boarewrite.jspë¥¼ ë„ì›€
+		// ±Û¾²±â ¼º°ø : ¸ñ·Ï Ãâ·Â(¸ñ·ÏÃâ·ÂÀ» ´ã´çÇÏ´Â ÄÁÆ®·Ñ·¯ÀÇ ÁÖ¼Ò¸¦ ¿äÃ»ÇØ¾ßÇÔ)
+		// ±Û¾²±â ½ÇÆĞ : boardwrite.jsp¸¦ ¶ç¿ò
 		if(writeResult > 0) {
 			mav.setViewName("redirect:/boardlist");
 		} else {
 			mav.setViewName("boardwrite");
 		}
 		return mav;
-	}
-
+		}
+	
 	public ModelAndView boardList() {
 		mav = new ModelAndView();
 		List<BoardDTO> boardList = bdao.boardList();
 		
 		mav.addObject("boardList", boardList);
 		mav.setViewName("boardlist");
+		
 		return mav;
 	}
+	
+	public ModelAndView boardView(int bnumber) {
+		mav = new ModelAndView();
+		// 1. ÇØ´ç ±ÛÀÇ Á¶È¸¼ö °ª 1Áõ°¡(update Äõ¸®)
+		// 2. ÇØ´ç ±ÛÀÇ ³»¿ë °¡Á®¿À±â(select Äõ¸®)
+		bdao.boardHits(bnumber);
+		BoardDTO board = bdao.boardView(bnumber);
+		
+		mav.addObject("boardView", board);
+		mav.setViewName("boardview");
+		return mav;
+	}
+	
+	 public ModelAndView boardUpdate(int bnumber) {
+			mav = new ModelAndView(); 
+			//DB¿¡¼­ bnumber ÇØ´ç µ¥ÀÌÅÍ °¡Á®¿Í¼­ boardupdate.jsp ¸¦ ¸ñÀûÁö·Î ÁöÁ¤
+			BoardDTO board = bdao.boardView(bnumber); 
+			mav.addObject("boardUpdate", board);
+			mav.setViewName("boardupdate"); 
+			return mav; 
+		}
+
+		 public ModelAndView updateProcess(BoardDTO board) {
+			mav = new ModelAndView();
+			int updateResult = bdao.updateProcess(board);
+			if(updateResult > 0) {
+				
+			mav.setViewName("redirect:/boardlist"); // boardlist.jsp
+			} else {
+				// 2. ÇØ´ç ±ÛÀÇ »ó¼¼È­¸é Ãâ·Â
+				mav.setViewName("redirect:/boardview?bnumber="+board.getBnumber());
+			}
+			return mav;
+		}
+
+		 public ModelAndView boardDelete(int bnumber) {
+			 mav = new ModelAndView();
+			 int deleteResult = bdao.boardDelete(bnumber);
+			 if(deleteResult > 0) {
+				 mav.setViewName("redirect:/boardlist");
+			 }
+			 return mav;
+		}
+
+		public ModelAndView boardWriteFile(BoardDTO board) throws IllegalStateException, IOException {
+			mav = new ModelAndView();
+			// dto¿¡ ´ã±ä ÆÄÀÏÀ» °¡Á®¿È
+			MultipartFile bfile = board.getBfile();
+			// ÆÄÀÏ ÀÌ¸§À» °¡Á®¿È(ÆÄÀÏÀÌ¸§À» DB¿¡ ÀúÀåÇÏ±â À§ÇØ)
+			String bfilename = bfile.getOriginalFilename();
+			// ÆÄÀÏ¸í Áßº¹À» ÇÇÇÏ±â À§ÇØ ÆÄÀÏÀÌ¸§¾Õ¿¡ ÇöÀç ½Ã°£°ªÀ» ºÙÀÓ(ÀÚ¹Ù ±âº» ¸Ş¼Òµå)
+			bfilename = System.currentTimeMillis() + "-" + bfilename;
+			System.out.println("boardWriteFile ¸Ş¼Òµå " + bfilename);
+			// ÆÄÀÏ ÀúÀåÇÏ±â
+			/*String savePath = "D:\\source_phs\\spring\\spring\\Board210527\\src\\main\\webapp\\resources\\upload\\"+bfilename;*/
+			String savePath = "D:\\ÇÑ¼Ö\\source_phs\\spring\\spring\\Board210527\\src\\main\\webapp\\resources\\upload\\"+bfilename;
+			// bfileÀÌ ºñ¾îÀÖÁö ¾Ê´Ù¸é(Áï ÆÄÀÏÀÌ ÀÖÀ¸¸é) savePath¿¡ ÀúÀåÀ» ÇÏ°Ú´Ù.
+			if(!bfile.isEmpty()) {
+				bfile.transferTo(new File(savePath));
+			}
+			// throw ¾îÂ¼±¸ : ¿¹¿ÜÃ³¸®¹æ½Ä
+			// ¿©±â±îÁöÀÇ ³»¿ëÀº ÆÄÀÏÀ» ÀúÀåÇÏ´Â °úÁ¤(DB¿¬°áµÈ°Å ¾Æ´Ô)
+			
+			board.setBfilename(bfilename);
+			bdao.boardWriteFile(board);
+			
+			mav.setViewName("redirect:/boardlist");
+			return mav;
+		}
+
 }

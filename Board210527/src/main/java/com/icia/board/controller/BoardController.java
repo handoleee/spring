@@ -1,9 +1,12 @@
 package com.icia.board.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.board.dto.BoardDTO;
@@ -11,31 +14,64 @@ import com.icia.board.service.BoardService;
 
 @Controller
 public class BoardController {
-
-	@Autowired
+@Autowired
 	private BoardService bs;
-	
+
 	private ModelAndView mav;
-	
-	// ê¸€ì“°ê¸° í™”ë©´ ë„ìš°ëŠ” ë©”ì†Œë“œ
+
+	// ±Û¾²±â È­¸é ¶ç¿ì´Â ¸Ş¼Òµå
 	@RequestMapping(value="/writepage")
 	public String writePage() {
 		return "boardwrite";
-	}
-	
-	// ê¸€ì“°ê¸° ì²˜ë¦¬ë¥¼ í•˜ëŠ” ë©”ì†Œë“œ
+}
+
+	// ±Û¾²±â Ã³¸®¸¦ ÇÏ´Â ¸Ş¼Òµå
 	@RequestMapping(value="/boardwrite")
 	public ModelAndView boardWrite(@ModelAttribute BoardDTO board) {
 		mav = bs.boardWrite(board);
-		System.out.println(board);
 		return mav;
 	}
 	
-	// ê¸€ëª©ë¡
-	@RequestMapping(value="/boardlist")
+	// ÆÄÀÏÃ·ºÎ ±Û¾²±â
+		@RequestMapping(value="boardwritefile")
+		public ModelAndView boardWriteFile(@ModelAttribute BoardDTO board) throws IllegalStateException, IOException {
+			mav = bs.boardWriteFile(board);
+			return mav;
+		}
+
+	// ±Û ¸ñ·Ï
+	@RequestMapping(value="/boardlist") 
 	public ModelAndView boardList() {
 		mav = bs.boardList();
 		return mav;
 	}
 	
-}
+	// ±Û Á¶È¸ ±â´É
+	@RequestMapping(value="/boardview") 
+	public ModelAndView boardView(@RequestParam("bnumber") int bnumber) {
+		mav = bs.boardView(bnumber);
+		return mav;
+	}
+	
+	// ¼öÁ¤È­¸é ¿äÃ»
+		@RequestMapping(value="/boardupdate") 
+		public ModelAndView boardUpdate(@RequestParam("bnumber") int bnumber) { 
+			mav = bs.boardUpdate(bnumber);
+			return mav;
+		}
+		
+		// ¼öÁ¤Ã³¸®
+		@RequestMapping(value="/updateprocess")
+		public ModelAndView updateProcess(@ModelAttribute BoardDTO board) {
+			mav = bs.updateProcess(board);
+			return mav;
+		}
+		 
+		// »èÁ¦Ã³¸®
+		@RequestMapping(value="/boarddelete")
+		public ModelAndView boardDelete(@RequestParam("bnumber") int bnumber) {
+			mav = bs.boardDelete(bnumber);
+			return mav;
+		}
+	}
+
