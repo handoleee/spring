@@ -18,7 +18,7 @@ border-collapse: collapse;
 	<table>
 		<tr>
 			<th>글번호</th>
-			<th>글제목</th>
+			<th><a href="boardview">글제목</a></th>
 			<th>비밀번호</th>
 			<th>작성자</th>
 			<th>내용</th>

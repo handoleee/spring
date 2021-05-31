@@ -19,6 +19,14 @@
 <select id="boardlist" resultType="boarddto">
 SELECT*FROM BOARD210527 
 </select>
+
+<!-- <select id="boardview" parameterType="int" resultType="boarddto">
+SELECT*FROM BOARD210527 WHERE BNUMBER=#{bnumber}
+</select>
+
+<select id="boardupdate" parameterType="int" resultType="boarddto">
+SELECT*FROM BOARD210527 WHERE BNUMBER=#{bnumber}</select> -->
+
  </mapper>
  
  

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.board.dto.BoardDTO;
@@ -37,4 +38,18 @@ public class BoardController {
 		return mav;
 	}
 	
+	/*
+	 * // 글 조회 기능
+	 * 
+	 * @RequestMapping(value="/boardview") public ModelAndView
+	 * boardView(@RequestParam("bnumber") int bnumber) { mav =
+	 * bs.boardView(bnumber); return mav; }
+	 * 
+	 * // 글 수정 기능
+	 * 
+	 * @RequestMapping(value="/boardupdate") public ModelAndView
+	 * update(@RequestParam("bnumber") int bnumber) { mav = bs.update(bnumber);
+	 * return mav; }
+	 */
 }
+

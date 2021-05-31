@@ -38,4 +38,14 @@ public class BoardService {
 		mav.setViewName("boardlist");
 		return mav;
 	}
+
+	/*
+	 * public ModelAndView boardView(int bnumber) { mav = new ModelAndView();
+	 * BoardDTO board = bdao.boardView(bnumber); mav.addObject("boardView", board);
+	 * mav.setViewName("boardview"); return mav; }
+	 * 
+	 * public ModelAndView update(int bnumber) { mav = new ModelAndView(); BoardDTO
+	 * boardUpdate = bdao.update(bnumber); mav.addObject("board", boardUpdate);
+	 * mav.setViewName("boardupdate"); return mav; }
+	 */
 }
