@@ -1,4 +1,4 @@
-S<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -37,5 +37,6 @@ border-collapse: collapse;
 		</tr>
 		</c:forEach>
 	</table>
+	<a href="writepage">글쓰기화면</a>
 </body>
 </html>

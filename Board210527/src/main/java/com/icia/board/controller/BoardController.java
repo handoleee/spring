@@ -14,64 +14,81 @@ import com.icia.board.service.BoardService;
 
 @Controller
 public class BoardController {
-@Autowired
+
+	@Autowired
 	private BoardService bs;
 
 	private ModelAndView mav;
 
-	// ±Û¾²±â È­¸é ¶ç¿ì´Â ¸Ş¼Òµå
+	// ê¸€ì“°ê¸° í™”ë©´ ë„ìš°ëŠ” ë©”ì†Œë“œ
 	@RequestMapping(value="/writepage")
 	public String writePage() {
 		return "boardwrite";
-}
+	}
 
-	// ±Û¾²±â Ã³¸®¸¦ ÇÏ´Â ¸Ş¼Òµå
+	// ê¸€ì“°ê¸° ì²˜ë¦¬ë¥¼ í•˜ëŠ” ë©”ì†Œë“œ
 	@RequestMapping(value="/boardwrite")
 	public ModelAndView boardWrite(@ModelAttribute BoardDTO board) {
 		mav = bs.boardWrite(board);
+		System.out.println(board);
 		return mav;
 	}
 	
-	// ÆÄÀÏÃ·ºÎ ±Û¾²±â
-		@RequestMapping(value="boardwritefile")
-		public ModelAndView boardWriteFile(@ModelAttribute BoardDTO board) throws IllegalStateException, IOException {
-			mav = bs.boardWriteFile(board);
-			return mav;
-		}
-
-	// ±Û ¸ñ·Ï
-	@RequestMapping(value="/boardlist") 
+	// íŒŒì¼ì²¨ë¶€ ê¸€ì“°ê¸°
+	@RequestMapping(value="boardwritefile")
+	public ModelAndView boardWriteFile(@ModelAttribute BoardDTO board) throws IllegalStateException, IOException {
+		mav = bs.boardWriteFile(board);
+		return mav;
+	}
+	
+	// ê¸€ ëª©ë¡
+	@RequestMapping(value="/boardlist")
 	public ModelAndView boardList() {
 		mav = bs.boardList();
 		return mav;
 	}
-	
-	// ±Û Á¶È¸ ±â´É
+
+	// ê¸€ ì¡°íšŒ ê¸°ëŠ¥
 	@RequestMapping(value="/boardview") 
-	public ModelAndView boardView(@RequestParam("bnumber") int bnumber) {
-		mav = bs.boardView(bnumber);
+	public ModelAndView boardView(@RequestParam("bnumber") int bnumber, 
+					@RequestParam(value="page", required=false, defaultValue="1") int page) { 
+		mav = bs.boardView(bnumber, page); 
 		return mav;
 	}
 	
-	// ¼öÁ¤È­¸é ¿äÃ»
-		@RequestMapping(value="/boardupdate") 
-		public ModelAndView boardUpdate(@RequestParam("bnumber") int bnumber) { 
-			mav = bs.boardUpdate(bnumber);
-			return mav;
-		}
-		
-		// ¼öÁ¤Ã³¸®
-		@RequestMapping(value="/updateprocess")
-		public ModelAndView updateProcess(@ModelAttribute BoardDTO board) {
-			mav = bs.updateProcess(board);
-			return mav;
-		}
-		 
-		// »èÁ¦Ã³¸®
-		@RequestMapping(value="/boarddelete")
-		public ModelAndView boardDelete(@RequestParam("bnumber") int bnumber) {
-			mav = bs.boardDelete(bnumber);
-			return mav;
-		}
+	// ìˆ˜ì •í™”ë©´ ìš”ì²­
+	@RequestMapping(value="/boardupdate") 
+	public ModelAndView boardUpdate(@RequestParam("bnumber") int bnumber) { 
+		mav = bs.boardUpdate(bnumber);
+		return mav;
 	}
-
+	
+	// ìˆ˜ì •ì²˜ë¦¬
+	@RequestMapping(value="/updateprocess")
+	public ModelAndView updateProcess(@ModelAttribute BoardDTO board) {
+		mav = bs.updateProcess(board);
+		return mav;
+	}
+	 
+	// ì‚­ì œì²˜ë¦¬
+	@RequestMapping(value="/boarddelete")
+	public ModelAndView boardDelete(@RequestParam("bnumber") int bnumber) {
+		mav = bs.boardDelete(bnumber);
+		return mav;
+	}
+	
+	// í˜ì´ì§•ì²˜ë¦¬
+	@RequestMapping(value="/paging")
+	public ModelAndView boardPaging(@RequestParam(value="page", required=false, defaultValue="1") int page) {
+		mav = bs.boardPaging(page);
+		return mav;
+	}
+	
+	// ê²€ìƒ‰ì²˜ë¦¬
+	@RequestMapping(value="/search")
+	public ModelAndView boardSearch(@RequestParam("searchtype") String searchType, 
+									@RequestParam("keyword") String keyword) {
+		mav = bs.boardSearch(searchType, keyword);
+		return mav;
+	}		
+}

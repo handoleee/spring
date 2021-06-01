@@ -2,7 +2,9 @@ package com.icia.board.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.board.dao.BoardDAO;
+import com.icia.board.dao.CommentDAO;
 import com.icia.board.dto.BoardDTO;
+import com.icia.board.dto.CommentDTO;
+import com.icia.board.dto.PageDTO;
 
 @Service
 public class BoardService {
@@ -18,99 +23,186 @@ public class BoardService {
 	@Autowired
 	private BoardDAO bdao;
 	
+	@Autowired
+	private CommentDAO cdao;
+	
 	private ModelAndView mav;
 	
 	public ModelAndView boardWrite(BoardDTO board) {
 		mav = new ModelAndView();
 		int writeResult = bdao.boardWrite(board);
 		
-		// ±Û¾²±â ¼º°ø : ¸ñ·Ï Ãâ·Â(¸ñ·ÏÃâ·ÂÀ» ´ã´çÇÏ´Â ÄÁÆ®·Ñ·¯ÀÇ ÁÖ¼Ò¸¦ ¿äÃ»ÇØ¾ßÇÔ)
-		// ±Û¾²±â ½ÇÆĞ : boardwrite.jsp¸¦ ¶ç¿ò
+		// ê¸€ì“°ê¸° ì„±ê³µ : ëª©ë¡ ì¶œë ¥(ëª©ë¡ì¶œë ¥ì„ ë‹´ë‹¹í•˜ëŠ” ì»¨íŠ¸ë¡¤ëŸ¬ì˜ ì£¼ì†Œë¥¼ ìš”ì²­í•´ì•¼í•¨)
+		// ê¸€ì“°ê¸° ì‹¤íŒ¨ : boarewrite.jspë¥¼ ë„ì›€
 		if(writeResult > 0) {
 			mav.setViewName("redirect:/boardlist");
 		} else {
 			mav.setViewName("boardwrite");
 		}
 		return mav;
-		}
-	
+	}
+
 	public ModelAndView boardList() {
 		mav = new ModelAndView();
 		List<BoardDTO> boardList = bdao.boardList();
+		mav.addObject("boardList", boardList);
+		mav.setViewName("boardlist");
+		return mav;
+	}
+
+	
+	 public ModelAndView boardView(int bnumber, int page) { 
+		 mav = new ModelAndView();
+		 // 1. í•´ë‹¹ ê¸€ì˜ ì¡°íšŒìˆ˜ ê°’ 1 ì¦ê°€ (update ì¿¼ë¦¬)
+		 // 2. í•´ë‹¹ ê¸€ì˜ ë‚´ìš© ê°€ì ¸ì˜¤ê¸° (select ì¿¼ë¦¬)
+		 bdao.boardHits(bnumber);
+		 
+		 BoardDTO board = bdao.boardView(bnumber);
+		 
+		 // ìƒì„¸ë³´ê¸° í›„ ëª©ë¡ìœ¼ë¡œ ëŒì•„ê°ˆ ë•Œ í˜„ì¬ í˜ì´ì§€ë¥¼ ìœ ì§€í•˜ê¸° ìœ„í•´ pageë„ ê°™ì´ ê°€ì ¸ê°
+		 mav.addObject("page", page);
+		 
+		 // boardview.jspë¥¼ ì—´ ë•Œ DBì— ì €ì¥ëœ ëŒ“ê¸€ ë¦¬ìŠ¤íŠ¸ë¡œ í•¨ê»˜ ê°€ì ¸ê°
+		 List<CommentDTO> commentList = cdao.commentList(bnumber);
+		 mav.addObject("commentList", commentList);
+		 
+		 mav.addObject("board", board);
+		 mav.setViewName("boardview"); 
+		 return mav;
+	 }
+	 
+	 public ModelAndView boardUpdate(int bnumber) {
+		mav = new ModelAndView(); 
+		//DBì—ì„œ bnumber í•´ë‹¹ ë°ì´í„° ê°€ì ¸ì™€ì„œ boardupdate.jspë¥¼ ëª©ì ì§€ë¡œ ì§€ì •
+		BoardDTO board = bdao.boardView(bnumber); 
+		mav.addObject("boardUpdate", board);
+		mav.setViewName("boardupdate"); 
+		return mav; 
+	}
+
+	 public ModelAndView updateProcess(BoardDTO board) {
+		mav = new ModelAndView();
+		int updateResult = bdao.updateProcess(board);
+		if(updateResult > 0) {
+			
+		mav.setViewName("redirect:/boardlist"); // boardlist.jsp
+		} else {
+			// 2. í•´ë‹¹ ê¸€ì˜ ìƒì„¸í™”ë©´ ì¶œë ¥
+			mav.setViewName("redirect:/boardview?bnumber="+board.getBnumber());
+		}
+		return mav;
+	}
+
+	 public ModelAndView boardDelete(int bnumber) {
+		 mav = new ModelAndView();
+		 int deleteResult = bdao.boardDelete(bnumber);
+		 if(deleteResult > 0) {
+			 mav.setViewName("redirect:/boardlist");
+		 }
+		 return mav;
+	}
+
+	public ModelAndView boardWriteFile(BoardDTO board) throws IllegalStateException, IOException {
+		mav = new ModelAndView();
+		// dtoì— ë‹´ê¸´ íŒŒì¼ì„ ê°€ì ¸ì˜´
+		MultipartFile bfile = board.getBfile();
+		// íŒŒì¼ ì´ë¦„ì„ ê°€ì ¸ì˜´(íŒŒì¼ì´ë¦„ì„ DBì— ì €ì¥í•˜ê¸° ìœ„í•´)
+		String bfilename = bfile.getOriginalFilename();
+		// íŒŒì¼ëª… ì¤‘ë³µì„ í”¼í•˜ê¸° ìœ„í•´ íŒŒì¼ì´ë¦„ì•ì— í˜„ì¬ ì‹œê°„ê°’ì„ ë¶™ì„(ìë°” ê¸°ë³¸ ë©”ì†Œë“œ)
+		bfilename = System.currentTimeMillis() + "-" + bfilename;
+		System.out.println("boardWriteFile ë©”ì†Œë“œ " + bfilename);
+		// íŒŒì¼ ì €ì¥í•˜ê¸°
+//		String savePath = "D:\\source_phs\\spring\\spring\\Board210527\\src\\main\\webapp\\resources\\upload\\"+bfilename;
+		String savePath = "D:\\í•œì†”\\source_phs\\spring\\spring\\Board210527\\src\\main\\webapp\\resources\\upload\\"+bfilename;
+		
+		// bfileì´ ë¹„ì–´ìˆì§€ ì•Šë‹¤ë©´(ì¦‰ íŒŒì¼ì´ ìˆìœ¼ë©´) savePathì— ì €ì¥ì„ í•˜ê² ë‹¤.
+		if(!bfile.isEmpty()) {
+			bfile.transferTo(new File(savePath));
+		}
+		// throw ì–´ì©Œêµ¬ : ì˜ˆì™¸ì²˜ë¦¬ë°©ì‹
+		// ì—¬ê¸°ê¹Œì§€ì˜ ë‚´ìš©ì€ íŒŒì¼ì„ ì €ì¥í•˜ëŠ” ê³¼ì •(DBì—°ê²°ëœê±° ì•„ë‹˜)
+		
+		board.setBfilename(bfilename);
+		bdao.boardWriteFile(board);
+		
+		mav.setViewName("redirect:/boardlist");
+		return mav;
+	}
+
+	// í˜ì´ì§• ì²˜ë¦¬ì— í™œìš©í•  ìƒìˆ˜
+	private static final int PAGE_LIMIT = 2; // í•œ í˜ì´ì§€ì— ë³´ì—¬ì§ˆ ê¸€ ê°œìˆ˜
+	private static final int BLOCK_LIMIT = 5; // í•œ í™”ë©´ì— ë³´ì—¬ì§ˆ í˜ì´ì§€ ê°œìˆ˜
+	
+	public ModelAndView boardPaging(int page) {
+		mav = new ModelAndView();
+		// ê²Œì‹œê¸€ ê°¯ìˆ˜ ê°€ì ¸ì˜¤ê¸°
+		int listCount = bdao.listCount();
+		
+		// ë§¤ê°œë³€ìˆ˜ë¡œ ë„˜ê²¨ë°›ì€ page ë³€ìˆ˜ê°’ì„ ê¸°ì¤€ìœ¼ë¡œ í˜„ì¬ ë³´ì—¬ì¤˜ì•¼ í•˜ëŠ” ê²Œì‹œë¬¼ì˜ ë²”ìœ„ ê³„ì‚°
+		int startRow = (page-1) * PAGE_LIMIT + 1;
+		int endRow = page * PAGE_LIMIT;
+		// page=1ì¼ ë•Œ(1í˜ì´ì§€í´ë¦­) startRow=1, endRow=3
+		// page=2ì¼ ë•Œ(2í˜ì´ì§€í´ë¦­) startRow=4, endRow=6
+		// page=3ì¼ ë•Œ(3í˜ì´ì§€í´ë¦­) startRow=7, endRow=9
+		
+		// startRow, endRow ê¸°ì¤€ìœ¼ë¡œ boardlist ê°€ì ¸ì˜¤ê¸°
+		PageDTO paging = new PageDTO();
+		paging.setStartRow(startRow);
+		paging.setEndRow(endRow);
+		List<BoardDTO> boardList = bdao.boardPaging(paging);
+		
+		// í•„ìš”í•œ í˜ì´ì§€ ê³„ì‚°
+		// maxPage : ìµœëŒ€ë¡œ í•„ìš”í•œ í˜ì´ì§€ ê°¯ìˆ˜
+		// ê¸€ê°¯ìˆ˜ : 16ê°œ, í•œí˜ì´ì§€ì— ë³´ì—¬ì§ˆ ê¸€ê°¯ìˆ˜ : 3ê°œ => maxPage=6
+		// 3.9=>4, 4.1=>5
+		int maxPage = (int)(Math.ceil((double)listCount / PAGE_LIMIT));
+		// í˜ì´ì§€ ë²ˆí˜¸ì—ì„œ ì‹œì‘í•  í˜ì´ì§€ì˜ ë²ˆí˜¸
+		// 1,4,7,10 ~~~ (BLOCK_LIMIT=3 ì¼ë•Œ)
+		// 1,6,11,16 ~~~ (BLOCK_LIMIT=5 ì¼ë•Œ)
+		// 1,11,21,31 ~~~ (BLOCK_LIMIT=10 ì¼ë•Œ)
+		int startPage = (((int)(Math.ceil((double)page / BLOCK_LIMIT))) - 1) * BLOCK_LIMIT + 1;
+		// 3,6,9,12 ~~~ (BLOCK_LIMIT=3 ì¼ë•Œ)
+		// 5,10,15,20 ~~~ (BLOCK_LIMIT=5 ì¼ë•Œ)
+		// 10,20,30,40 ~~~ (BLOCK_LIMIT=10 ì¼ë•Œ)
+		int endPage = startPage + BLOCK_LIMIT - 1;
+		
+		/* ê³„ì‚°ê²°ê³¼ ì „ì²´ í˜ì´ì§€ ê°¯ìˆ˜ëŠ” 4ê°œë°–ì— ì—†ëŠ”ë°
+		 * BLOCK_LIMIT 5ë¼ë©´ endPageëŠ” 5ì˜ ê°’ì„ ê°–ê²Œ ë¨
+		 * ê·¸ëŸ¬ë©´ 5í˜ì´ì§€ëŠ” í´ë¦­ì„ í•´ë´ì•¼ ë‚˜ì˜¬ ë°ì´í„°ë„ ì—†ê³  í•„ìš”ì—†ëŠ” í˜ì´ì§€ ë²ˆí˜¸ì„. ë”°ë¼ì„œ BLOCK_LIMITì´ 5ë¼ê³  í•˜ë”ë¼ë„
+		 * í•˜ë‹¨ì˜ í˜ì´ì§€ ëª©ë¡ì€ 1,2,3,4ë§Œ ë…¸ì¶œë˜ë©´ ë˜ê¸° ë•Œë¬¸ì— ì•„ë˜ì™€ ê°™ì€ ì‹ì„ í†µí•´ endPageê°’ì„ ì¡°ì •
+		 * */
+		if(endPage > maxPage) 
+			endPage = maxPage;
+		
+		// ê³„ì‚°ëœ page ê´€ë ¨ ê°’ì„ PageDTO ê°ì²´ì— ë‹´ìŒ
+		paging.setPage(page);
+		paging.setStartPage(startPage);
+		paging.setEndPage(endPage);
+		paging.setMaxPage(maxPage);
+		
+		mav.addObject("paging", paging);
+		mav.addObject("boardList", boardList);
+		mav.setViewName("boardlistpaging");
+		
+		return mav;
+	}
+
+	public ModelAndView boardSearch(String searchType, String keyword) {
+		mav = new ModelAndView();
+		
+		// Mapì„ ì‚¬ìš©í•˜ì—¬ mapperë¡œ ì „ë‹¬
+		Map<String, String> searchMap = new HashMap<String, String>();
+		// key, valueê°’ ()
+		searchMap.put("type", searchType);
+		searchMap.put("word", keyword);
+		
+		List<BoardDTO> boardList = bdao.boardSearh(searchMap);
 		
 		mav.addObject("boardList", boardList);
 		mav.setViewName("boardlist");
 		
 		return mav;
 	}
-	
-	public ModelAndView boardView(int bnumber) {
-		mav = new ModelAndView();
-		// 1. ÇØ´ç ±ÛÀÇ Á¶È¸¼ö °ª 1Áõ°¡(update Äõ¸®)
-		// 2. ÇØ´ç ±ÛÀÇ ³»¿ë °¡Á®¿À±â(select Äõ¸®)
-		bdao.boardHits(bnumber);
-		BoardDTO board = bdao.boardView(bnumber);
-		
-		mav.addObject("boardView", board);
-		mav.setViewName("boardview");
-		return mav;
-	}
-	
-	 public ModelAndView boardUpdate(int bnumber) {
-			mav = new ModelAndView(); 
-			//DB¿¡¼­ bnumber ÇØ´ç µ¥ÀÌÅÍ °¡Á®¿Í¼­ boardupdate.jsp ¸¦ ¸ñÀûÁö·Î ÁöÁ¤
-			BoardDTO board = bdao.boardView(bnumber); 
-			mav.addObject("boardUpdate", board);
-			mav.setViewName("boardupdate"); 
-			return mav; 
-		}
 
-		 public ModelAndView updateProcess(BoardDTO board) {
-			mav = new ModelAndView();
-			int updateResult = bdao.updateProcess(board);
-			if(updateResult > 0) {
-				
-			mav.setViewName("redirect:/boardlist"); // boardlist.jsp
-			} else {
-				// 2. ÇØ´ç ±ÛÀÇ »ó¼¼È­¸é Ãâ·Â
-				mav.setViewName("redirect:/boardview?bnumber="+board.getBnumber());
-			}
-			return mav;
-		}
-
-		 public ModelAndView boardDelete(int bnumber) {
-			 mav = new ModelAndView();
-			 int deleteResult = bdao.boardDelete(bnumber);
-			 if(deleteResult > 0) {
-				 mav.setViewName("redirect:/boardlist");
-			 }
-			 return mav;
-		}
-
-		public ModelAndView boardWriteFile(BoardDTO board) throws IllegalStateException, IOException {
-			mav = new ModelAndView();
-			// dto¿¡ ´ã±ä ÆÄÀÏÀ» °¡Á®¿È
-			MultipartFile bfile = board.getBfile();
-			// ÆÄÀÏ ÀÌ¸§À» °¡Á®¿È(ÆÄÀÏÀÌ¸§À» DB¿¡ ÀúÀåÇÏ±â À§ÇØ)
-			String bfilename = bfile.getOriginalFilename();
-			// ÆÄÀÏ¸í Áßº¹À» ÇÇÇÏ±â À§ÇØ ÆÄÀÏÀÌ¸§¾Õ¿¡ ÇöÀç ½Ã°£°ªÀ» ºÙÀÓ(ÀÚ¹Ù ±âº» ¸Ş¼Òµå)
-			bfilename = System.currentTimeMillis() + "-" + bfilename;
-			System.out.println("boardWriteFile ¸Ş¼Òµå " + bfilename);
-			// ÆÄÀÏ ÀúÀåÇÏ±â
-			/*String savePath = "D:\\source_phs\\spring\\spring\\Board210527\\src\\main\\webapp\\resources\\upload\\"+bfilename;*/
-			String savePath = "D:\\ÇÑ¼Ö\\source_phs\\spring\\spring\\Board210527\\src\\main\\webapp\\resources\\upload\\"+bfilename;
-			// bfileÀÌ ºñ¾îÀÖÁö ¾Ê´Ù¸é(Áï ÆÄÀÏÀÌ ÀÖÀ¸¸é) savePath¿¡ ÀúÀåÀ» ÇÏ°Ú´Ù.
-			if(!bfile.isEmpty()) {
-				bfile.transferTo(new File(savePath));
-			}
-			// throw ¾îÂ¼±¸ : ¿¹¿ÜÃ³¸®¹æ½Ä
-			// ¿©±â±îÁöÀÇ ³»¿ëÀº ÆÄÀÏÀ» ÀúÀåÇÏ´Â °úÁ¤(DB¿¬°áµÈ°Å ¾Æ´Ô)
-			
-			board.setBfilename(bfilename);
-			bdao.boardWriteFile(board);
-			
-			mav.setViewName("redirect:/boardlist");
-			return mav;
-		}
-
+	 
 }

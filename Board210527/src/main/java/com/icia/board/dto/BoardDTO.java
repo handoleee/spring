@@ -2,6 +2,10 @@ package com.icia.board.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+
+//getter, setter, toString, ìƒì„±ìë¥¼ ìë™ìœ¼ë¡œ ë§Œë“¤ì–´ì¤Œ
+//Getter, Setter, ToString ì„ íƒí•´ì„œ ë„£ê¸°ë„ ê°€ëŠ¥ dataê°€ ì œì¼ í¼
+
 public class BoardDTO {
 
 	private int bnumber;
@@ -12,10 +16,10 @@ public class BoardDTO {
 	private String bdate;
 	private int bhits;
 	
-	// ÆÄÀÏÀ» ´ã±â À§ÇÑ ÇÊµå(boardwrite.jsp¿¡¼­ Controller·Î Àü´ŞÇÒ ¶§)
+	// íŒŒì¼ì„ ë‹´ê¸° ìœ„í•œ í•„ë“œ(boardwrite.jspì—ì„œ Controllerë¡œ ì „ë‹¬í•  ë•Œ)
 	private MultipartFile bfile;
 		
-	// ÆÄÀÏ¸íÀ» ´ã±â À§ÇÑ ÇÊµå
+	// íŒŒì¼ëª…ì„ ë‹´ê¸° ìœ„í•œ í•„ë“œ
 	private String bfilename;
 
 	public int getBnumber() {
@@ -93,10 +97,7 @@ public class BoardDTO {
 	@Override
 	public String toString() {
 		return "BoardDTO [bnumber=" + bnumber + ", btitle=" + btitle + ", bpassword=" + bpassword + ", bwriter="
-				+ bwriter + ", bcontents=" + bcontents + ", bdate=" + bdate + ", bhits=" + bhits + ", bfilename="
-				+ bfilename + "]";
+				+ bwriter + ", bcontents=" + bcontents + ", bdate=" + bdate + ", bhits=" + bhits + ", bfile=" + bfile
+				+ ", bfilename=" + bfilename + "]";
 	}
-	
-	
-	
 }
