@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<<<<<<< HEAD
 	<script>
 		function update() {
 			var pwd = document.getElementById('pwd').value;
@@ -19,6 +20,22 @@
 </head>
 <body>
 <h2>boardupdate.jsp</h2>
+=======
+<script>
+		function update() {
+			var pwd = document.getElementById('pwd').value;
+			var bpassword = '${boardUpdate.bpassword}';
+			if(pwd == bpassword) {
+				updateform.submit();
+			} else {
+				alert('비밀번호 불일치');
+			}
+		}
+	</script>
+</head>
+<body>
+	<h2>boardupdate.jsp</h2>
+>>>>>>> branch 'master' of https://github.com/handoleee/spring.git
 	<form action="updateprocess" method="post" name="updateform">
 	<!--  type="hidden" 이면 안보임. -->
 		글번호 : <input type="text" name="bnumber" value="${boardUpdate.bnumber}" readonly><br>

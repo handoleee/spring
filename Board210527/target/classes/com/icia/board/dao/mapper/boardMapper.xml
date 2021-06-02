@@ -62,4 +62,20 @@
 			</when>
 		</choose>
 	</sql>
+<<<<<<< HEAD
  </mapper>
+=======
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+>>>>>>> branch 'master' of https://github.com/handoleee/spring.git

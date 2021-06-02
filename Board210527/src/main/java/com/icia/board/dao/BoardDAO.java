@@ -60,4 +60,8 @@ public class BoardDAO {
 		return sql.selectList("bm.boardsearch", searchMap);
 	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> branch 'master' of https://github.com/handoleee/spring.git
