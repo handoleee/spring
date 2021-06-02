@@ -18,7 +18,7 @@ border-collapse: collapse;
 	<table>
 		<tr>
 			<th>글번호</th>
-			<th><a href="boardview">글제목</a></th>
+			<th>글제목</th>
 			<th>비밀번호</th>
 			<th>작성자</th>
 			<th>내용</th>
@@ -28,7 +28,7 @@ border-collapse: collapse;
 		<c:forEach var="board" items="${boardList}">
 		<tr>
 			<td>${board.bnumber}</td>
-			<td>${board.btitle}</td>
+			<td><a href="boardview?bnumber=${board.bnumber}">${board.btitle}</a></td>
 			<td>${board.bpassword}</td>
 			<td>${board.bwriter}</td>
 			<td>${board.bcontents}</td>
@@ -37,5 +37,6 @@ border-collapse: collapse;
 		</tr>
 		</c:forEach>
 	</table>
+	<a href="writepage">글쓰기화면</a>
 </body>
 </html>

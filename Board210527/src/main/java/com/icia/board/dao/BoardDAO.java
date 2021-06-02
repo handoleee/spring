@@ -1,12 +1,14 @@
 package com.icia.board.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.icia.board.dto.BoardDTO;
+import com.icia.board.dto.PageDTO;
 
 @Repository
 public class BoardDAO {
@@ -17,17 +19,45 @@ public class BoardDAO {
 	public int boardWrite(BoardDTO board) {
 		return sql.insert("bm.boardwrite", board);
 	}
-
+	
 	public List<BoardDTO> boardList() {
 		return sql.selectList("bm.boardlist");
 	}
-
-	/*
-	 * public BoardDTO boardView(int bnumber) { return sql.selectOne("bm.boardview",
-	 * bnumber); }
-	 * 
-	 * public BoardDTO update(int bnumber) { return sql.selectOne("bm.boardupdate",
-	 * bnumber); }
-	 */
 	
+	public BoardDTO boardView(int bnumber) {
+		return sql.selectOne("bm.boardview", bnumber);
+	}
+	
+	public void boardHits(int bnumber) {
+		sql.update("bm.boardhits", bnumber);
+	}
+	
+	public BoardDTO update(int bnumber) { 
+		 return sql.selectOne("bm.boardupdate", bnumber); 
+	 }
+
+	public int updateProcess(BoardDTO board) {
+		return sql.update("bm.updateprocess", board);
+	}
+
+	public int boardDelete(int bnumber) {
+		return sql.delete("bm.boarddelete", bnumber);	
+	}
+
+	public void boardWriteFile(BoardDTO board) {
+		sql.insert("bm.boardwritefile", board);
+	}
+
+	public int listCount() {
+		return sql.selectOne("bm.listcount");
+	}
+
+	public List<BoardDTO> boardPaging(PageDTO paging) {
+		return sql.selectList("bm.boardpaging", paging);
+	}
+
+	public List<BoardDTO> boardSearh(Map<String, String> searchMap) {
+		return sql.selectList("bm.boardsearch", searchMap);
+	}
+
 }

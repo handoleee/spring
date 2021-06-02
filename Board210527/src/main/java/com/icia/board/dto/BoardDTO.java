@@ -1,7 +1,10 @@
 package com.icia.board.dto;
 
+import org.springframework.web.multipart.MultipartFile;
 
+import lombok.Data;
 
+@Data
 // getter, setter, toString, 생성자를 자동으로 만들어줌
 // Getter, Setter, ToString 선택해서 넣기도 가능 data가 제일 큼
 public class BoardDTO {
@@ -13,54 +16,12 @@ public class BoardDTO {
 	private String bcontents;
 	private String bdate;
 	private int bhits;
-	public int getBnumber() {
-		return bnumber;
-	}
-	public void setBnumber(int bnumber) {
-		this.bnumber = bnumber;
-	}
-	public String getBtitle() {
-		return btitle;
-	}
-	public void setBtitle(String btitle) {
-		this.btitle = btitle;
-	}
-	public String getBpassword() {
-		return bpassword;
-	}
-	public void setBpassword(String bpassword) {
-		this.bpassword = bpassword;
-	}
-	public String getBwriter() {
-		return bwriter;
-	}
-	public void setBwriter(String bwriter) {
-		this.bwriter = bwriter;
-	}
-	public String getBcontents() {
-		return bcontents;
-	}
-	public void setBcontents(String bcontents) {
-		this.bcontents = bcontents;
-	}
-	public String getBdate() {
-		return bdate;
-	}
-	public void setBdate(String bdate) {
-		this.bdate = bdate;
-	}
-	public int getBhits() {
-		return bhits;
-	}
-	public void setBhits(int bhits) {
-		this.bhits = bhits;
-	}
-	@Override
-	public String toString() {
-		return "BoardDTO [bnumber=" + bnumber + ", btitle=" + btitle + ", bpassword=" + bpassword + ", bwriter="
-				+ bwriter + ", bcontents=" + bcontents + ", bdate=" + bdate + ", bhits=" + bhits + "]";
-	}
 	
+	// 파일을 담기 위한 필드(boardwrite.jsp에서 Controller로 전달할 때)
+	private MultipartFile bfile;
+	
+	// 파일명을 담기 위한 필드
+	private String bfilename;
 }
 	
 	

@@ -18,7 +18,7 @@
 		}
 	}
 </script>
-</head>
+</head> 
 <body>
 	<h2>memberupdate.jsp</h2>
 	<form action="updateprocess" method="post" name="updateform">
@@ -27,7 +27,7 @@
 	<!-- member123 : Service class/ mav.addObject("") -->
 		아이디 : <input type="text" name="mid" value="${member123.mid}" readonly><br>
 		비밀번호 : <input type="text" name="mpassword" id="pwd"><br>
-		이름 : <input type="text" name="mname" value="${member123.mname}" readonly}><br>
+		이름 : <input type="text" name="mname" value="${member123.mname}" readonly><br>
 		이메일 : <input type="text" name="memail" value="${member123.memail}"><br>
 		
 		<!-- js 함수를 호출하고 싶을 때는 type을 button으로 하여 사용 -->

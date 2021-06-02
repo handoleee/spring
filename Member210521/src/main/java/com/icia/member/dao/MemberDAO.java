@@ -40,7 +40,7 @@ public class MemberDAO {
 	}
 
 	public void memberDelete(String mid) {
-		sql.delete("mm.memberdelete",mid);
+		sql.delete("mm.memberdelete", mid);
 		
 	}
 	
