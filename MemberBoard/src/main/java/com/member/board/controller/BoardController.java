@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.member.board.dto.BoardDTO;
@@ -30,5 +31,16 @@ public class BoardController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/boardlist")
+	public ModelAndView boardList()	{
+		mav = bs.boardList();
+		return mav;
+	}
 	
+	@RequestMapping(value="/boardview")
+	public ModelAndView boardView(@RequestParam("bnumber") int bnumber,
+					@RequestParam(value="page", required=false, defaultValue="1") int page) {
+		mav = bs.boardView(bnumber, page);
+		return mav;
+	}
 }

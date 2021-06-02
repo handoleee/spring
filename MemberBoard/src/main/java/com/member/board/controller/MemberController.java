@@ -88,6 +88,17 @@ public class MemberController {
 		mav = ms.memberDelete(mid);
 		return mav;
 	}
+	
+	 // ajax로 상세조회
+	  @RequestMapping(value="/memberviewajax")
+	  public @ResponseBody MemberDTO memberViewAjax(
+			  @RequestParam("mid") String mid) {
+		  System.out.println("memberViewAjax 메소드 호출됨");
+		  System.out.println("전달 id값 "+mid);
+		  MemberDTO member = ms.memberViewAjax(mid);
+		  System.out.println(member);
+		  return member;
+	  }
 }
 
 

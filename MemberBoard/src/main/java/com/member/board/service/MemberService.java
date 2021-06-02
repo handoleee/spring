@@ -134,4 +134,9 @@ public class MemberService {
 		return mav;
 	}
 
+	public MemberDTO memberViewAjax(String mid) {
+		MemberDTO member = mdao.memberView(mid);
+		return member;
+	}
+
 }

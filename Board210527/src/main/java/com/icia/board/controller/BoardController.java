@@ -90,9 +90,4 @@ public class BoardController {
 									@RequestParam("keyword") String keyword) {
 		mav = bs.boardSearch(searchType, keyword);
 		return mav;
-	}		
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> branch 'master' of https://github.com/handoleee/spring.git
+	}
