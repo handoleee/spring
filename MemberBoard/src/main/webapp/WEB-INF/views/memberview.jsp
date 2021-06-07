@@ -14,6 +14,7 @@
 	이름 : ${memberView.mname}<br>
 	전화번호 : ${memberView.mphone}<br>
 	이메일 : ${memberView.memail}<br>
+	이미지: <img src="resources/profile/${member.mprofilename}" height="200" width="200"> <br>
 	
 	<a href="./">홈으로</a>
 	<a href="memberlist">회원목록</a>

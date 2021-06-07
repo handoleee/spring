@@ -11,20 +11,5 @@
 	<select id="commentlist" parameterType="int" resultType="commentdto">
 		SELECT*FROM COMMENT210601 WHERE CBNUMBER=#{cbnumber} ORDER BY CNUMBER DESC
 	</select>
-<<<<<<< HEAD
  </mapper>
-=======
- </mapper>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
->>>>>>> branch 'master' of https://github.com/handoleee/spring.git
+

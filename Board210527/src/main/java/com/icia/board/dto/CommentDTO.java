@@ -35,8 +35,4 @@ public class CommentDTO {
 		return "CommentDTO [cnumber=" + cnumber + ", cbnumber=" + cbnumber + ", cwriter=" + cwriter + ", ccontents="
 				+ ccontents + "]";
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> branch 'master' of https://github.com/handoleee/spring.git

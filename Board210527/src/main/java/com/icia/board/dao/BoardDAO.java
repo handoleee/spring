@@ -56,12 +56,7 @@ public class BoardDAO {
 		return sql.selectList("bm.boardpaging", paging);
 	}
 
-	public List<BoardDTO> boardSearh(Map<String, String> searchMap) {
+	public List<BoardDTO> boardSearch(Map<String, String> searchMap) {
 		return sql.selectList("bm.boardsearch", searchMap);
 	}
-
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> branch 'master' of https://github.com/handoleee/spring.git

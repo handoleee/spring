@@ -2,6 +2,8 @@ package com.member.board.controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,11 +18,13 @@ import com.member.board.service.MemberService;
 @Controller
 public class MemberController {
 
-	
 	@Autowired
 	private MemberService ms;
 	
 	private ModelAndView mav;
+	
+	@Autowired
+	private HttpSession session;
 	
 	@RequestMapping(value="/joinpage")
 	public String joinPage() {
@@ -33,7 +37,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	// 중복확인 - 안되는중
+	// 중복확인
 	@RequestMapping(value="/idcheck")
 	public @ResponseBody String idCheck(@RequestParam("mid") String mid) {
 		System.out.println("idCheck 메소드 호출됨");
@@ -53,10 +57,9 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/boardlist")
-	public ModelAndView boardlist() {
-		mav = ms.boardList();
-		return mav;
+	public String logout() {
+		session.invalidate();
+		return "home";
 	}
 	
 	@RequestMapping(value="/memberupdate")
@@ -65,7 +68,7 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/updateprocess")
+	@RequestMapping(value="/mupdateprocess")
 	public ModelAndView updateProcess(@ModelAttribute MemberDTO member) {
 		mav = ms.updateProcess(member);
 		return mav;

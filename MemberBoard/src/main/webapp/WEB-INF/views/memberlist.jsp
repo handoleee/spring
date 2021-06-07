@@ -57,6 +57,7 @@
 </head>
 <body>
 	<h2>회원목록</h2>
+	<c:if test="${sessionScope.loginMember eq 'admin'}">
 	<table>
 		<tr>
 			<th>아이디</th>
@@ -82,5 +83,7 @@
 	</table>
 	
 	<div id="memberviewdiv"></div>
+	</c:if>
+	<a href="./">홈으로</a>
 </body>
 </html>

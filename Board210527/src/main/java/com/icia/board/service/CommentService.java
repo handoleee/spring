@@ -29,9 +29,4 @@ public class CommentService {
 			commentList = null;
 		return commentList;
 	}
-
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> branch 'master' of https://github.com/handoleee/spring.git

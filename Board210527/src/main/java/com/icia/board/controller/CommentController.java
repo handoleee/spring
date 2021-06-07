@@ -24,8 +24,5 @@ public class CommentController {
 		List<CommentDTO> commentList = cs.commentWrite(comment);
 		return commentList;
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> branch 'master' of https://github.com/handoleee/spring.git
+

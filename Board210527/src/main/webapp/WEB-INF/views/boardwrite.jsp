@@ -7,11 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<< HEAD
+
 	<h2>boardwrite.jsp</h2>
-=======
-<h2>boardwrite.jsp</h2>
->>>>>>> branch 'master' of https://github.com/handoleee/spring.git
 	<div style="background-color:blue;">
 	<form action="boardwrite" method="post">
 		글제목 : <input type="text" name="btitle"><br>

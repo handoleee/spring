@@ -39,8 +39,52 @@ public class BoardController {
 	
 	@RequestMapping(value="/boardview")
 	public ModelAndView boardView(@RequestParam("bnumber") int bnumber,
-					@RequestParam(value="page", required=false, defaultValue="1") int page) {
+									@RequestParam(value="page", required=false, defaultValue="1") int page) {
 		mav = bs.boardView(bnumber, page);
 		return mav;
 	}
+	
+	// 페이징처리
+	@RequestMapping(value="/paging")
+	public ModelAndView boardPaging(@RequestParam(value="page", required=false, defaultValue="1") int page) {
+		mav = bs.boardPaging(page);
+		return mav;
+	}
+	
+	// 검색처리
+	@RequestMapping(value="/search")
+	public ModelAndView boardSearch(@RequestParam("searchtype") String searchType, 
+									@RequestParam("keyword") String keyword) {
+		mav = bs.boardSearch(searchType, keyword);
+		return mav;
+	}
+		
+	// 삭제처리
+	@RequestMapping(value="/boarddelete")
+	public ModelAndView boardDelete(@RequestParam("bnumber") int bnumber) {
+		mav = bs.boardDelete(bnumber);
+		return mav;
+	}
+	
+	// 수정화면 요청
+	@RequestMapping(value="/boardupdate") 
+	public ModelAndView boardUpdate(@RequestParam("bnumber") int bnumber) { 
+		mav = bs.boardUpdate(bnumber);
+		System.out.println("con.up");
+		return mav;
+	}
+		
+	// 수정처리	
+	@RequestMapping(value="/updateprocess")
+	public ModelAndView updateProcess(@ModelAttribute BoardDTO board) {
+		mav = bs.updateProcess(board);
+		return mav;
+	}
+	
+	// mypage
+	@RequestMapping(value="/mypage")
+	public String myPage() {
+		return "mypage";
+	}
+	
 }

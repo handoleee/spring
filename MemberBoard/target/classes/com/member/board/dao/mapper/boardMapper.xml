@@ -3,7 +3,58 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="bm"> 
+ 
+ 	<insert id="boardwrite" parameterType="boarddto">
+		INSERT INTO BOARDTABLE(BNUMBER, BWRITER, BTITLE, BCONTENTS, BFILENAME, BHITS, BDATE) 
+			VALUES(BOARDTABLE_SEQ.NEXTVAL, #{bwriter}, #{btitle}, #{bcontents}, #{bfilename,jdbcType=VARCHAR}, 0, SYSDATE)
+	</insert>
+	
 	<select id="boardlist" resultType="boarddto">
-	SELECT*FROM BOARDTABLE ORDER BY BWRITER ASC
+		SELECT*FROM BOARDTABLE
 	</select>
+	
+	<select id="listcount" resultType="int">
+   		SELECT COUNT(BNUMBER) FROM BOARDTABLE
+	</select>
+
+	<select id="boardpaging" parameterType="pagedto" resultType="boarddto">
+		SELECT*FROM (SELECT B.*, ROW_NUMBER() OVER(ORDER BY BNUMBER DESC)
+			AS RN FROM BOARDTABLE B) WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="boardview" parameterType="int" resultType="boarddto">
+		SELECT*FROM BOARDTABLE WHERE BNUMBER=#{bnumber}
+	</select>
+	
+	<update id="boardhits" parameterType="int">
+		UPDATE BOARDTABLE SET BHITS = BHITS+1 WHERE BNUMBER=#{bnumber}
+	</update>
+	
+	<select id="boardupdate" parameterType="int" resultType="boarddto">
+		SELECT*FROM BOARDTABLE WHERE BNUMBER=#{bnumber}
+	</select>
+
+	<update id="updateprocess" parameterType="boarddto">
+		UPDATE BOARDTABLE SET BTITLE=#{btitle}, BCONTENTS=#{bcontents} WHERE BNUMBER=#{bnumber}
+	</update>
+	
+	<delete id="boarddelete" parameterType="int">
+		DELETE FROM BOARDTABLE WHERE BNUMBER=#{bnumber} 
+	</delete>
+	
+	<select id="boardsearch" parameterType="java.util.HashMap" resultType="boarddto">
+		SELECT*FROM BOARDTABLE
+   		<include refid="search"></include>
+	</select>
+	<sql id="search">
+   		<choose>
+			<when test="type=='btitle'">
+        		 WHERE BTITLE LIKE '%'||#{word}||'%'
+      		</when>
+      		<when test="type=='bwriter'">
+        		 WHERE BWRITER LIKE '%'||#{word}||'%'
+      		</when>
+   		</choose>
+	</sql>
+
  </mapper>
