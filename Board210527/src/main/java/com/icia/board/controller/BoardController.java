@@ -91,3 +91,4 @@ public class BoardController {
 		mav = bs.boardSearch(searchType, keyword);
 		return mav;
 	}
+}
