@@ -38,8 +38,8 @@ public class MemberService {
 		mprofilename = System.currentTimeMillis() + "-" + mprofilename;
 		System.out.println("mprofilename " + mprofilename);
 		
-//		String savePath = "D:\\source_phs\\spring\\spring\\MemberBoard\\src\\main\\webapp\\resources\\profile\\"+mprofilename;
-		String savePath = "D:\\phs\\source_phs\\spring\\spring\\MemberBoard\\src\\main\\webapp\\resources\\profile\\"+mprofilename;
+		String savePath = "D:\\source_phs\\spring\\spring\\MemberBoard\\src\\main\\webapp\\resources\\profile\\"+mprofilename;
+		//String savePath = "D:\\phs\\source_phs\\spring\\spring\\MemberBoard\\src\\main\\webapp\\resources\\profile\\"+mprofilename;
 		if(!mprofile.isEmpty()) {
 			mprofile.transferTo(new File(savePath));
 		}

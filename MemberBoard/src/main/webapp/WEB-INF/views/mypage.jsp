@@ -14,5 +14,6 @@
 <body>
 	<h2>마이페이지</h2>
 	<button onclick="update()">회원정보수정</button>	
+	<a href="myboardlist">내가 쓴 글목록</a>
 </body>
 </html>

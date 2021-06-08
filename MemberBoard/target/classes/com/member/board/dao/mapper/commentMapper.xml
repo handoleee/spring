@@ -4,11 +4,11 @@
  
 <mapper namespace="cm"> 
 	<insert id="commentwrite" parameterType="commentdto">
-		INSERT INTO COMMENTTABLE2(CNUMBER,CBNUMBER,CWRITER,CCONTENTS)
-		 VALUES(COT_SEQ.NEXTVAL,#{cbnumber},#{cwriter},#{ccontents})
+		INSERT INTO COMMENTTABLE(CNUMBER,CBNUMBER,CWRITER,CCONTENTS)
+		 VALUES(COMMENTTABLE_SEQ.NEXTVAL,#{cbnumber},#{cwriter},#{ccontents})
 	</insert> 
 	
 	<select id="commentlist" parameterType="int" resultType="commentdto">
-		SELECT*FROM COMMENTTABLE2 WHERE CBNUMBER=#{cbnumber} ORDER BY CNUMBER DESC
+		SELECT*FROM COMMENTTABLE WHERE CBNUMBER=#{cbnumber} ORDER BY CNUMBER DESC
 	</select>
 </mapper>

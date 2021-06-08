@@ -19,24 +19,40 @@ public class BoardController {
 	private BoardService bs;
 	
 	private ModelAndView mav;
+<<<<<<< HEAD
 	// 글쓰기화면 이동
+=======
+	//ok
+>>>>>>> branch 'master' of https://github.com/handoleee/spring.git
 	@RequestMapping(value="/writepage")
 	public String writePage() {
 		return "boardwrite";
 	}
+<<<<<<< HEAD
 	// 글쓰기
+=======
+	//ok
+>>>>>>> branch 'master' of https://github.com/handoleee/spring.git
 	@RequestMapping(value="/boardwrite")
 	public ModelAndView boardWrite(@ModelAttribute BoardDTO board) throws IllegalStateException, IOException {
 		mav = bs.boardWrite(board);
 		return mav;
 	}
+<<<<<<< HEAD
 	// 게시판(로그아웃,마이페이지, 페이징,글쓰기링크)
+=======
+	//ok
+>>>>>>> branch 'master' of https://github.com/handoleee/spring.git
 	@RequestMapping(value="/boardlist")
 	public ModelAndView boardList()	{
 		mav = bs.boardList();
 		return mav;
 	}
+<<<<<<< HEAD
 	// 글보기
+=======
+	// ok
+>>>>>>> branch 'master' of https://github.com/handoleee/spring.git
 	@RequestMapping(value="/boardview")
 	public ModelAndView boardView(@RequestParam("bnumber") int bnumber,
 									@RequestParam(value="page", required=false, defaultValue="1") int page) {
@@ -44,14 +60,14 @@ public class BoardController {
 		return mav;
 	}
 	
-	// 페이징처리
+	// ok 페이징처리
 	@RequestMapping(value="/paging")
 	public ModelAndView boardPaging(@RequestParam(value="page", required=false, defaultValue="1") int page) {
 		mav = bs.boardPaging(page);
 		return mav;
 	}
 	
-	// 검색처리
+	// ok 검색처리
 	@RequestMapping(value="/search")
 	public ModelAndView boardSearch(@RequestParam("searchtype") String searchType, 
 									@RequestParam("keyword") String keyword) {
@@ -59,14 +75,14 @@ public class BoardController {
 		return mav;
 	}
 		
-	// 삭제처리
+	// ok삭제처리
 	@RequestMapping(value="/boarddelete")
 	public ModelAndView boardDelete(@RequestParam("bnumber") int bnumber) {
 		mav = bs.boardDelete(bnumber);
 		return mav;
 	}
 	
-	// 수정화면 요청
+	// ok 수정화면 요청
 	@RequestMapping(value="/boardupdate") 
 	public ModelAndView boardUpdate(@RequestParam("bnumber") int bnumber) { 
 		mav = bs.boardUpdate(bnumber);
@@ -74,17 +90,23 @@ public class BoardController {
 		return mav;
 	}
 		
-	// 수정처리	
+	// ok 수정처리	
 	@RequestMapping(value="/updateprocess")
 	public ModelAndView updateProcess(@ModelAttribute BoardDTO board) {
 		mav = bs.updateProcess(board);
 		return mav;
 	}
 	
-	// mypage
-	@RequestMapping(value="/mypage")
-	public String myPage() {
-		return "mypage";
+//	@RequestMapping(value="/myboardlistpage")
+//	public String myboardListPage() {
+//		return "myboardlist";
+//	}
+	
+	// 내가 작성한 글목록
+	@RequestMapping(value="/myboardlist")
+	public ModelAndView myboardList() {
+		mav = bs.myboardList();
+		return mav;
 	}
 	
 }

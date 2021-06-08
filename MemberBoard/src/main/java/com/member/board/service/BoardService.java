@@ -36,7 +36,8 @@ public class BoardService {
 		String bfilename = bfile.getOriginalFilename();
 		bfilename = System.currentTimeMillis() + "-" + bfilename;
 		System.out.println("boardWriteFile 메소드 " + bfilename); 
-		String savePath = "D:\\phs\\source_phs\\spring\\spring\\MemberBoard\\src\\main\\webapp\\resources\\file\\"+bfilename;
+		String savePath = "D:\\source_phs\\spring\\spring\\MemberBoard\\src\\main\\webapp\\resources\\file\\"+bfilename;
+		//String savePath = "D:\\phs\\source_phs\\spring\\spring\\MemberBoard\\src\\main\\webapp\\resources\\file\\"+bfilename;
 		
 		if(!bfile.isEmpty()) {
 			bfile.transferTo(new File(savePath));
@@ -142,6 +143,14 @@ public class BoardService {
 		if(updateResult > 0) {
 			mav.setViewName("redirect:/boardview?bnumber="+board.getBnumber());
 		}
+		return mav;
+	}
+
+	public ModelAndView myboardList() {
+		mav =new ModelAndView();
+		List<BoardDTO> myboardList = bdao.myboardList();
+		mav.addObject("myboardList", myboardList);
+		mav.setViewName("myboardlist");
 		return mav;
 	}
 }

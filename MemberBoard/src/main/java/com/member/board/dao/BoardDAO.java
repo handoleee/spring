@@ -58,4 +58,7 @@ public class BoardDAO {
 		return sql.update("bm.updateprocess", board);
 	}
 
+	public List<BoardDTO> myboardList() {
+		return sql.selectList("bm.myboardlist");
+	}
 }
