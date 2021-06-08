@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.member.board.dao.BoardDAO;
 import com.member.board.dao.MemberDAO;
 import com.member.board.dto.BoardDTO;
 import com.member.board.dto.MemberDTO;
@@ -21,6 +22,9 @@ public class MemberService {
 	@Autowired
 	private MemberDAO mdao;
 	
+	@Autowired
+	private BoardDAO bdao;
+	
 	private ModelAndView mav;
 	
 	@Autowired
@@ -28,15 +32,6 @@ public class MemberService {
 	
 	public ModelAndView memberJoin(MemberDTO member) throws IllegalStateException, IOException {
 		mav = new ModelAndView();
-//		int insertResult = 0;
-//		
-////		insertResult = mdao.memberJoin(member);
-//		
-//		if(insertResult > 0) {
-//			mav.setViewName("memberlogin");
-//		} else {
-//			mav.setViewName("joinfail");
-//		}
 		
 		MultipartFile mprofile = member.getMprofile();
 		String mprofilename = mprofile.getOriginalFilename();
@@ -44,7 +39,7 @@ public class MemberService {
 		System.out.println("mprofilename " + mprofilename);
 		
 		String savePath = "D:\\source_phs\\spring\\spring\\MemberBoard\\src\\main\\webapp\\resources\\profile\\"+mprofilename;
-		
+		//String savePath = "D:\\phs\\source_phs\\spring\\spring\\MemberBoard\\src\\main\\webapp\\resources\\profile\\"+mprofilename;
 		if(!mprofile.isEmpty()) {
 			mprofile.transferTo(new File(savePath));
 		}
@@ -73,18 +68,12 @@ public class MemberService {
 		String loginId = mdao.memberLogin(member);
 		if(loginId != null) {
 			session.setAttribute("loginMember", loginId);
+			//loginId= bdao.boardWrite(board);
 			mav.setViewName("boardlist");
+			
 		} else {
 			mav.setViewName("memberlogin");
 		}
-		return mav;
-	}
-
-	public ModelAndView boardList() {
-		mav = new ModelAndView();
-		List<BoardDTO> boardList = mdao.boardList();
-		mav.addObject("boardList", boardList);
-		mav.setViewName("boardlist");
 		return mav;
 	}
 
@@ -104,9 +93,8 @@ public class MemberService {
 		
 		if(updateResult > 0) {
 			mav.setViewName("boardlist");
-		} else {
-			mav.setViewName("updatefail");
-		}
+			System.out.println("수정완료");
+		} 
 		return mav;
 	}
 
@@ -139,4 +127,14 @@ public class MemberService {
 		return member;
 	}
 
+	public ModelAndView mypage() {
+		mav = new ModelAndView();
+		String loginId = (String) session.getAttribute("loginMember");
+		MemberDTO mypage = mdao.mypage(loginId);
+		
+		mav.addObject("mypage",mypage);
+		mav.setViewName("mypage");
+		return mav;
+	}
+	
 }

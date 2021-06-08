@@ -1,12 +1,6 @@
 package com.icia.board.dto;
 
 import org.springframework.web.multipart.MultipartFile;
-<<<<<<< HEAD
-
-import lombok.Data;
-=======
->>>>>>> branch 'master' of https://github.com/handoleee/spring.git
-
 
 //getter, setter, toString, 생성자를 자동으로 만들어줌
 //Getter, Setter, ToString 선택해서 넣기도 가능 data가 제일 큼
@@ -23,12 +17,7 @@ public class BoardDTO {
 	
 	// 파일을 담기 위한 필드(boardwrite.jsp에서 Controller로 전달할 때)
 	private MultipartFile bfile;
-<<<<<<< HEAD
 	
-	// 파일명을 담기 위한 필드
-	private String bfilename;
-=======
-		
 	// 파일명을 담기 위한 필드
 	private String bfilename;
 
@@ -110,5 +99,4 @@ public class BoardDTO {
 				+ bwriter + ", bcontents=" + bcontents + ", bdate=" + bdate + ", bhits=" + bhits + ", bfile=" + bfile
 				+ ", bfilename=" + bfilename + "]";
 	}
->>>>>>> branch 'master' of https://github.com/handoleee/spring.git
 }

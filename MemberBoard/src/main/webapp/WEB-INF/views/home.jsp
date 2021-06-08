@@ -12,6 +12,5 @@
 <P>  The time on the server is ${serverTime}. </P>
 <a href="joinpage">회원가입</a>
 <a href="loginpage">로그인</a>
-<a href="memberlist">회원목록</a>
 </body>
 </html>

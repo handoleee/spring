@@ -21,9 +21,4 @@ public class CommentDAO {
 	public List<CommentDTO> commentList(int cbnumber) {
 		return sql.selectList("cm.commentlist", cbnumber);
 	}
-
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> branch 'master' of https://github.com/handoleee/spring.git

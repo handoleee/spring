@@ -50,8 +50,4 @@ public class PageDTO {
 		return "PageDTO [page=" + page + ", maxPage=" + maxPage + ", startPage=" + startPage + ", endPage=" + endPage
 				+ ", startRow=" + startRow + ", endRow=" + endRow + "]";
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> branch 'master' of https://github.com/handoleee/spring.git

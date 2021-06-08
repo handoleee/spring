@@ -6,7 +6,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.member.board.dto.BoardDTO;
 import com.member.board.dto.MemberDTO;
 
 @Repository
@@ -15,8 +14,8 @@ public class MemberDAO {
 	@Autowired
 	private SqlSessionTemplate sql;
 	
-	public int memberJoin(MemberDTO member) {
-		return sql.insert("mm.memberjoin", member);
+	public void memberJoin(MemberDTO member) {
+		sql.insert("mm.memberjoin", member);
 	}
 
 	public String idCheck(String mid) {
@@ -25,10 +24,6 @@ public class MemberDAO {
 
 	public String memberLogin(MemberDTO member) {
 		return sql.selectOne("mm.memberlogin", member);
-	}
-
-	public List<BoardDTO> boardList() {
-		return sql.selectList("bm.boardlist");
 	}
 
 	public MemberDTO update(String loginId) {
@@ -49,6 +44,10 @@ public class MemberDAO {
 
 	public void memberDelete(String mid) {
 		sql.delete("mm.memberdelete", mid);
+	}
+
+	public MemberDTO mypage(String loginId) {
+		return sql.selectOne("mm.mypage", loginId);
 	}
 
 }
