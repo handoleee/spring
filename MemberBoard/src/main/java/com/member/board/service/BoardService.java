@@ -31,10 +31,6 @@ public class BoardService {
 	
 	public ModelAndView boardWrite(BoardDTO board) throws IllegalStateException, IOException {
 		mav = new ModelAndView();
-//		
-//		String loginId = mdao.memberLogin(member);
-//		session.setAttribute("loginMember", loginId);
-//		mav.setViewName("boardlist");
 		
 		MultipartFile bfile = board.getBfile();
 		String bfilename = bfile.getOriginalFilename();

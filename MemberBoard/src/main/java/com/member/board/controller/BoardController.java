@@ -19,24 +19,24 @@ public class BoardController {
 	private BoardService bs;
 	
 	private ModelAndView mav;
-	
+	// 글쓰기화면 이동
 	@RequestMapping(value="/writepage")
 	public String writePage() {
 		return "boardwrite";
 	}
-	
+	// 글쓰기
 	@RequestMapping(value="/boardwrite")
 	public ModelAndView boardWrite(@ModelAttribute BoardDTO board) throws IllegalStateException, IOException {
 		mav = bs.boardWrite(board);
 		return mav;
 	}
-	
+	// 게시판(로그아웃,마이페이지, 페이징,글쓰기링크)
 	@RequestMapping(value="/boardlist")
 	public ModelAndView boardList()	{
 		mav = bs.boardList();
 		return mav;
 	}
-	
+	// 글보기
 	@RequestMapping(value="/boardview")
 	public ModelAndView boardView(@RequestParam("bnumber") int bnumber,
 									@RequestParam(value="page", required=false, defaultValue="1") int page) {

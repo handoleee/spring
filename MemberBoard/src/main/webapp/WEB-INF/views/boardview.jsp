@@ -47,15 +47,12 @@
 		</c:when>
 		</c:choose>
 		
-	
-	<!-- 댓글 등록 부분 -->
 	<div id="comment-write">
 		작성자 : <input name="cwriter" placeholder="" value="${sessionScope.loginMember}" readonly><br>
 		내용 : <input type="text" id="ccontents"><br>
 		<button id="cwrite-btn">댓글등록</button>
 	</div>
-	
-	<!-- 댓글 목록출력 부분 -->
+
 	<div id="comment-list">
 		<table border="1">
 			<tr>
