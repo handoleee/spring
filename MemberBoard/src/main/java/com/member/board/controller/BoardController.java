@@ -19,40 +19,34 @@ public class BoardController {
 	private BoardService bs;
 	
 	private ModelAndView mav;
-<<<<<<< HEAD
+
 	// 글쓰기화면 이동
-=======
+
 	//ok
->>>>>>> branch 'master' of https://github.com/handoleee/spring.git
 	@RequestMapping(value="/writepage")
 	public String writePage() {
 		return "boardwrite";
 	}
-<<<<<<< HEAD
+
 	// 글쓰기
-=======
 	//ok
->>>>>>> branch 'master' of https://github.com/handoleee/spring.git
 	@RequestMapping(value="/boardwrite")
 	public ModelAndView boardWrite(@ModelAttribute BoardDTO board) throws IllegalStateException, IOException {
 		mav = bs.boardWrite(board);
 		return mav;
 	}
-<<<<<<< HEAD
+
 	// 게시판(로그아웃,마이페이지, 페이징,글쓰기링크)
-=======
 	//ok
->>>>>>> branch 'master' of https://github.com/handoleee/spring.git
 	@RequestMapping(value="/boardlist")
 	public ModelAndView boardList()	{
 		mav = bs.boardList();
 		return mav;
 	}
-<<<<<<< HEAD
+
 	// 글보기
-=======
 	// ok
->>>>>>> branch 'master' of https://github.com/handoleee/spring.git
+
 	@RequestMapping(value="/boardview")
 	public ModelAndView boardView(@RequestParam("bnumber") int bnumber,
 									@RequestParam(value="page", required=false, defaultValue="1") int page) {

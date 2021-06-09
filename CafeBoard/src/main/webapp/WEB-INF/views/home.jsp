@@ -10,5 +10,8 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+<a href="joinpage">회원가입</a>
+<a href="loginpage">로그인</a>
+<a>메뉴조회</a>
 </body>
 </html>
