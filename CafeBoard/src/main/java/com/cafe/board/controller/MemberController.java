@@ -1,6 +1,8 @@
 package com.cafe.board.controller;
 
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +22,9 @@ public class MemberController {
 	
 	private ModelAndView mav;
 	
+	@Autowired
+	private HttpSession session;
+	
 	@RequestMapping(value="/joinpage")
 	public String joinPage() {
 		return "memberjoin";
@@ -34,8 +39,8 @@ public class MemberController {
 	@RequestMapping(value="/idcheck")
 	public @ResponseBody String idCheck(@RequestParam("mid") String mid) {
 		System.out.println("idcheck 호출");
-		String idresult = ms.idCheck(mid);
-		return idresult;
+		String result = ms.idCheck(mid);
+		return result;
 	}
 	
 //	@RequestMapping(value="/pwcheck")
@@ -44,4 +49,21 @@ public class MemberController {
 //		String pwresult = ms.pwCheck(mpassword);
 //		return pwresult;
 //	}
+	
+	@RequestMapping(value="/loginpage")
+	public String loginPage() {
+		return "memberlogin";
+	}
+	
+	@RequestMapping(value="/memberlogin")
+	public ModelAndView memerLogin(@ModelAttribute MemberDTO member) {
+		System.out.println("login메소드"+member.toString());
+		mav = ms.memberlogin(member);
+		return mav;
+	}
+	
+	public String logout() {
+		session.invalidate();
+		return "home";
+	}
 }

@@ -4,10 +4,17 @@
  
  <mapper namespace="mm"> 
 	<insert id="memberjoin" parameterType="memberdto">
-		INSERT INTO CAFEMEMBER(
+		INSERT INTO MEMBERTB(
 			MID, MPASSWORD, MPHONE, MNAME) VALUES(#{mid},#{mpassword},#{mphone},#{mname})
 	</insert>
 	
+	<select id="idcheck" parameterType="String" resultType="String">
+		SELECT MID FROM MEMBERTB WHERE MID=#{mid}
+	</select>
+	
+	<select id="memberlogin" parameterType="memberdto" resultType="String">
+		SELECT MID FROM MEMBERTB WHERE MID=#{mid} AND MPASSWORD=#{mpassword}
+	</select>
  </mapper>
  
  

@@ -24,4 +24,8 @@ public class MemberDAO {
 //		return sql.selectOne("mm.pwcheck", mpassword);
 //	}
 
+	public String memberLogin(MemberDTO member) {
+		return sql.selectOne("mm.memberlogin", member);
+	}
+
 }

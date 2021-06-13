@@ -8,8 +8,8 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script>
 		function idcheck(){
-			var inputId = document.getElementId('mid').value;
-			var idcheckResult = document.getElementId('idcheckresult');
+			var inputId = document.getElementById('mid').value;
+			var idcheckResult = document.getElementById('idcheckresult');
 			console.log(inputId);
 			$.ajax({
 				type: 'post',
@@ -35,7 +35,7 @@
 		
 		/* function pwcheck() {
 			var inputPw = document.getElementById('mpw').value;
-			var mpwcf = document.getElementById('mpwcf').value;
+			var mpwcf = document.getElementById('mpw').value;
 			var pwcheckResult = document.getElementById('pwcheckresult');
 			
 			if(inputPw == mpwcf){
@@ -49,16 +49,17 @@
 	</script>
 </head>
 <body>
-<h2>회원가입페이지(memberjoin.jsp)</h2>
+	<h2>회원가입페이지(memberjoin.jsp)</h2>
 
-<form action="memberjoin" method="post">
-아이디 : <input type="text" name="mid" onkeyup="idcheck()">
-		<span id="idcheckresult"></span><br>
-비밀번호 : <input type="text" name="mpw"><br>
-비밀번호 확인 : <input type="text" name="mpwcf" onkeyup="pwcheck()">
-			<span id="pw"></span><br>
-이름 : <input type="text" name="mname"><br>
-전화번호 : <input type="text" name="mphone">
-</form>
+	<form action="memberjoin" method="post">
+		아이디 : <input type="text" name="mid" id="mid" onkeyup="idcheck()">
+				<span id="idcheckresult"></span><br>
+		비밀번호 : <input type="text" name="mpassword"><br>
+		<!-- 비밀번호 확인 : <input type="text" name="mpwcf" onkeyup="pwcheck()">
+				<span id="pw"></span><br> -->
+		이름 : <input type="text" name="mname"><br>
+		전화번호 : <input type="text" name="mphone"><br>
+		<input type="submit" value="회원가입">
+	</form>
 </body>
 </html>
