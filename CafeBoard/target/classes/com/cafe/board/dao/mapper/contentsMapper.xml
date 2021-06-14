@@ -3,6 +3,22 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="cm"> 
+	<select id="contentslist" resultType="contentsdto">
+		SELECT*FROM CONTENTSTB
+	</select>
+	<select id="adminmenulist" parameterType="contentsdto">
+		SELECT*FROM CONTENTSTB
+	</select>
+	
+	<!-- addmenu, adminmenudelete -->
+	<insert id="addmenu" parameterType="contentsdto">
+		INSERT INTO CONTENTSTB(CBRAND, CNUMBER, CNAME, CPRICE, CSIZE, CALL, CSCRI) 
+			VALUES (#{cbrand}, COT_SEQ.NEXTVAL, #{cname}, #{cprice}, #{csize}, #{call}, #{cscri})
+	</insert>
+	
+	<delete id="adminmenudelete" parameterType="int">
+		DELETE FROM CONTENTSTB WHERE CNUMBER=#{cnumber}
+	</delete>
 	
  </mapper>
  

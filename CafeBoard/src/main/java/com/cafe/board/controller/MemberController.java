@@ -25,17 +25,18 @@ public class MemberController {
 	@Autowired
 	private HttpSession session;
 	
+	//가입페이지 이동
 	@RequestMapping(value="/joinpage")
 	public String joinPage() {
 		return "memberjoin";
 	}
-	
+	// 가입
 	@RequestMapping(value="/memberjoin")
 	public ModelAndView memberJoin(@ModelAttribute MemberDTO member) {
 		mav = ms.memberJoin(member);
 		return mav;
 	}
-	
+	// 아이디 중복체크
 	@RequestMapping(value="/idcheck")
 	public @ResponseBody String idCheck(@RequestParam("mid") String mid) {
 		System.out.println("idcheck 호출");
@@ -62,8 +63,15 @@ public class MemberController {
 		return mav;
 	}
 	
-	public String logout() {
+	@RequestMapping(value="/logout")
+	public ModelAndView logout(HttpSession session) {
 		session.invalidate();
-		return "home";
+		ModelAndView mav = new ModelAndView("redirect:/");
+		return mav;
+	}
+	
+	@RequestMapping(value="/mypage")
+	public String myPage() {
+		return "mypage";
 	}
 }

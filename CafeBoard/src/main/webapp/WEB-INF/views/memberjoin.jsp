@@ -33,19 +33,19 @@
 			});
 		}
 		
-		/* function pwcheck() {
-			var inputPw = document.getElementById('mpw').value;
-			var mpwcf = document.getElementById('mpw').value;
-			var pwcheckResult = document.getElementById('pwcheckresult');
-			
+		function pwconfirm() {
+			var inputPw = document.getElementById('mpassword').value;
+			var mpwcf = document.getElementById('pwconfirm').value;
+			var pwconfirmResult = document.getElementById('pwconfirmresult');
+			console.log(mpwcf);
 			if(inputPw == mpwcf){
-				pwcheckResult.style.color = 'green';
-				pwcheckResult.innerHTML = '비밀번호가 일치합니다.'
+				pwconfirmResult.style.color = 'green';
+				pwconfirmResult.innerHTML = '비밀번호가 일치합니다.'
 			} else {
-				pwcheckResult.style.color = 'red';
-				pwcheckResult.innerHTML = '비밀번호가 일치하지 않습니다.';
+				pwconfirmResult.style.color = 'red';
+				pwconfirmResult.innerHTML = '비밀번호가 일치하지 않습니다.';
 			}
-			} */
+			}
 	</script>
 </head>
 <body>
@@ -55,8 +55,8 @@
 		아이디 : <input type="text" name="mid" id="mid" onkeyup="idcheck()">
 				<span id="idcheckresult"></span><br>
 		비밀번호 : <input type="text" name="mpassword"><br>
-		<!-- 비밀번호 확인 : <input type="text" name="mpwcf" onkeyup="pwcheck()">
-				<span id="pw"></span><br> -->
+		비밀번호 확인 : <input type="text" name="mpwcf" onkeyup="pwconfirm()">
+				<span id="pwconfirmresult"></span><br> 
 		이름 : <input type="text" name="mname"><br>
 		전화번호 : <input type="text" name="mphone"><br>
 		<input type="submit" value="회원가입">

@@ -48,7 +48,7 @@ public class MemberService {
 //	public String pwCheck(String mpassword) {
 //		String pwCheckResult = mdao.pwCheck(mpassword);
 //		String result="";
-//		if(pwCheckResult == null) {
+//		if(pwCheckResult == mpassword) {
 //			result = "ok";
 //		} else {
 //			result = "no";
@@ -65,8 +65,17 @@ public class MemberService {
 			mav.setViewName("contentslist");
 		} else {
 			mav.setViewName("memberlogin");
-			//로그인안한 상태여도 로그인 상태가 되어 잇는지..?
+			//로그인안한 상태여도 로그인 상태가 되어 있는지..?
 		}
+		return mav;
+	}
+	
+	public ModelAndView mypage() {
+		mav = new ModelAndView();
+		String loginId = (String) session.getAttribute("loginMember");
+		MemberDTO mypage = mdao.mypage(loginId);
+		mav.addObject("mypage", mypage);
+		mav.setViewName("mypage");
 		return mav;
 	}
 

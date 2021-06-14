@@ -28,4 +28,8 @@ public class MemberDAO {
 		return sql.selectOne("mm.memberlogin", member);
 	}
 
+	public MemberDTO mypage(String loginId) {
+		return sql.selectOne("mm.mypage", loginId);
+	}
+
 }

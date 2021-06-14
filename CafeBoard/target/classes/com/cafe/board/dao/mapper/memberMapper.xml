@@ -11,10 +11,14 @@
 	<select id="idcheck" parameterType="String" resultType="String">
 		SELECT MID FROM MEMBERTB WHERE MID=#{mid}
 	</select>
-	
+	<!-- 
+	<select id="pwcheck" parameterType="String" resultType="String">
+		SELECT MID FROM MEMBERTB WHERE MID=#{mid}
+	</select> -->
 	<select id="memberlogin" parameterType="memberdto" resultType="String">
 		SELECT MID FROM MEMBERTB WHERE MID=#{mid} AND MPASSWORD=#{mpassword}
 	</select>
+	
  </mapper>
  
  
