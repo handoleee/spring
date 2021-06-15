@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h2>로그인페이지(memberlogin.jsp)</h2>
+	<h2>로그인페이지(memberlogin.jsp)</h2>
 
 	<form action="memberlogin" method="post">
 		아이디 : <input type="text" name="mid"><br>
