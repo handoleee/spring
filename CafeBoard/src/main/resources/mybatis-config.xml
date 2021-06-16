@@ -2,6 +2,10 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<settings> 
+    	<setting name="cacheEnabled" value="false" />
+    	<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
 	<typeAliases>
 		<typeAlias type="com.cafe.board.dto.MemberDTO" alias="memberdto"/>
 		<typeAlias type="com.cafe.board.dto.ContentsDTO" alias="contentsdto"/>

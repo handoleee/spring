@@ -5,20 +5,29 @@
  <mapper namespace="cm"> 
 	<select id="contentslist" resultType="contentsdto">
 		SELECT*FROM CONTENTSTB
-	</select>
-	<select id="adminmenulist" parameterType="contentsdto">
-		SELECT*FROM CONTENTSTB
-	</select>
+	</select>	
 	
-	<!-- addmenu, adminmenudelete -->
-	<insert id="addmenu" parameterType="contentsdto">
-		INSERT INTO CONTENTSTB(CBRAND, CNUMBER, CNAME, CPRICE, CSIZE, CALL, CSCRI) 
-			VALUES (#{cbrand}, COT_SEQ.NEXTVAL, #{cname}, #{cprice}, #{csize}, #{call}, #{cscri})
+<!-- 	집에서는 시퀀스 이름 COT1_SEQ.NEXTVAL -->
+	<insert id="adminmenu" parameterType="contentsdto">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+		INSERT INTO CONTENTSTB(CBRAND, CNUMBER, CNAME, CPRICE, CSIZE, CALL, CSCRI, CPICNAME) 
+			VALUES (#{cbrand}, COT_SEQ.NEXTVAL, #{cname}, #{cprice}, #{csize}, #{call}, #{cscri}, #{cpicname})
 	</insert>
 	
-	<delete id="adminmenudelete" parameterType="int">
+	<select id="menuupdate" parameterType="int" resultType="contentsdto">
+		SELECT*FROM CONTENTSTB WHERE CNUMBER=#{cnumber}
+	</select>
+	
+	<update id="menuupdateprocess" parameterType="contentsdto">
+		UPDATE CONTENTSTB SET CNAME=#{cname}, CPRICE=#{cprice}, CSIZE=#{csize}, CALL=#{call}, CSCRI=#{cscri} WHERE CNUMBER=#{cnumber}
+	</update>
+	
+	<delete id="menudelete" parameterType="int">
 		DELETE FROM CONTENTSTB WHERE CNUMBER=#{cnumber}
 	</delete>
+	
+	<select id="menuview" parameterType="int" resultType="contentsdto">
+		SELECT*FROM CONTENTSTB WHERE CNUMBER=#{cnumber}
+	</select>
 	
  </mapper>
  
