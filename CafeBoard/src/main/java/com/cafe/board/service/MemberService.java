@@ -62,7 +62,7 @@ public class MemberService {
 		String loginId = mdao.memberLogin(member);
 		if(loginId != null) {
 			session.setAttribute("loginMember", loginId);
-			mav.setViewName("contentslist");
+			mav.setViewName("redirect:/contentslist");
 		} else {
 			mav.setViewName("memberlogin");
 			//로그인안한 상태여도 로그인 상태가 되어 있는지..?

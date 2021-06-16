@@ -14,6 +14,8 @@
 <body>
 	<h2>마이페이지(mypage.jsp)</h2>
 	<button onclick="">내정보</button>
+	<h3>찜한 목록</h3>
+	
 	
 	
 </body>

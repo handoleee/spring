@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>즐겨찾는 메뉴 add.jsp</h2>
+	<h2>즐겨찾는 메뉴 likelist.jsp</h2>
 
 </body>
 </html>

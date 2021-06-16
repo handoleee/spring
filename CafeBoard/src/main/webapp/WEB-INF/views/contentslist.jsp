@@ -6,13 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<script>
-		function mypage() {
-			if(${sessionScope.loginMember} != null){
-			location.href="mypage";}
-		}
-		
-	</script>
+
 </head>
 <body>
 	<h2>메뉴 contentslist</h2>
@@ -26,18 +20,44 @@
 	<c:if test="${sessionScope.loginMember eq ('admin')}">
 		<a href="adminmenupage">메뉴 추가, 삭제</a><br><br>
 	</c:if>
-		<input type="checkbox" value="${contents.cbrand}">
-	<%-- <c:forEach var="contents" items="${contents}">
-	<!-- 체크박스 넣기 -->	
-	</c:forEach> --%>
-	<c:if test="${!empty contentsList}">
-		<select name="selectBox" id="selectBox" class="select">
-			<c:forEach var="contentsList" items="${contentsList}" varStatus="i">
-				<option value="${contentsList.cbrand}">${contentsList.cbrand}</option>
-			</c:forEach>
-		</select>
+	
+	<c:if test="${empty sessionScope.loginMember}">
+		<a href="./">홈으로</a><br>
 	</c:if>
-	<!--사진 띄우고 마우스 위에다가 올리면 상세설명 뜨게 -->
-	<!--크기 맞춰서 메뉴 이름 적어놓고..? -->
+		
+	메뉴 사진<br>
+	<c:forEach items="${contents}" var="i">
+	
+	<a href="menuview?cnumber=${i.cnumber}"><img src="resources/menupicture/${i.cpicname}" height="150" width="150"></a>
+	</c:forEach>
+	
+	 <c:choose>
+		<c:when test="${paging.page<=1}">
+			[이전]&nbsp;
+		</c:when>
+		<c:otherwise>
+			<a href="paging?page=${paging.page-1}">[이전]</a>&nbsp;
+		</c:otherwise>
+	</c:choose>
+	
+	<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
+		<c:choose>
+			<c:when test="${i eq paging.page}">
+				${i}
+			</c:when>
+			<c:otherwise>
+				<a href="paging?page=${i}">${i}</a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+
+	<c:choose>
+		<c:when test="${paging.page>=paging.maxPage}">
+			[다음]
+		</c:when>
+		<c:otherwise>
+			<a href="paging?page=${paging.page+1}">[다음]</a>
+		</c:otherwise>
+	</c:choose>
 </body>
 </html>

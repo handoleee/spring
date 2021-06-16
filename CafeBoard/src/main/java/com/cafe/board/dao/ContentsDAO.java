@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cafe.board.dto.ContentsDTO;
+import com.cafe.board.dto.PageDTO;
 
 @Repository
 public class ContentsDAO {
@@ -18,25 +19,44 @@ public class ContentsDAO {
 		return sql.selectList("cm.contentslist");
 	}
 	
-	public int adminMenu(ContentsDTO contents) {
-		return sql.insert("cm.adminmenu", contents);
+	public void adminMenu(ContentsDTO contents) {
+		sql.insert("cm.adminmenu", contents);
 	}
 
 	public List<ContentsDTO> adminMenuList() {
 		return sql.selectList("cm.adminmenulist");
 	}
 
-	public ContentsDTO addmenu() {
-		return sql.selectOne("cm.addmenu");
+//	public ContentsDTO addmenu() {
+//		return sql.selectOne("cm.addmenu");
+//	}
+//
+//	public int addmenuProcess(ContentsDTO contents) {
+//		return sql.insert("cm.addmenuprocess", contents);
+//	}
+
+	public void menuDelete(int cnumber) {
+		sql.delete("cm.menudelete", cnumber);
 	}
 
-	public int addmenuProcess(ContentsDTO contents) {
-		return sql.insert("cm.addmenuprocess", contents);
+	public int listCount() {
+		return sql.selectOne("cm.listcount");
 	}
 
-	public void adminmenuDelete(int cnumber) {
-		sql.delete("cm.adminmenudelete", cnumber);
-		
+	public List<ContentsDTO> contentsPaging(PageDTO paging) {
+		return sql.selectList("cm.contentspaging", paging);
+	}
+
+	public ContentsDTO menuUpdate(int cnumber) {
+		return sql.selectOne("cm.menuupdate", cnumber);
+	}
+
+	public int menuUpdateProcess(ContentsDTO contents) {
+		return sql.update("cm.menuupdateprocess", contents);
+	}
+
+	public ContentsDTO menuView(int cnumber) {
+		return sql.selectOne("cm.menuview", cnumber);
 	}
 
 	

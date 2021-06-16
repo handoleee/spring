@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<script>
-		function addmenu() {
-			addmenuform.submit();
+		function menuupdate() {
+			location.href='menuupdate?cnumber='+${contents.cnumber};
 		}
 		function menudelete() {
 			
@@ -18,10 +18,10 @@
 </head>
 <body>
 	<h2>(관리자 전용)메뉴 등록, 삭제 adminmenu.jsp</h2>
-	<form action="addmenu" name="addmenuform">
-		메뉴 등록 <br>
-		브랜드 이름 : 
-		<input type="text" name="cbrand"><br>
+	<h3>메뉴 등록</h3>
+	<!--  name="addmenuform" -->
+	<form action="adminmenu" method="post" enctype="multipart/form-data">
+		브랜드 이름 : <input type="text" name="cbrand"><br>
 		<!-- <select id="test">
 			<option value="1">스타벅스</option>
 			<option value="2">커피빈</option>
@@ -36,12 +36,9 @@
 		용량 : <input type="text" name="csize"><br>
 		알레르기 : <input type="text" name="call"><br>
 		메뉴설명 : <input type="text" name="cscri"><br>
+		메뉴 사진 : <input type="file" name="cpic"><br>
 		<input type="submit" value="등록">
 	</form>
-<!-- 	var a = document.getELementById('test').options[document.getElemenyById('test').selectedIndex].text;
-	alert(a); -->
-	<%-- <c:forEach var="test" items="${menuList}">
-	${test}<br>
-	</c:forEach> --%>
+	<button onclick="menuupdate()">수정</button>
 </body>
 </html>
