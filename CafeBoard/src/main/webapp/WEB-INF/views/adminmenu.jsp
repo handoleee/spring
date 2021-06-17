@@ -13,6 +13,9 @@
 		function menudelete() {
 			
 		}
+		/* function brand() {
+			
+		} */
 		
 	</script>
 </head>
@@ -22,15 +25,13 @@
 	<!--  name="addmenuform" -->
 	<form action="adminmenu" method="post" enctype="multipart/form-data">
 		브랜드 이름 : <input type="text" name="cbrand"><br>
-		<!-- <select id="test">
-			<option value="1">스타벅스</option>
-			<option value="2">커피빈</option>
-			<option value="3">할리스</option>
-			<option value="4">빽다방</option>
-			<option value="5">메가커피</option>
-				${menuList.rbrand}가 아닌 것같음.. 
-				꼭 이렇게 해야만 하는지? db에서 가져오면 안되나..
-			</select><br>	 -->		
+		<!-- <select id="brand" onchange="brand()">
+			<option value="스타벅스">스타벅스</option>
+			<option value="커피빈">커피빈</option>
+			<option value="할리스">할리스</option>
+			<option value="빽다방">빽다방</option>
+			<option value="메가커피">메가커피</option>	
+		</select><br> -->
 		메뉴 이름 : <input type="text" name="cname"><br>
 		가격 : <input type="text" name="cprice"><br>
 		용량 : <input type="text" name="csize"><br>

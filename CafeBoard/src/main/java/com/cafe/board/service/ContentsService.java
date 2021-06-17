@@ -37,8 +37,8 @@ public class ContentsService {
 		String cpicname = cpic.getOriginalFilename();
 		cpicname = System.currentTimeMillis() + "-" + cpicname;
 		System.out.println("메뉴 추가 "+cpicname);
-		String savePath = "D:\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\menupicture\\"+cpicname;
-		
+//		String savePath = "D:\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\menupicture\\"+cpicname;
+		String savePath = "D:\\phs\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\menupicture\\"+cpicname;
 		if(!cpic.isEmpty()) {
 			cpic.transferTo(new File(savePath));
 		}

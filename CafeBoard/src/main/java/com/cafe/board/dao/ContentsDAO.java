@@ -27,14 +27,6 @@ public class ContentsDAO {
 		return sql.selectList("cm.adminmenulist");
 	}
 
-//	public ContentsDTO addmenu() {
-//		return sql.selectOne("cm.addmenu");
-//	}
-//
-//	public int addmenuProcess(ContentsDTO contents) {
-//		return sql.insert("cm.addmenuprocess", contents);
-//	}
-
 	public void menuDelete(int cnumber) {
 		sql.delete("cm.menudelete", cnumber);
 	}

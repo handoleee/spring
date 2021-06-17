@@ -45,13 +45,6 @@ public class ContentsController {
 		return mav;
 	}
 	
-//	// 메뉴 리스트
-//	@RequestMapping(value="/adminmenulist")
-//	public ModelAndView adminMenuList() {
-//		mav = cs.adminMenuList();
-//		return mav;
-//	}
-//	
 	// 메뉴 수정
 	@RequestMapping(value="/menuupdate")
 	public ModelAndView menuUpdate(@RequestParam("cnumber") int cnumber) {
