@@ -1,5 +1,7 @@
 package com.cafe.board.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +78,15 @@ public class MemberService {
 		MemberDTO mypage = mdao.mypage(loginId);
 		mav.addObject("mypage", mypage);
 		mav.setViewName("mypage");
+		return mav;
+	}
+
+	public ModelAndView memberList() {
+		mav = new ModelAndView();
+		List<MemberDTO> memberList = mdao.memberList();
+		
+		mav.addObject("memberList", memberList);
+		mav.setViewName("memberlist");
 		return mav;
 	}
 

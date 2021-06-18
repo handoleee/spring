@@ -1,13 +1,14 @@
 package com.cafe.board.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.cafe.board.dto.ContentsDTO;
-import com.cafe.board.dto.PageDTO;
+import com.cafe.board.dto.ContentsPageDTO;
 
 @Repository
 public class ContentsDAO {
@@ -35,7 +36,7 @@ public class ContentsDAO {
 		return sql.selectOne("cm.listcount");
 	}
 
-	public List<ContentsDTO> contentsPaging(PageDTO paging) {
+	public List<ContentsDTO> contentsPaging(ContentsPageDTO paging) {
 		return sql.selectList("cm.contentspaging", paging);
 	}
 
@@ -44,11 +45,16 @@ public class ContentsDAO {
 	}
 
 	public int menuUpdateProcess(ContentsDTO contents) {
+		System.out.println("updateprocess.dao작동");
 		return sql.update("cm.menuupdateprocess", contents);
 	}
 
 	public ContentsDTO menuView(int cnumber) {
 		return sql.selectOne("cm.menuview", cnumber);
+	}
+
+	public List<ContentsDTO> menuSearch(Map<String, String> searchMap) {
+		return sql.selectList("cm.menusearch", searchMap);
 	}
 
 	

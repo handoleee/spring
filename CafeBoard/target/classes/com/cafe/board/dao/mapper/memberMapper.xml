@@ -19,6 +19,9 @@
 		SELECT MID FROM MEMBERTB WHERE MID=#{mid} AND MPASSWORD=#{mpassword}
 	</select>
 	
+	<select id="memberlist" resultType="memberdto">
+		SELECT*FROM MEMBERTB ORDER BY MID ASC
+	</select>
  </mapper>
  
  

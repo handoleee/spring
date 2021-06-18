@@ -3,7 +3,61 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="bm"> 
+	<insert id="boardwrite" parameterType="boarddto">
+		INSERT INTO BOARDTB(BNUMBER, BWRITER, BTITLE, BCONTENTS, BHITS, BDATE, BPICNAME)
+			VALUES(BOA_SEQ.NEXTVAL, #{bwriter}, #{btitle}, #{bcontents}, 0, SYSDATE, #{bpicname})
+	</insert>
 	
+	<select id="boardlist" resultType="boarddto">
+		SELECT*FROM BOARDTB
+	</select>
+		
+	<select id="boardview" parameterType="int" resultType="boarddto">
+		SELECT*FROM BOARDTB WHERE BNUMBER=#{bnumber}
+	</select>
+	
+	<update id="boardhits" parameterType="int">
+		UPDATE BOARDTB SET BHITS = BHITS+1 WHERE BNUMBER=#{bnumber}
+	</update>
+	
+	<select id="listcount" resultType="int">
+		SELECT COUNT(BNUMBER) FROM BOARDTB 
+	</select>
+
+	<select id="boardpaging" parameterType="boardpagedto" resultType="boarddto">
+		SELECT*FROM (SELECT B.*, ROW_NUMBER() OVER(ORDER BY BNUMBER DESC)
+			AS RN FROM BOARDTB B) WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="boardupdate" parameterType="int" resultType="boarddto">
+		SELECT*FROM BOARDTB WHERE BNUMBER=#{bnumber}
+	</select>
+
+	<update id="boardupdateprocess" parameterType="boarddto">
+		UPDATE BOARDTB SET BTITLE=#{btitle}, BCONTENTS=#{bcontents} WHERE BNUMBER=#{bnumber}
+	</update>
+	
+	<delete id="boarddelete" parameterType="int">
+		DELETE FROM BOARDTB WHERE BNUMBER=#{bnumber}
+	</delete>
+	
+	<select id="boardsearch" parameterType="java.util.HashMap" resultType="boarddto">
+		SELECT*FROM BOARDTABLE
+   		<include refid="search"></include>
+	</select>
+	<sql id="search">
+   		<choose>
+			<when test="type=='btitle'">
+        		 WHERE BTITLE LIKE '%'||#{word}||'%'
+      		</when>
+      		<when test="type=='bwriter'">
+        		 WHERE BWRITER LIKE '%'||#{word}||'%'
+      		</when>
+      		<when test="type=='bcontents'">
+        		 WHERE BCONTENTS LIKE '%'||#{word}||'%'
+      		</when>
+   		</choose>
+	</sql>
  </mapper>
  
  

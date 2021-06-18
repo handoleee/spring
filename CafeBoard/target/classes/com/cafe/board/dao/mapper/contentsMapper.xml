@@ -13,6 +13,11 @@
 			VALUES (#{cbrand}, COT_SEQ.NEXTVAL, #{cname}, #{cprice}, #{csize}, #{call}, #{cscri}, #{cpicname})
 	</insert>
 	
+	<select id="contentspaging" parameterType="contentspagedto" resultType="contentsdto">
+		SELECT*FROM (SELECT C.*, ROW_NUMBER() OVER(ORDER BY CNUMBER DESC)
+			AS RN FROM CONTENTSTB C) WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
 	<select id="menuupdate" parameterType="int" resultType="contentsdto">
 		SELECT*FROM CONTENTSTB WHERE CNUMBER=#{cnumber}
 	</select>
@@ -27,6 +32,25 @@
 	
 	<select id="menuview" parameterType="int" resultType="contentsdto">
 		SELECT*FROM CONTENTSTB WHERE CNUMBER=#{cnumber}
+	</select>
+	
+	<select id="menusearch" parameterType="java.util.HashMap" resultType="contentsdto">
+		SELECT*FROM CONTENTSTB
+		<include refid="search"></include>
+	</select>
+	<sql id="search">
+		<choose>
+			<when test="type=='cbrand'">
+        		 WHERE CBRAND LIKE '%'||#{word}||'%'
+      		</when>
+      		<when test="type=='cname'">
+        		 WHERE CNAME LIKE '%'||#{word}||'%'
+      		</when>
+   		</choose>
+	</sql>
+	
+	<select id="selectbrand" resultType="contentsdto">
+		SELECT*FROM CONTENTSTB WHERE CBRAND=#{cbrand}
 	</select>
 	
  </mapper>

@@ -10,6 +10,8 @@
 		<typeAlias type="com.cafe.board.dto.MemberDTO" alias="memberdto"/>
 		<typeAlias type="com.cafe.board.dto.ContentsDTO" alias="contentsdto"/>
 		<typeAlias type="com.cafe.board.dto.BoardDTO" alias="boarddto"/>
+		<typeAlias type="com.cafe.board.dto.ContentsPageDTO" alias="contentspagedto"/>
+		<typeAlias type="com.cafe.board.dto.BoardPageDTO" alias="boardpagedto"/>
 	</typeAliases>
 	
 </configuration>

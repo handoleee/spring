@@ -33,7 +33,7 @@ public class ContentsController {
 		return "adminmenu";
 	}
 	
-	@RequestMapping(value="/paging")
+	@RequestMapping(value="/contentspaging")
 	public ModelAndView contentsPaging(@RequestParam(value="page", required=false, defaultValue="1") int page) {
 	mav = cs.contentsPaging(page);
 	return mav;}
@@ -54,11 +54,11 @@ public class ContentsController {
 	}
 	
 	// 메뉴 수정 과정
-	@RequestMapping(value="menuupdateprocess")
-		public ModelAndView menuUpdateProcess(@ModelAttribute ContentsDTO contents) {
-			mav = cs.menuUpdateProcess(contents);
-			return mav;
-		}
+	@RequestMapping(value="/menuupdateprocess")
+	public ModelAndView menuUpdateProcess(@ModelAttribute ContentsDTO contents) {
+		mav = cs.menuUpdateProcess(contents);
+		return mav;
+	}
 
 	// 메뉴 삭제(관리자)
 	@RequestMapping(value="/menudelete")
@@ -74,4 +74,12 @@ public class ContentsController {
 		mav = cs.menuView(cnumber, page);
 		return mav;
 	}
-}
+	
+	// 메뉴 검색
+	@RequestMapping(value="/menusearch")
+	public ModelAndView menuSearch(@RequestParam("searchtype") String searchType,
+									@RequestParam("keyword") String keyword) {
+		mav = cs.menuSearch(searchType, keyword);
+		return mav;
+	}
+	}

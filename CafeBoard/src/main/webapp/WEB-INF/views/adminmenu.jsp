@@ -7,11 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<script>
-		function menuupdate() {
+		function menuUpdate() {
 			location.href='menuupdate?cnumber='+${contents.cnumber};
 		}
-		function menudelete() {
-			
+		function menuDelete() {
+			location.href='menudelete?cnumber='+${contents.cnumber};
 		}
 		/* function brand() {
 			
@@ -24,14 +24,14 @@
 	<h3>메뉴 등록</h3>
 	<!--  name="addmenuform" -->
 	<form action="adminmenu" method="post" enctype="multipart/form-data">
-		브랜드 이름 : <input type="text" name="cbrand"><br>
-		<!-- <select id="brand" onchange="brand()">
+		<!-- 브랜드 이름 : <input type="text" name="cbrand"><br> -->
+		<select name="cbrand">
 			<option value="스타벅스">스타벅스</option>
 			<option value="커피빈">커피빈</option>
 			<option value="할리스">할리스</option>
 			<option value="빽다방">빽다방</option>
 			<option value="메가커피">메가커피</option>	
-		</select><br> -->
+		</select><br>
 		메뉴 이름 : <input type="text" name="cname"><br>
 		가격 : <input type="text" name="cprice"><br>
 		용량 : <input type="text" name="csize"><br>
@@ -40,6 +40,7 @@
 		메뉴 사진 : <input type="file" name="cpic"><br>
 		<input type="submit" value="등록">
 	</form>
-	<button onclick="menuupdate()">수정</button>
+		<button onclick="menuUpdate()">수정</button>
+		<button onclick="menuDelete()">삭제</button>
 </body>
 </html>

@@ -74,4 +74,11 @@ public class MemberController {
 	public String myPage() {
 		return "mypage";
 	}
+	
+	// 회원조회
+	@RequestMapping(value="/memberlist")
+	public ModelAndView memberList() {
+		mav = ms.memberList();
+		return mav;
+	}
 }
