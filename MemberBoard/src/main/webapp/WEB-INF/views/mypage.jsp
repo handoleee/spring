@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-	function update() {
+	/* function update() {
 		location.href="memberupdate";
-	}
+	} */
 </script>
 </head>
 <body>

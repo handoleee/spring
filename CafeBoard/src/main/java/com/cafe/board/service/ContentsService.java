@@ -2,7 +2,9 @@ package com.cafe.board.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cafe.board.dao.ContentsDAO;
 import com.cafe.board.dto.ContentsDTO;
-import com.cafe.board.dto.PageDTO;
+import com.cafe.board.dto.ContentsPageDTO;
 
 @Service
 public class ContentsService {
@@ -37,8 +39,8 @@ public class ContentsService {
 		String cpicname = cpic.getOriginalFilename();
 		cpicname = System.currentTimeMillis() + "-" + cpicname;
 		System.out.println("메뉴 추가 "+cpicname);
-//		String savePath = "D:\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\menupicture\\"+cpicname;
-		String savePath = "D:\\phs\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\menupicture\\"+cpicname;
+		String savePath = "D:\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\menupicture\\"+cpicname;
+//		String savePath = "D:\\phs\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\menupicture\\"+cpicname;
 		if(!cpic.isEmpty()) {
 			cpic.transferTo(new File(savePath));
 		}
@@ -46,27 +48,7 @@ public class ContentsService {
 		cdao.adminMenu(contents);
 		mav.setViewName("redirect:/contentslist");
 		return mav;
-		
-//		int insertResult = 0;
-//		insertResult = cdao.adminMenu(contents);
-//		if(insertResult > 0) {
-//			mav.setViewName("adminmenu");
-//		} else {
-//			mav.setViewName("contentslist");
-//		}
-//		return mav;
-	}
-
-	public ModelAndView adminMenuList() {
-		mav = new ModelAndView();
-		List<ContentsDTO> menuList = cdao.adminMenuList();
-		for(int i=0; i<menuList.size(); i++) {
-			System.out.println(menuList.get(i));
 		}
-		mav.addObject("menulist", menuList);
-		mav.setViewName("menulist");
-		return mav;
-	}
 
 	public ModelAndView menuDelete(int cnumber) {
 		mav = new ModelAndView();
@@ -86,7 +68,7 @@ public class ContentsService {
 		int startRow = (page-1) * PAGE_LIMIT + 1;
 		int endRow = page * PAGE_LIMIT;
 		
-		PageDTO paging = new PageDTO();
+		ContentsPageDTO paging = new ContentsPageDTO();
 		paging.setStartRow(startRow);
 		paging.setEndRow(endRow);
 		List<ContentsDTO> contentsList = cdao.contentsPaging(paging);
@@ -110,7 +92,7 @@ public class ContentsService {
 
 	public ModelAndView menuUpdate(int cnumber) {
 		mav = new ModelAndView();
-		ContentsDTO contents = cdao.menuUpdate(cnumber);
+		ContentsDTO contents = cdao.menuView(cnumber);
 		mav.addObject("menuUpdate", contents);
 		mav.setViewName("menuupdate");
 		System.out.println("contents. 서비스 메뉴업뎃");
@@ -119,11 +101,12 @@ public class ContentsService {
 
 	public ModelAndView menuUpdateProcess(ContentsDTO contents) {
 		mav = new ModelAndView();
-		int updateResult =cdao.menuUpdateProcess(contents);
+		int updateResult = cdao.menuUpdateProcess(contents);
+		
 		if(updateResult > 0) {
 //			일단, contentslist로 하고, view 
 			mav.setViewName("redirect:/menuview?cnumber="+contents.getCnumber());
-		}
+		} 
 		return mav;
 	}
 
@@ -133,6 +116,19 @@ public class ContentsService {
 		
 		mav.addObject("contents", contents);
 		mav.setViewName("menuview");
+		return mav;
+	}
+
+	public ModelAndView menuSearch(String searchType, String keyword) {
+		mav = new ModelAndView();
+		
+		Map<String, String> searchMap = new HashMap<String, String>();
+		searchMap.put("type", searchType);
+		searchMap.put("word", keyword);
+		
+		List<ContentsDTO> contentsList = cdao.menuSearch(searchMap);
+		mav.addObject("contentsList", contentsList);
+		mav.setViewName("contentslist");
 		return mav;
 	}
 

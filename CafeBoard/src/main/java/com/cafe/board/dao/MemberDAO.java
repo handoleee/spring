@@ -1,5 +1,7 @@
 package com.cafe.board.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,6 +32,18 @@ public class MemberDAO {
 
 	public MemberDTO mypage(String loginId) {
 		return sql.selectOne("mm.mypage", loginId);
+	}
+
+	public List<MemberDTO> memberList() {
+		return sql.selectList("mm.memberlist");
+	}
+
+	public MemberDTO memberUpdate(String loginId) {
+		return sql.selectOne("mm.memberupdate", loginId);
+	}
+
+	public int memberUpdateProcess(MemberDTO member) {
+		return sql.update("mm.memberupdateprocess", member);
 	}
 
 }

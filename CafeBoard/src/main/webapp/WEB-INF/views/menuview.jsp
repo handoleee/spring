@@ -18,6 +18,10 @@
 			}
 			
 		}
+		
+		/* function likeList(){
+			location.href='likelist?mid='+
+		} */
 	</script>
 </head>
 <body>
@@ -32,6 +36,9 @@
 		메뉴설명 : ${contents.cscri}<br>
 		사진 : <img src="resources/menupicture/${contents.cpicname}" height="150" width="150"><br>
 		<a href="contentslist">목록</a>
+		<c:if test="${sessionScope.loginMember != null}">
+		<a href="likelist">즐겨찾는 메뉴 등록</a>
+		</c:if>
 		<c:if test="${sessionScope.loginMember eq ('admin')}">
 			<button onclick="menuUpdate()">수정</button>
 			<button onclick="menuDelete()">삭제</button>

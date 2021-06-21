@@ -19,6 +19,17 @@
 		SELECT MID FROM MEMBERTB WHERE MID=#{mid} AND MPASSWORD=#{mpassword}
 	</select>
 	
+	<select id="memberlist" resultType="memberdto">
+		SELECT*FROM MEMBERTB ORDER BY MID ASC
+	</select>
+	
+	<select id="memberupdate" parameterType="String" resultType="memberdto">
+		SELECT*FROM MEMBERTB WHERE MID=#{mid}
+	</select>
+	
+	<update id="memberupdateprocess" parameterType="memberdto">
+		UPDATE MEMBERTB SET MEMAIL=#{memail} WHERE MID=#{mid}
+	</update>
  </mapper>
  
  
