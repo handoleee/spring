@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="lm"> 
+	<insert id="likelist">
+		INSERT INTO LIKETB (LNUMBER, LBRANDNUM, LWRITER) 
+			VALUES(LIK_SEQ.NEXTVAL,#{lbrandnum},#{lwriter})
+	</insert>
+	<!-- <select id="likelist" parameterType="int" resultType="likedto">
+		SELECT*FROM LIKETB WHERE LWRITER=#{lwriter}
+	</select>
+	
+	<update id="likelistprocess" parameterType="String">
+		UPDATE LIKETB SET LNUMBER=#{lnumber}, LBRANDNUM=#{lbrandnum} WHERE LWRITER=#{lwriter}
+	</update> -->
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

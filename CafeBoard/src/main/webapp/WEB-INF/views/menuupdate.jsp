@@ -14,6 +14,7 @@
 <body>
 	<h2>메뉴 수정(menuupdate.jsp)</h2>
 	<form action="menuupdateprocess" method="post" name="updateform">
+		<input type="hidden" name="cnumber" value="${menuUpdate.cnumber}" readonly>
 		브랜드 이름 : <input type="text" name="cbrand" value="${menuUpdate.cbrand}" readonly><br>
 		메뉴 이름 : <input type="text" name="cname" value="${menuUpdate.cname}"><br>
 		가격 : <input type="text" name="cprice" value="${menuUpdate.cprice}"><br>

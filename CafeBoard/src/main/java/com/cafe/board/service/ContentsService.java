@@ -23,12 +23,36 @@ public class ContentsService {
 	
 	private ModelAndView mav;
 	
-	public ModelAndView contentsList() {
+	
+	private static final int PAGE_LIMIT = 3;
+	private static final int BLOCK_LIMIT = 3;
+	
+	public ModelAndView contentsList(int page) {
 		mav = new ModelAndView();
-		List<ContentsDTO> contentsList = cdao.contentsList();
+		ContentsPageDTO paging = new ContentsPageDTO();
+		
+		int listCount = cdao.listCount();
+		int startRow = (page-1) * PAGE_LIMIT + 1;
+		int endRow = page * PAGE_LIMIT;
+		
+		paging.setStartRow(startRow);
+		paging.setEndRow(endRow);
+		List<ContentsDTO> contentsList = cdao.contentsList(paging);
+		
+		int maxPage = (int)(Math.ceil((double)listCount / PAGE_LIMIT));
+		int startPage = (((int)(Math.ceil((double)page / BLOCK_LIMIT))) - 1) * BLOCK_LIMIT + 1;
+		int endPage = startPage + BLOCK_LIMIT - 1;
+		if(endPage > maxPage)
+			endPage = maxPage;
+		
+		paging.setPage(page);
+		paging.setStartPage(startPage);
+		paging.setEndPage(endPage);
+		paging.setMaxPage(maxPage);
 		
 		mav.addObject("contents", contentsList);
 		mav.setViewName("contentslist");
+		mav.addObject("paging", paging);
 		return mav;
 	}
 	
@@ -57,45 +81,11 @@ public class ContentsService {
 		return mav;
 	}
 
-	private static final int PAGE_LIMIT = 4;
-	private static final int BLOCK_LIMIT = 4;
-	
-	public ModelAndView contentsPaging(int page) {
-		mav = new ModelAndView();
-		
-		int listCount = cdao.listCount();
-		
-		int startRow = (page-1) * PAGE_LIMIT + 1;
-		int endRow = page * PAGE_LIMIT;
-		
-		ContentsPageDTO paging = new ContentsPageDTO();
-		paging.setStartRow(startRow);
-		paging.setEndRow(endRow);
-		List<ContentsDTO> contentsList = cdao.contentsPaging(paging);
-		
-		int maxPage = (int)(Math.ceil((double)listCount / PAGE_LIMIT));
-		int startPage = (((int)(Math.ceil((double)page / BLOCK_LIMIT))) - 1) * BLOCK_LIMIT + 1;
-		int endPage = startPage + BLOCK_LIMIT - 1;
-		if(endPage > maxPage)
-			endPage = maxPage;
-		
-		paging.setPage(page);
-		paging.setStartPage(startPage);
-		paging.setEndPage(endPage);
-		paging.setMaxPage(maxPage);
-		
-		mav.addObject("paging", paging);
-		mav.addObject("contentsList", contentsList);
-		mav.setViewName("contentslist");
-		return mav;
-	}
-
 	public ModelAndView menuUpdate(int cnumber) {
 		mav = new ModelAndView();
 		ContentsDTO contents = cdao.menuView(cnumber);
 		mav.addObject("menuUpdate", contents);
 		mav.setViewName("menuupdate");
-		System.out.println("contents. 서비스 메뉴업뎃");
 		return mav;
 	}
 
@@ -105,10 +95,8 @@ public class ContentsService {
 		
 		if(updateResult > 0) {
 //			일단, contentslist로 하고, view 
-			mav.setViewName("redirect:/contentslist");
-		} else {
 			mav.setViewName("redirect:/menuview?cnumber="+contents.getCnumber());
-		}
+		} 
 		return mav;
 	}
 
@@ -129,7 +117,7 @@ public class ContentsService {
 		searchMap.put("word", keyword);
 		
 		List<ContentsDTO> contentsList = cdao.menuSearch(searchMap);
-		mav.addObject("contentsList", contentsList);
+		mav.addObject("contents", contentsList);
 		mav.setViewName("contentslist");
 		return mav;
 	}

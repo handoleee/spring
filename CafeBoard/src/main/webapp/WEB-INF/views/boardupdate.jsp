@@ -14,11 +14,11 @@
 <body>
 	<h2>글수정(boardupdate.jsp)</h2>
 	<form action="boardupdateprocess" method="post" name="bupdateform">
-		글번호 : ${boardUpdate.bnumber} <br>
-	작성자 : ${boardUpdate.bwriter}<br>
-	제목 : <input type="text" name="btitle" value="${boardUpdate.btitle}"><br>
-	내용 : <textarea rows=5 name="bcontents">${boardUpdate.bcontents}</textarea><br>
-	작성일자 : ${boardUpdate.bdate}<br>
+		<input type="hidden" name="bnumber" value="${boardUpdate.bnumber}" readonly>
+		작성자 : ${boardUpdate.bwriter}<br>
+		제목 : <input type="text" name="btitle" value="${boardUpdate.btitle}"><br>
+		내용 : <textarea rows=5 name="bcontents">${boardUpdate.bcontents}</textarea><br>
+		작성일자 : ${boardUpdate.bdate}<br>
 	<input type="button" onclick="bupdatefn()" value="수정">
 	</form>
 

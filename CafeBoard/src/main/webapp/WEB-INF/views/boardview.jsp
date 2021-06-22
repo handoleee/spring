@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-		function boardupdate() {
+		function boardUpdate() {
 			location.href='boardupdate?bnumber='+${board.bnumber};
 			}
 		
@@ -20,7 +20,7 @@
 	</script>
 </head>
 <body>
-<h2>글조회(boardview.jsp)</h2>
+	<h2>글조회(boardview.jsp)</h2>
 
 	글번호 : ${board.bnumber}<br>
 	작성자 : ${board.bwriter}<br>
@@ -33,11 +33,11 @@
 	<c:set var="bwriter" value="${board.bwriter}" />
 		<c:choose>
 		<c:when test="${sessionScope.loginMember eq ('admin')}">
-		<button onclick="boardupdate()">수정</button>
+		<button onclick="boardUpdate()">수정</button>
 		<button onclick="boardDelete()">삭제</button>
 		</c:when>
 		<c:when test="${sessionScope.loginMember eq bwriter}">
-		<button onclick="boardupdate()">수정</button>
+		<button onclick="boardUpdate()">수정</button>
 		<button onclick="boardDelete()">삭제</button>
 		</c:when>
 		</c:choose>

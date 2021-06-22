@@ -22,6 +22,22 @@
 	<select id="memberlist" resultType="memberdto">
 		SELECT*FROM MEMBERTB ORDER BY MID ASC
 	</select>
+	
+	<select id="memberupdate" parameterType="String" resultType="memberdto">
+		SELECT*FROM MEMBERTB WHERE MID=#{mid}
+	</select>
+	
+	<update id="memberupdateprocess" parameterType="memberdto">
+		UPDATE MEMBERTB SET MPASSWORD=#{mpassword}, MNAME=#{mname}, MPHONE=#{mphone} WHERE MID=#{mid}
+	</update>
+	
+	<!-- <select id="likelist" parameterType="int" resultType="likedto">
+		SELECT*FROM LIKETB WHERE LWRITER=#{lwriter}
+	</select>
+	
+	<update id="likelistprocess" parameterType="String">
+		UPDATE LIKETB SET LNUMBER=#{lnumber}, LBRANDNUM=#{lbrandnum} WHERE LWRITER=#{lwriter}
+	</update> -->
  </mapper>
  
  

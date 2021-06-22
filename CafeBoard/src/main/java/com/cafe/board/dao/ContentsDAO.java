@@ -16,8 +16,8 @@ public class ContentsDAO {
 	@Autowired
 	private SqlSessionTemplate sql;
 	
-	public List<ContentsDTO> contentsList() {
-		return sql.selectList("cm.contentslist");
+	public List<ContentsDTO> contentsList(ContentsPageDTO paging) {
+		return sql.selectList("cm.contentslist", paging);
 	}
 	
 	public void adminMenu(ContentsDTO contents) {
@@ -36,16 +36,11 @@ public class ContentsDAO {
 		return sql.selectOne("cm.listcount");
 	}
 
-	public List<ContentsDTO> contentsPaging(ContentsPageDTO paging) {
-		return sql.selectList("cm.contentspaging", paging);
-	}
-
 	public ContentsDTO menuUpdate(int cnumber) {
 		return sql.selectOne("cm.menuupdate", cnumber);
 	}
 
 	public int menuUpdateProcess(ContentsDTO contents) {
-		System.out.println("updateprocess.dao작동");
 		return sql.update("cm.menuupdateprocess", contents);
 	}
 

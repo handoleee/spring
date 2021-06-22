@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cafe.board.dao.MemberDAO;
+import com.cafe.board.dto.ContentsDTO;
+import com.cafe.board.dto.LikeDTO;
 import com.cafe.board.dto.MemberDTO;
 
 @Service
@@ -16,6 +18,7 @@ public class MemberService {
 
 	@Autowired
 	private MemberDAO mdao;
+	
 	
 	@Autowired
 	private HttpSession session;
@@ -72,14 +75,14 @@ public class MemberService {
 		return mav;
 	}
 	
-	public ModelAndView mypage() {
-		mav = new ModelAndView();
-		String loginId = (String) session.getAttribute("loginMember");
-		MemberDTO mypage = mdao.mypage(loginId);
-		mav.addObject("mypage", mypage);
-		mav.setViewName("mypage");
-		return mav;
-	}
+//	public ModelAndView mypage() {
+//		mav = new ModelAndView();
+//		String loginId = (String) session.getAttribute("loginMember");
+//		MemberDTO mypage = mdao.mypage(loginId);
+//		mav.addObject("mypage", mypage);
+//		mav.setViewName("mypage");
+//		return mav;
+//	}
 
 	public ModelAndView memberList() {
 		mav = new ModelAndView();
@@ -90,4 +93,62 @@ public class MemberService {
 		return mav;
 	}
 
+	public ModelAndView memberUpdate() {
+		mav = new ModelAndView();
+		String loginId = (String) session.getAttribute("loginMember");
+		MemberDTO memberUpdate = mdao.memberUpdate(loginId);
+		
+		mav.addObject("memberUpdate", memberUpdate);
+		mav.setViewName("memberupdate");
+		return mav;
+	}
+
+	public ModelAndView memberUpdateProcess(MemberDTO member) {
+		mav = new ModelAndView();
+		int updateResult = mdao.memberUpdateProcess(member);
+		if(updateResult > 0) {
+			mav.setViewName("redirect:/memberupdate");
+		} else {
+			mav.setViewName("redirect:/mypage");
+		}
+		return mav;
+	}
+	
+//	public ModelAndView likeList() {
+//		mav = new ModelAndView();
+//		List<LikeDTO> likeList = mdao.likeList();
+//		mav.addObject("likeList", likeList);
+//		mav.setViewName("likelist");
+//		return mav;
+//	}
+//
+//	public ModelAndView likeListProcess(MemberDTO member) {
+//		mav = new ModelAndView();
+//		int likeResult = mdao.likeListProcess(member);
+//		if(likeResult > 0) {
+//			mav.setViewName("redirect:/mypage");
+//		}
+//		return mav;
+//	}
+	
+//	public ModelAndView myPage() {
+//		mav = new ModelAndView();
+//		String loginId = (String) session.getAttribute("loginMember");
+//		MemberDTO myPage = mdao.mypage(loginId);
+//		mav.addObject("myPage", myPage);
+//		mav.setViewName("mypage");
+//		return mav;
+//	}
+
 }
+
+//public ModelAndView likeList(MemberDTO member) {
+//mav = new ModelAndView();
+//List<ContentsDTO> likeList = mdao.likeList(member);
+//
+//mav.addObject("likeList", likeList);
+//mav.setViewName("likelist");
+//return mav;
+//
+//}
+

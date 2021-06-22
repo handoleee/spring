@@ -40,7 +40,6 @@
 		메뉴 사진 : <input type="file" name="cpic"><br>
 		<input type="submit" value="등록">
 	</form>
-		<button onclick="menuUpdate()">수정</button>
-		<button onclick="menuDelete()">삭제</button>
+		
 </body>
 </html>

@@ -20,9 +20,10 @@ public class BoardDAO {
 		sql.insert("bm.boardwrite", board);
 	}
 
-	public List<BoardDTO> boardList() {
-		return sql.selectList("bm.boardlist");
+	public List<BoardDTO> boardList(BoardPageDTO paging) {
+		return sql.selectList("bm.boardlist", paging);
 	}
+	
 	
 	public void boardHits(int bnumber) {
 		sql.update("bm.boardhits", bnumber);
@@ -36,10 +37,10 @@ public class BoardDAO {
 		return sql.selectOne("bm.listcount");
 	}
 
-	public List<BoardDTO> boardPaging(BoardPageDTO paging) {
-		return sql.selectList("bm.boardpaging", paging);
-	}
-
+	public BoardDTO boardUpdate(int bnumber) { 
+		 return sql.selectOne("bm.boardupdate", bnumber); 
+	 }
+	
 	public int boardUpdateProcess(BoardDTO board) {
 		return sql.update("bm.boardupdateprocess", board);
 	}

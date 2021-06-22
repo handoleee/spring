@@ -16,12 +16,15 @@
 			if(confirm("삭제하시겠습니까?") == true){
 				alert('삭제되었습니다.');
 			}
-			
 		}
-		
-		/* function likeList(){
-			location.href='likelist?mid='+
-		} */
+			
+		function likeList() {
+			location.href='likelist?cnumber='+${loginMember};
+			if(confirm("즐겨찾는 메뉴에 추가하시겠습니까?") == true){
+				alert('추가되었습니다.');
+			}
+		}
+			
 	</script>
 </head>
 <body>
@@ -37,7 +40,7 @@
 		사진 : <img src="resources/menupicture/${contents.cpicname}" height="150" width="150"><br>
 		<a href="contentslist">목록</a>
 		<c:if test="${sessionScope.loginMember != null}">
-		<a href="likelist">즐겨찾는 메뉴 등록</a>
+			<button onclick="likeList()">즐겨찾는메뉴등록</button>
 		</c:if>
 		<c:if test="${sessionScope.loginMember eq ('admin')}">
 			<button onclick="menuUpdate()">수정</button>

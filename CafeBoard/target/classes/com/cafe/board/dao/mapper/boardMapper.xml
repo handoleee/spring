@@ -8,8 +8,13 @@
 			VALUES(BOA_SEQ.NEXTVAL, #{bwriter}, #{btitle}, #{bcontents}, 0, SYSDATE, #{bpicname})
 	</insert>
 	
-	<select id="boardlist" resultType="boarddto">
+	<!-- <select id="boardlist" resultType="boarddto">
 		SELECT*FROM BOARDTB
+	</select> -->
+	
+	<select id="boardlist" parameterType="boardpagedto" resultType="boarddto">
+		SELECT*FROM (SELECT B.*, ROW_NUMBER() OVER(ORDER BY BNUMBER DESC)
+			AS RN FROM BOARDTB B) WHERE RN BETWEEN #{startRow} AND #{endRow}
 	</select>
 		
 	<select id="boardview" parameterType="int" resultType="boarddto">
@@ -24,11 +29,6 @@
 		SELECT COUNT(BNUMBER) FROM BOARDTB 
 	</select>
 
-	<select id="boardpaging" parameterType="boardpagedto" resultType="boarddto">
-		SELECT*FROM (SELECT B.*, ROW_NUMBER() OVER(ORDER BY BNUMBER DESC)
-			AS RN FROM BOARDTB B) WHERE RN BETWEEN #{startRow} AND #{endRow}
-	</select>
-	
 	<select id="boardupdate" parameterType="int" resultType="boarddto">
 		SELECT*FROM BOARDTB WHERE BNUMBER=#{bnumber}
 	</select>
@@ -42,7 +42,7 @@
 	</delete>
 	
 	<select id="boardsearch" parameterType="java.util.HashMap" resultType="boarddto">
-		SELECT*FROM BOARDTABLE
+		SELECT*FROM BOARDTB
    		<include refid="search"></include>
 	</select>
 	<sql id="search">

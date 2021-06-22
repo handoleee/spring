@@ -6,6 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<style>
+		table,tr,th,td {
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+	</style>
 <script>
 	function boardWrite(){
 		
@@ -16,6 +22,7 @@
 	<h2>게시판(boardlist.jsp)</h2>
 
 	<a href="writepage">글작성</a>
+	<a href="contentslist">메뉴 조회</a>
 	<form action="boardsearch" method="get">
 		<select name="searchtype">
 			<option value="btitle">제목</option>
@@ -25,8 +32,8 @@
 		<input type="text" name="keyword" placeholder="검색어입력">
 		<input type="submit" value="검색">
 	</form>
-<table>
-<c:forEach var="board" items="${board}">
+	<table>
+	
 		<tr>
 			<th>글번호</th>
 			<th>작성자</th>
@@ -35,13 +42,13 @@
 			<th>조회수</th>
 			<th>작성일자</th>
 			<th>파일</th>
-			
 		</tr>
-		
-		<tr>			
+		<c:forEach var="board" items="${board}">	
+		<tr>
+				
 			<td>${board.bnumber}</td>
 			<td>${board.bwriter}</td>
-			<td><a href="boardview?bnumber=${board.bnumber}">${board.btitle}</a></td>
+			<td><a href="boardview?bnumber=${board.bnumber}&page=${paging.page}">${board.btitle}</a></td>
 			<td>${board.bcontents}</td>
 			<td>${board.bhits}</td>
 			<td>${board.bdate}</td>
@@ -54,7 +61,7 @@
 			[이전]&nbsp;
 		</c:when>
 		<c:otherwise>
-			<a href="boardpaging?page=${paging.page-1}">[이전]</a>&nbsp;
+			<a href="boardlist?page=${paging.page-1}">[이전]</a>&nbsp;
 		</c:otherwise>
 	</c:choose>
 	
@@ -64,7 +71,7 @@
 				${i}
 			</c:when>
 			<c:otherwise>
-				<a href="boardpaging?page=${i}">${i}</a>
+				<a href="boardlist?page=${i}">${i}</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
@@ -74,7 +81,7 @@
 			[다음]
 		</c:when>
 		<c:otherwise>
-			<a href="boardpaging?page=${paging.page+1}">[다음]</a>
+			<a href="boardlist?page=${paging.page+1}">[다음]</a>
 		</c:otherwise>
 	</c:choose>
 </body>

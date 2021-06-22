@@ -13,8 +13,8 @@
 </head>
 <body>
 	<h2>마이페이지(mypage.jsp)</h2>
-	<button onclick="">내정보</button>
-	<a href="likelist">찜한 목록</a>
+	<button onclick="location='memberupdate.jsp'">정보수정</button>
+	<a href="likelist?=${loginMember}">찜한 목록</a>
 	
 	
 	

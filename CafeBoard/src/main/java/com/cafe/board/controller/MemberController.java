@@ -70,15 +70,52 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/mypage")
-	public String myPage() {
-		return "mypage";
-	}
-	
 	// 회원조회
 	@RequestMapping(value="/memberlist")
 	public ModelAndView memberList() {
 		mav = ms.memberList();
 		return mav;
 	}
+	
+	// 회원정보 수정
+	@RequestMapping(value="/memberupdate")
+	public ModelAndView memberUpdate() {
+		mav = ms.memberUpdate();
+		return mav;
+	}
+	
+	//회원정보 수정 요청
+	@RequestMapping(value="/memberupdateprocess")
+	public ModelAndView memberUpdateProcess(@ModelAttribute MemberDTO member) {
+		mav = ms.memberUpdateProcess(member);
+		return mav;
+	}
+	
+	// 마이페이지
+//	@RequestMapping(value="/mypage")
+//	public ModelAndView MyPage() {
+//		mav= ms.myPage();
+//		return mav;
+//	}
+	
+	@RequestMapping(value="/mypage")
+	public String myPage() {
+		return "mypage";
+	}
+	
+//	// 즐겨찾는 메뉴 
+//	@RequestMapping(value="/likelist")
+//	public ModelAndView likeList() {
+//		mav = ms.likeList();
+//		return mav;
+//	}
+//	// 즐겨찾는 메뉴 요청
+//	@RequestMapping(value="/likelistprocess")
+//	public ModelAndView likeListProcess(@ModelAttribute MemberDTO member) {
+//		mav = ms.likeListProcess(member);
+//		return mav;
+//	}
+			
+	
+	
 }

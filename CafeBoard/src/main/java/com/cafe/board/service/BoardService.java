@@ -31,6 +31,7 @@ public class BoardService {
 		bpicname = System.currentTimeMillis() + "-" + bpicname;
 		System.out.println("boardwrite:"+bpicname);
 		String savePath = "D:\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\boardpicture\\"+bpicname;
+//		String savePath = "D:\\phs\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\boardpicture\\"+bpicname;
 		
 		if(!bpic.isEmpty()) {
 			bpic.transferTo(new File(savePath));
@@ -42,12 +43,39 @@ public class BoardService {
 		mav.setViewName("redirect:/boardlist");
 		return mav;
 	}
+	
+	private static final int PAGE_LIMIT = 3;
+	private static final int BLOCK_LIMIT = 3;
 
-	public ModelAndView boardList() {
+	public ModelAndView boardList(int page) {
 		mav = new ModelAndView();
-		List<BoardDTO> boardList = bdao.boardList();
+		
+		BoardPageDTO paging = new BoardPageDTO();
+		
+		int listCount = bdao.listCount();
+		int startRow = (page-1) * PAGE_LIMIT + 1;
+		int endRow = page * PAGE_LIMIT;
+		
+		paging.setStartRow(startRow);
+		paging.setEndRow(endRow);
+		List<BoardDTO> boardList = bdao.boardList(paging);
+//		List<BoardDTO> boardList = bdao.boardPaging(paging);
+		
+		int maxPage = (int)(Math.ceil((double)listCount / PAGE_LIMIT));
+		int startPage = (((int)(Math.ceil((double)page / BLOCK_LIMIT))) -1) * BLOCK_LIMIT + 1;
+		int endPage = startPage + BLOCK_LIMIT - 1;
+		if(endPage > maxPage)
+			endPage = maxPage;
+		
+		paging.setPage(page);
+		paging.setStartPage(startPage);
+		paging.setEndPage(endPage);
+		paging.setMaxPage(maxPage);
+		
 		mav.addObject("board", boardList);
 		mav.setViewName("boardlist");
+		mav.addObject("paging", paging);
+		System.out.println("페이징값"+paging);
 		return mav;
 	}
 
@@ -62,39 +90,9 @@ public class BoardService {
 		
 	}
 
-	private static final int PAGE_LIMIT = 5;
-	private static final int BLOCK_LIMIT = 5;
-	
-	public ModelAndView boardPaging(int page) {
-		mav = new ModelAndView();
-		
-		int listCount = bdao.listCount();
-		
-		int startRow = (page-1) * PAGE_LIMIT + 1;
-		int endRow = page * PAGE_LIMIT;
-		
-		BoardPageDTO paging = new BoardPageDTO();
-		paging.setStartRow(startRow);
-		paging.setEndRow(endRow);
-		List<BoardDTO> boardList = bdao.boardPaging(paging);
-		
-		int maxPage = (int)(Math.ceil((double)listCount / PAGE_LIMIT));
-		int startPage = (((int)(Math.ceil((double)page / BLOCK_LIMIT))) -1) * BLOCK_LIMIT + 1;
-		int endPage = startPage + BLOCK_LIMIT - 1;
-		if(endPage > maxPage)
-			endPage = maxPage;
-		
-		paging.setPage(page);
-		paging.setStartPage(startPage);
-		paging.setEndPage(endPage);
-		paging.setMaxPage(maxPage);
-		
-		return mav;
-	}
-
 	public ModelAndView boardUpdate(int bnumber) {
 		mav = new ModelAndView();
-		BoardDTO board =bdao.boardView(bnumber);
+		BoardDTO board = bdao.boardView(bnumber);
 		mav.addObject("boardUpdate", board);
 		mav.setViewName("boardupdate");
 		return mav;
@@ -126,7 +124,7 @@ public class BoardService {
 		searchMap.put("word", keyword);
 		
 		List<BoardDTO> boardList = bdao.boardSearch(searchMap);
-		mav.addObject("boardList", boardList);
+		mav.addObject("board", boardList);
 		mav.setViewName("boardlist");
 		return mav;
 	}

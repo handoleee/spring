@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+출처: https://offbyone.tistory.com/325 [쉬고 싶은 개발자]
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +25,29 @@ $('input[name="checkbox"]').is(":checked") */
 	var test = $(this).val();
 	console.log("벨류값 : "+test);
 } */
+
+</script>
+
+<script>
+
+	var $form = $("#listForm");
+
+	$(function() {
+		$form.find(".btnexpsrYn").on('click', function(e){
+			var chked_val = "";
+
+	$(":checkbox[name='cbrand']:checked").each(function(pi,po){
+	    chked_val += ","+po.value;
+	    console.log(pi);
+
+	});
+
+	chked_val = chked_val.substring(1); 
+	console.log(chked_val);
+
+});
+
+});
 
 </script>
 <style>
@@ -49,7 +75,13 @@ table{
 	<c:if test="${empty sessionScope.loginMember}">
 		<a href="./">홈으로</a><br>
 	</c:if>
-	
+	<form:form commandName="" id="listForm" name="listForm">
+		<input type="checkbox" name="cbrand1" value="스타벅스"<?if($row[cbrand1] == "스타벅스"){echo "checked"}?>/>스타벅스
+		<input type="checkbox" name="cbrand2" id="cbrand_2" value="커피빈">
+		<input type="checkbox" name="cbrand3" id="cbrand_3" value="할리스">
+		<input type="checkbox" name="cbrand4" id="cbrand_4" value="빽다방">
+		<input type="checkbox" name="cbrand5" id="cbrand_4" value="메가커피">
+	</form:form>
 	<form action="menusearch" method="get">
 		<select name="searchtype">
 			<option value="cbrand">브랜드</option>
@@ -73,9 +105,8 @@ table{
 	
 	<a href="menuview?cnumber=${i.cnumber}"><img src="resources/menupicture/${i.cpicname}" height="150" width="150"></a><br>
 	</c:forEach>
-		<table>
-		<c:forEach var="contents" items="${contentsList}">
-		
+	
+		<table>		
 		<tr>
 			<th>브랜드</th>
 			<th>등록번호</th>
@@ -83,6 +114,8 @@ table{
 			<th>가격</th>
 			<th>용량</th>
 		</tr>
+		
+		<c:forEach var="contents" items="${contents}">
 		<tr>
 			<td>${contents.cbrand}</td>
 			<td><a href="menuview?cnumber=${contents.cnumber}&page=${paging.page}">${contents.cnumber}</a></td>
@@ -98,7 +131,7 @@ table{
 			[이전]&nbsp;
 		</c:when>
 		<c:otherwise>
-			<a href="contentspaging?page=${paging.page-1}">[이전]</a>&nbsp;
+			<a href="contentslist?page=${paging.page-1}">[이전]</a>&nbsp;
 		</c:otherwise>
 	</c:choose>
 	
@@ -108,7 +141,7 @@ table{
 				${i}
 			</c:when>
 			<c:otherwise>
-				<a href="contentspaging?page=${i}">${i}</a>
+				<a href="contentslist?page=${i}">${i}</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
@@ -118,7 +151,7 @@ table{
 			[다음]
 		</c:when>
 		<c:otherwise>
-			<a href="contentspaging?page=${paging.page+1}">[다음]</a>
+			<a href="contentslist?page=${paging.page+1}">[다음]</a>
 		</c:otherwise>
 	</c:choose>
 </body>

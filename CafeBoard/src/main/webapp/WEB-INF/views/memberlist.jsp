@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	
 </head>
 <style>
 	table, tr,th, td{
@@ -15,6 +16,7 @@
 </style>
 <body>
 	<h2>회원리스트(memberlist.jsp)</h2>
+	<button onclick="location='./'">홈으로</button>
 	<table>
 		<tr>
 			<th>아이디</th>

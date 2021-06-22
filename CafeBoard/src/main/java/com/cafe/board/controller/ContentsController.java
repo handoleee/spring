@@ -22,8 +22,8 @@ public class ContentsController {
 	
 	// 메뉴 목록
 	@RequestMapping(value="/contentslist")
-	public ModelAndView contentsList() {
-		mav = cs.contentsList();
+	public ModelAndView contentsList(@RequestParam(value="page", required=false, defaultValue="1") int page) {
+		mav = cs.contentsList(page);
 		return mav;
 	}
 	
@@ -33,10 +33,11 @@ public class ContentsController {
 		return "adminmenu";
 	}
 	
-	@RequestMapping(value="/contentspaging")
-	public ModelAndView contentsPaging(@RequestParam(value="page", required=false, defaultValue="1") int page) {
-	mav = cs.contentsPaging(page);
-	return mav;}
+//	@RequestMapping(value="/contentspaging")
+//	public ModelAndView contentsPaging(@RequestParam(value="page", required=false, defaultValue="1") int page) {
+//	mav = cs.contentsPaging(page);
+//	return mav;
+//	}
 	
 	// 메뉴 등록
 	@RequestMapping(value="/adminmenu")

@@ -34,8 +34,8 @@ public class BoardController {
 	}
 	// 게시글 목록
 	@RequestMapping(value="/boardlist")
-	public ModelAndView boardList() {
-		mav = bs.boardList();
+	public ModelAndView boardList(@RequestParam(value="page", required=false, defaultValue="1") int page) {
+		mav = bs.boardList(page);
 		return mav;
 	}
 	// 게시글 조회
@@ -62,13 +62,6 @@ public class BoardController {
 	@RequestMapping(value="/boarddelete")
 	public ModelAndView boardDelete(@RequestParam("bnumber") int bnumber) {
 		mav = bs.boardDelete(bnumber);
-		return mav;
-	}
-	
-	// 게시글 페이징
-	@RequestMapping(value="/boardpaging")
-	public ModelAndView boardPaging(@RequestParam(value="page", required=false, defaultValue="1")int page) {
-		mav = bs.boardPaging(page);
 		return mav;
 	}
 	

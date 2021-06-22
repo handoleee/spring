@@ -2,10 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
- <mapper namespace="cm"> 
-	<select id="contentslist" resultType="contentsdto">
-		SELECT*FROM CONTENTSTB
-	</select>	
+ <mapper namespace="cm"> 	
 	
 <!-- 	집에서는 시퀀스 이름 COT1_SEQ.NEXTVAL -->
 	<insert id="adminmenu" parameterType="contentsdto">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
@@ -13,9 +10,13 @@
 			VALUES (#{cbrand}, COT_SEQ.NEXTVAL, #{cname}, #{cprice}, #{csize}, #{call}, #{cscri}, #{cpicname})
 	</insert>
 	
-	<select id="contentspaging" parameterType="contentspagedto" resultType="contentsdto">
+	<select id="contentslist" parameterType="contentspagedto" resultType="contentsdto">
 		SELECT*FROM (SELECT C.*, ROW_NUMBER() OVER(ORDER BY CNUMBER DESC)
 			AS RN FROM CONTENTSTB C) WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="listcount" resultType="int">
+		SELECT COUNT(CNUMBER) FROM CONTENTSTB 
 	</select>
 	
 	<select id="menuupdate" parameterType="int" resultType="contentsdto">
@@ -52,7 +53,7 @@
 	<select id="selectbrand" resultType="contentsdto">
 		SELECT*FROM CONTENTSTB WHERE CBRAND=#{cbrand}
 	</select>
-	
+
  </mapper>
  
  
