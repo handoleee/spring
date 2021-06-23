@@ -30,8 +30,8 @@ public class BoardService {
 		String bpicname = bpic.getOriginalFilename();
 		bpicname = System.currentTimeMillis() + "-" + bpicname;
 		System.out.println("boardwrite:"+bpicname);
-		String savePath = "D:\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\boardpicture\\"+bpicname;
-//		String savePath = "D:\\phs\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\boardpicture\\"+bpicname;
+//		String savePath = "D:\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\boardpicture\\"+bpicname;
+		String savePath = "D:\\phs\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\boardpicture\\"+bpicname;
 		
 		if(!bpic.isEmpty()) {
 			bpic.transferTo(new File(savePath));

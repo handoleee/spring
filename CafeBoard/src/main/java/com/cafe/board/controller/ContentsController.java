@@ -1,14 +1,18 @@
 package com.cafe.board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cafe.board.dto.BrandDTO;
 import com.cafe.board.dto.ContentsDTO;
 import com.cafe.board.service.ContentsService;
 
@@ -20,13 +24,23 @@ public class ContentsController {
 	
 	private ModelAndView mav;
 	
+	
 	// 메뉴 목록
 	@RequestMapping(value="/contentslist")
 	public ModelAndView contentsList(@RequestParam(value="page", required=false, defaultValue="1") int page) {
 		mav = cs.contentsList(page);
+	
 		return mav;
 	}
 	
+	
+	// 체크박스
+	@RequestMapping(value="/contentslist/brandlist")
+	public ModelAndView brandList(@RequestParam ContentsDTO contents) {
+		mav = cs.brandList(contents);
+		return mav;
+	}
+	// @ResponseBody @RequestParam(value="valueArrCheck[]") List<String> valueArr)
 	// 메뉴 등록 페이지 이동(관리자)
 	@RequestMapping(value="/adminmenupage")
 	public String adminmenuPage() {
@@ -83,4 +97,5 @@ public class ContentsController {
 		mav = cs.menuSearch(searchType, keyword);
 		return mav;
 	}
-	}
+	
+}

@@ -2,6 +2,7 @@ package com.cafe.board.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cafe.board.dao.ContentsDAO;
+import com.cafe.board.dto.BrandDTO;
 import com.cafe.board.dto.ContentsDTO;
 import com.cafe.board.dto.ContentsPageDTO;
 
@@ -45,14 +47,25 @@ public class ContentsService {
 		if(endPage > maxPage)
 			endPage = maxPage;
 		
+		
 		paging.setPage(page);
 		paging.setStartPage(startPage);
 		paging.setEndPage(endPage);
 		paging.setMaxPage(maxPage);
 		
+		
+		
 		mav.addObject("contents", contentsList);
 		mav.setViewName("contentslist");
 		mav.addObject("paging", paging);
+		return mav;
+	}
+	
+	public ModelAndView brandList(ContentsDTO contents) {
+		List<BrandDTO> brandList = new ArrayList<BrandDTO>();
+		brandList = cdao.brandList(contents);
+		
+		mav.addObject("brand", brandList);
 		return mav;
 	}
 	
@@ -63,8 +76,8 @@ public class ContentsService {
 		String cpicname = cpic.getOriginalFilename();
 		cpicname = System.currentTimeMillis() + "-" + cpicname;
 		System.out.println("메뉴 추가 "+cpicname);
-		String savePath = "D:\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\menupicture\\"+cpicname;
-//		String savePath = "D:\\phs\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\menupicture\\"+cpicname;
+//		String savePath = "D:\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\menupicture\\"+cpicname;
+		String savePath = "D:\\phs\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\menupicture\\"+cpicname;
 		if(!cpic.isEmpty()) {
 			cpic.transferTo(new File(savePath));
 		}
@@ -121,7 +134,4 @@ public class ContentsService {
 		mav.setViewName("contentslist");
 		return mav;
 	}
-
-	
-
 }

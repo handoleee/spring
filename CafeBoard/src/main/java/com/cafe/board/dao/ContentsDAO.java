@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cafe.board.dto.BrandDTO;
 import com.cafe.board.dto.ContentsDTO;
 import com.cafe.board.dto.ContentsPageDTO;
 
@@ -52,6 +53,8 @@ public class ContentsDAO {
 		return sql.selectList("cm.menusearch", searchMap);
 	}
 
-	
+	public List<BrandDTO> brandList(ContentsDTO contents) {
+		return sql.selectList("cm.brandlist", contents);
+	}
 
 }

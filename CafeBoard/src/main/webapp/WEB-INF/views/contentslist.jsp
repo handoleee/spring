@@ -3,58 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-출처: https://offbyone.tistory.com/325 [쉬고 싶은 개발자]
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script>
-/* $("input[name=cbrand]:checked").each(function() {
-	var test = $(this).val();
-} */
-/* function selectbrand(){
-	const query = 'input[name="cbrand"]:checked';
+	<style>
+		table {
+			text-align: center;
+		}
+	</style>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
-} */
-/* $('input:checkbox[name="checkbox"]').is(":checked") == true
-$('input[name="checkbox"]').is(":checked") */
+	
 
-/* $("input[name=cbrand]:checked").each(function() {
-	var test = $(this).val();
-	console.log("벨류값 : "+test);
-} */
-
-</script>
-
-<script>
-
-	var $form = $("#listForm");
-
-	$(function() {
-		$form.find(".btnexpsrYn").on('click', function(e){
-			var chked_val = "";
-
-	$(":checkbox[name='cbrand']:checked").each(function(pi,po){
-	    chked_val += ","+po.value;
-	    console.log(pi);
-
-	});
-
-	chked_val = chked_val.substring(1); 
-	console.log(chked_val);
-
-});
-
-});
-
-</script>
-<style>
-table{
-	text-align: center;
-}
-</style>
 </head>
 <body>
 	<h2>메뉴 contentslist</h2>
@@ -75,13 +37,15 @@ table{
 	<c:if test="${empty sessionScope.loginMember}">
 		<a href="./">홈으로</a><br>
 	</c:if>
-	<form:form commandName="" id="listForm" name="listForm">
-		<input type="checkbox" name="cbrand1" value="스타벅스"<?if($row[cbrand1] == "스타벅스"){echo "checked"}?>/>스타벅스
-		<input type="checkbox" name="cbrand2" id="cbrand_2" value="커피빈">
-		<input type="checkbox" name="cbrand3" id="cbrand_3" value="할리스">
-		<input type="checkbox" name="cbrand4" id="cbrand_4" value="빽다방">
-		<input type="checkbox" name="cbrand5" id="cbrand_4" value="메가커피">
-	</form:form>
+	<form action="brandlist" method="get" id="brand">
+		
+		<input type="checkbox" name="brand" value="1" onclick="change_cate()" /><label for="스타벅스">스타벅스</label>
+		<input type="checkbox" name="brand" value="2" onclick="change_cate()" /><label for="커피빈">커피빈</label>
+		<input type="checkbox" name="brand" value="3" onclick="change_cate()" /><label for="할리스">할리스</label>
+		<input type="checkbox" name="brand" value="4" onclick="change_cate()" /><label for="빽다방">빽다방</label>
+		<input type="checkbox" name="brand" value="5" onclick="change_cate()" /><label for="메가커피">메가커피</label>
+	</form>
+	
 	<form action="menusearch" method="get">
 		<select name="searchtype">
 			<option value="cbrand">브랜드</option>
@@ -91,15 +55,6 @@ table{
 		<input type="submit" value="검색">
 	</form>
 	
-		<!-- <form name="checkboxform" id="selectbrand">
-		<input type="checkbox" name="cbrand" value="starbucks">스타벅스
-		<input type="checkbox" name="cbrand" value="coffeebean">커피빈
-		<input type="checkbox" name="cbrand" value="hollys">할리스
-		<input type="checkbox" name="cbrand" value="paik">빽다방
-		<input type="checkbox" name="cbrand" value="mega">메가커피
-		</form>
-		<br> -->
-		
 	메뉴 사진<br>
 	<c:forEach items="${contents}" var="i">
 	
@@ -154,5 +109,33 @@ table{
 			<a href="contentslist?page=${paging.page+1}">[다음]</a>
 		</c:otherwise>
 	</c:choose>
+	
+	<script>
+	function search_keyword(){
+		var key = $("#brand").val();
+		var chked_val = "";
+		$(":checkbox[name = 'brand']:checked").each(function(pi,po){
+			if( po.value == "all" || chked_val == "all"){
+				chked_val = "all";
+			} else{
+				chked_val += po.value + ",";
+			console.log("함수 search_keyword")}
+		})}; 
+	
+	function change_cate(){
+		var skeyword = $("#brand").val();
+		var chked_val = "";
+		var brandname = document.getElementById('brand');
+		$(":checkbox[name = 'brand']:checked").each(function(pi,po){
+			if( po.value == "all" || chked_val == "all"){
+				chked_val = "all";
+			} else{
+				chked_val += po.value + ",";
+			}
+			console.log("함수 change_cate");
+			console.log(brandname);
+		})}; 
+		
+	</script>
 </body>
 </html>

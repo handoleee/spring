@@ -50,10 +50,14 @@
    		</choose>
 	</sql>
 	
-	<select id="selectbrand" resultType="contentsdto">
+	<!-- <select id="selectbrand" resultType="contentsdto">
+		SELECT*FROM CONTENTSTB WHERE CBRAND=#{cbrand}
+	</select> -->
+
+
+	<select id="brandlist" parameterType="contentsdto" resultType="contentsdto">
 		SELECT*FROM CONTENTSTB WHERE CBRAND=#{cbrand}
 	</select>
-
  </mapper>
  
  
