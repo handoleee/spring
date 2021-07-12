@@ -6,17 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	
-</head>
-<style>
+	<style>
 	table, tr,th, td{
 		border: solid black 1px;
 		border-collapse: collapse;
 		}
+	h2{
+		color:#db7093;}
 </style>
+</head>
+
 <body>
-	<h2>회원리스트(memberlist.jsp)</h2>
-	<button onclick="location='./'">홈으로</button>
+	<h2>회원목록</h2>
+	<button onclick="location='contentslist'">메뉴목록</button>
 	<table>
 		<tr>
 			<th>아이디</th>

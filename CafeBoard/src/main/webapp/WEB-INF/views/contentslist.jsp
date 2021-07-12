@@ -8,23 +8,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<style>
 		table {
 			text-align: center;
 		}
+		
+		h2{
+		color:#db7093;}
 	</style>
-	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
-	
-
 </head>
 <body>
-	<h2>메뉴 contentslist</h2>
+	<h2>메뉴목록</h2>
 	로그인 아이디 : ${sessionScope.loginMember}
 	<br>
 	<c:if test="${not empty sessionScope.loginMember}">
 		<a href="logout">로그아웃</a>
-	<!-- <button onclick="logout()">로그아웃</button> -->
 		<a href="mypage">마이페이지</a>
 		<a href="boardlist">게시판</a>
 	</c:if>
@@ -37,14 +36,15 @@
 	<c:if test="${empty sessionScope.loginMember}">
 		<a href="./">홈으로</a><br>
 	</c:if>
-	<form action="brandlist" method="get" id="brand">
-		
-		<input type="checkbox" name="brand" value="1" onclick="change_cate()" /><label for="스타벅스">스타벅스</label>
-		<input type="checkbox" name="brand" value="2" onclick="change_cate()" /><label for="커피빈">커피빈</label>
-		<input type="checkbox" name="brand" value="3" onclick="change_cate()" /><label for="할리스">할리스</label>
-		<input type="checkbox" name="brand" value="4" onclick="change_cate()" /><label for="빽다방">빽다방</label>
-		<input type="checkbox" name="brand" value="5" onclick="change_cate()" /><label for="메가커피">메가커피</label>
-	</form>
+	<%-- <form action="brandlist" method="get">
+		<ul>
+		<li><input type="checkbox" name="brand" value="1" onclick="change_cate()"><label for="스타벅스">스타벅스</label></li>
+		<li><input type="checkbox" name="brand" value="2" onclick="change_cate()"><label for="커피빈">커피빈</label></li>
+		<li><input type="checkbox" name="brand" value="3" onclick="change_cate()"><label for="할리스">할리스</label></li>
+		<li><input type="checkbox" name="brand" value="4" onclick="change_cate()"><label for="빽다방">빽다방</label></li>
+		<li><input type="checkbox" name="brand" value="5" onclick="change_cate()"><label for="메가커피">메가커피</label></li>
+	</ul>
+	</form> --%>
 	
 	<form action="menusearch" method="get">
 		<select name="searchtype">
@@ -111,7 +111,7 @@
 	</c:choose>
 	
 	<script>
-	function search_keyword(){
+	/* function search_keyword(){
 		var key = $("#brand").val();
 		var chked_val = "";
 		$(":checkbox[name = 'brand']:checked").each(function(pi,po){
@@ -120,12 +120,12 @@
 			} else{
 				chked_val += po.value + ",";
 			console.log("함수 search_keyword")}
-		})}; 
+		})}; */
 	
-	function change_cate(){
-		var skeyword = $("#brand").val();
+	/* function change_cate(){
+		var skeyword = $("#skeyword").val();
 		var chked_val = "";
-		var brandname = document.getElementById('brand');
+		var brandname = document.getElementsByName('brand');
 		$(":checkbox[name = 'brand']:checked").each(function(pi,po){
 			if( po.value == "all" || chked_val == "all"){
 				chked_val = "all";
@@ -133,8 +133,11 @@
 				chked_val += po.value + ",";
 			}
 			console.log("함수 change_cate");
-			console.log(brandname);
-		})}; 
+			console.log(chked_val);
+		
+		}); 
+		 location.replace("/brandlist?chked_val="+chked_val+"&skeyword="+skeyword+"${brandname}"); 
+		} */
 		
 	</script>
 </body>

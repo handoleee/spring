@@ -5,9 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<style>
+		h2{
+			color:#db7093;}
+	</style>
 </head>
 <body>
-	<h2>로그인페이지(memberlogin.jsp)</h2>
+	<h2>로그인</h2>
 
 	<form action="memberlogin" method="post">
 		아이디 : <input type="text" name="mid"><br>

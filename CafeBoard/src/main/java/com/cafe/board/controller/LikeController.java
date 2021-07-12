@@ -22,6 +22,25 @@ public class LikeController {
 	
 	private ModelAndView mav;
 	
+	// 찜목록 이동
+	@RequestMapping(value="/likelistpage")
+	public String likeListPage() {
+		return "likelist";
+	}
+	// 찜목록
+	@RequestMapping(value="/likelist")
+	public ModelAndView likeList(String lid) {
+		mav = ls.likeList(lid);
+		return mav;
+	}
+
+//	// 장바구니 추가
+//	@RequestMapping(value="/addlikelist")
+//	public ModelAndView addLikeList(@ModelAttribute LikeDTO like) {
+//		mav = ls.addLikeList(like);
+//		return mav;
+//	}
+	
 //	@ResponseBody
 //	@RequestMapping(value="/likelist")
 //	public void likeList(LikeDTO like, HttpSession Session) throws Exception {
@@ -39,9 +58,17 @@ public class LikeController {
 //		return mav;
 //	}
 	
-	@RequestMapping(value="/likelist")
-	public ModelAndView likeList(@RequestParam("lwriter") String lwriter) {
-		mav = ls.likeList(lwriter);
-		return mav;
-	}
+//	@RequestMapping(value="/addlikelist")
+//	public ModelAndView addLikeList() {
+//		mav = ls.addLikeList();
+//		return mav;
+//	}
+//	
+//	@RequestMapping(value="/addlikelistprocess")
+//	public ModelAndView addLikeListProcess(@ModelAttribute LikeDTO like) {
+//		mav = ls.addLikeListProcess(like);
+//		return mav;
+//	}
+	
+
 }

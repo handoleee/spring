@@ -8,10 +8,6 @@
 			VALUES(BOA_SEQ.NEXTVAL, #{bwriter}, #{btitle}, #{bcontents}, 0, SYSDATE, #{bpicname})
 	</insert>
 	
-	<!-- <select id="boardlist" resultType="boarddto">
-		SELECT*FROM BOARDTB
-	</select> -->
-	
 	<select id="boardlist" parameterType="boardpagedto" resultType="boarddto">
 		SELECT*FROM (SELECT B.*, ROW_NUMBER() OVER(ORDER BY BNUMBER DESC)
 			AS RN FROM BOARDTB B) WHERE RN BETWEEN #{startRow} AND #{endRow}

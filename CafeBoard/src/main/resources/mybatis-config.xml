@@ -12,6 +12,7 @@
 		<typeAlias type="com.cafe.board.dto.BoardDTO" alias="boarddto"/>
 		<typeAlias type="com.cafe.board.dto.ContentsPageDTO" alias="contentspagedto"/>
 		<typeAlias type="com.cafe.board.dto.BoardPageDTO" alias="boardpagedto"/>
+		<typeAlias type="com.cafe.board.dto.LikeDTO" alias="likedto"/>
 	</typeAliases>
 	
 </configuration>

@@ -22,7 +22,6 @@
 <body>
 	<h2>(관리자 전용)메뉴 등록, 삭제 adminmenu.jsp</h2>
 	<h3>메뉴 등록</h3>
-	<!--  name="addmenuform" -->
 	<form action="adminmenu" method="post" enctype="multipart/form-data">
 		<!-- 브랜드 이름 : <input type="text" name="cbrand"><br> -->
 		<select name="cbrand">

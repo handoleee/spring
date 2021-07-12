@@ -6,5 +6,5 @@ import lombok.Data;
 public class LikeDTO {
 	private int lnumber;
 	private int lbrandnum;
-	private String lwriter;
+	private String lid;
 }

@@ -22,9 +22,6 @@ public class MemberController {
 	
 	private ModelAndView mav;
 	
-	@Autowired
-	private HttpSession session;
-	
 	//가입페이지 이동
 	@RequestMapping(value="/joinpage")
 	public String joinPage() {
@@ -43,13 +40,6 @@ public class MemberController {
 		String result = ms.idCheck(mid);
 		return result;
 	}
-	
-//	@RequestMapping(value="/pwcheck")
-//	public @ResponseBody String pwCheck(@RequestParam("mpassword") String mpassword) {
-//		System.out.println("pwcheck 호출");
-//		String pwresult = ms.pwCheck(mpassword);
-//		return pwresult;
-//	}
 	
 	@RequestMapping(value="/loginpage")
 	public String loginPage() {

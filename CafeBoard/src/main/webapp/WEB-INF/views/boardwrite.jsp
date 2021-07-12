@@ -5,9 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<style>
+		h2{
+			color:#db7093;}
+	</style>
 </head>
 <body>
-<h2>게시판 글쓰기(boardwrite.jsp)</h2>
+<h2>게시판 글쓰기</h2>
 	<form action="boardwrite" method="post" enctype="multipart/form-data">
 		작성자 : <input type="text" name="bwriter" placeholder="" value="${sessionScope.loginMember}" readonly><br>
 		제목 : <input type="text" name="btitle"><br>

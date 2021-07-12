@@ -24,7 +24,6 @@ public class BoardDAO {
 		return sql.selectList("bm.boardlist", paging);
 	}
 	
-	
 	public void boardHits(int bnumber) {
 		sql.update("bm.boardhits", bnumber);
 	}

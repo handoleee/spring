@@ -11,9 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.member.board.dao.BoardDAO;
 import com.member.board.dao.MemberDAO;
-import com.member.board.dto.BoardDTO;
 import com.member.board.dto.MemberDTO;
 
 @Service
@@ -21,9 +19,6 @@ public class MemberService {
 
 	@Autowired
 	private MemberDAO mdao;
-	
-	@Autowired
-	private BoardDAO bdao;
 	
 	private ModelAndView mav;
 	

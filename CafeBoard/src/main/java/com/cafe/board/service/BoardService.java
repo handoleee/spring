@@ -59,7 +59,6 @@ public class BoardService {
 		paging.setStartRow(startRow);
 		paging.setEndRow(endRow);
 		List<BoardDTO> boardList = bdao.boardList(paging);
-//		List<BoardDTO> boardList = bdao.boardPaging(paging);
 		
 		int maxPage = (int)(Math.ceil((double)listCount / PAGE_LIMIT));
 		int startPage = (((int)(Math.ceil((double)page / BLOCK_LIMIT))) -1) * BLOCK_LIMIT + 1;

@@ -10,9 +10,13 @@
 			updateform.submit();
 		}
 	</script>
+	<style>
+		h2{
+			color:#db7093;}
+	</style>
 </head>
 <body>
-	<h2>메뉴 수정(menuupdate.jsp)</h2>
+	<h2>메뉴 수정</h2>
 	<form action="menuupdateprocess" method="post" name="updateform">
 		<input type="hidden" name="cnumber" value="${menuUpdate.cnumber}" readonly>
 		브랜드 이름 : <input type="text" name="cbrand" value="${menuUpdate.cbrand}" readonly><br>

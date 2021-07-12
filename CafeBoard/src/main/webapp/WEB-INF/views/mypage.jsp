@@ -6,15 +6,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<script>
-		function mypage() {
-			
-		}
+		function memberUpdate() {
+			location.href="memberupdate";
+		} 
+		/* function likeList() {
+			location.href="likelist"?${loginMember};
+		} */
 	</script>
 </head>
 <body>
 	<h2>마이페이지(mypage.jsp)</h2>
-	<button onclick="location='memberupdate.jsp'">정보수정</button>
-	<a href="likelist?=${loginMember}">찜한 목록</a>
+	<button onclick="memberUpdate()">정보수정</button>
+	<form action="likelist" method="get"> 
+	<input type="submit" value="찜목록">
+	</form>
+	<!-- <button onclick="likeList()">찜목록</button> -->
 	
 	
 	

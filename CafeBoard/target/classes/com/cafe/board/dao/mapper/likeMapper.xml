@@ -3,17 +3,21 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="lm"> 
-	<insert id="likelist">
-		INSERT INTO LIKETB (LNUMBER, LBRANDNUM, LWRITER) 
-			VALUES(LIK_SEQ.NEXTVAL,#{lbrandnum},#{lwriter})
-	</insert>
-	<!-- <select id="likelist" parameterType="int" resultType="likedto">
-		SELECT*FROM LIKETB WHERE LWRITER=#{lwriter}
-	</select>
+ 	<select id="likelist" resultType="likedto">
+ 		SELECT*FROM LIKETB WHERE LID={#lid}
+ 	</select>
+ 	
+ 	<insert id="addlikelist" parameterType="likedto">
+ 		INSERT INTO LIKETB(LNUMBER, LBRANDNUM, LID) VALUES(LIK_SEQ.NEXTVAL, #{lbrandnum}, #{lid})	
+ 	</insert>
+	<!-- 
 	
-	<update id="likelistprocess" parameterType="String">
-		UPDATE LIKETB SET LNUMBER=#{lnumber}, LBRANDNUM=#{lbrandnum} WHERE LWRITER=#{lwriter}
-	</update> -->
+	<update id="addlikelistprocess" parameterType="String">
+		UPDATE LIKETB SET LNUMBER=#{lnumber}, LBRANDNUM=#{lbrandnum} WHERE LID=#{lid}
+	</update> 
+	
+	</insert> -->
+	
  </mapper>
  
  

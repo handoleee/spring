@@ -66,6 +66,7 @@ public class ContentsService {
 		brandList = cdao.brandList(contents);
 		
 		mav.addObject("brand", brandList);
+//		mav.setViewName("redirect:/brandlist");
 		return mav;
 	}
 	

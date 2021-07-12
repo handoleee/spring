@@ -18,6 +18,10 @@
 			}
 		}
 	</script>
+	<style>
+		h2{
+			color:#db7093;}
+	</style>
 </head>
 <body>
 	<h2>글조회(boardview.jsp)</h2>

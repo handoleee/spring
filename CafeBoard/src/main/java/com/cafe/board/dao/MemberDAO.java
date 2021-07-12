@@ -6,8 +6,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.cafe.board.dto.ContentsDTO;
-import com.cafe.board.dto.LikeDTO;
 import com.cafe.board.dto.MemberDTO;
 
 @Repository
@@ -23,10 +21,6 @@ public class MemberDAO {
 	public String idCheck(String mid) {
 		return sql.selectOne("mm.idcheck", mid);
 	}
-
-//	public String pwCheck(String mpassword) {
-//		return sql.selectOne("mm.pwcheck", mpassword);
-//	}
 
 	public String memberLogin(MemberDTO member) {
 		return sql.selectOne("mm.memberlogin", member);

@@ -18,17 +18,21 @@
 			}
 		}
 			
-		function likeList() {
-			location.href='likelist?cnumber='+${loginMember};
+		function addLikeList() {
+			location.href='addlikelist?cnumber='+${contents.cnumber}+'&loginId='+${loginMember};
 			if(confirm("즐겨찾는 메뉴에 추가하시겠습니까?") == true){
 				alert('추가되었습니다.');
 			}
-		}
 			
+		}
 	</script>
+	<style>
+		h2{
+		color:#db7093;}
+	</style>
 </head>
 <body>
-	<h2>메뉴 상세조회(menuview.jsp)</h2>
+	<h2>메뉴 상세조회</h2>
 
 		브랜드 이름 : ${contents.cbrand}<br>
 		메뉴 번호 : ${contents.cnumber}<br>
@@ -40,7 +44,10 @@
 		사진 : <img src="resources/menupicture/${contents.cpicname}" height="150" width="150"><br>
 		<a href="contentslist">목록</a>
 		<c:if test="${sessionScope.loginMember != null}">
-			<button onclick="likeList()">즐겨찾는메뉴등록</button>
+		<form name="addlikelist" method="post" action=addlikelist>
+			<input type="hidden" name="likenumber" value="${likelist.lbrandnum}">
+			<input type="submit" value="찜목록">
+		</form>
 		</c:if>
 		<c:if test="${sessionScope.loginMember eq ('admin')}">
 			<button onclick="menuUpdate()">수정</button>

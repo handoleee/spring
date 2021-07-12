@@ -32,12 +32,14 @@ public class BoardController {
 		mav = bs.boardWrite(board);
 		return mav;
 	}
+	
 	// 게시글 목록
 	@RequestMapping(value="/boardlist")
 	public ModelAndView boardList(@RequestParam(value="page", required=false, defaultValue="1") int page) {
 		mav = bs.boardList(page);
 		return mav;
 	}
+	
 	// 게시글 조회
 	@RequestMapping(value="/boardview")
 	public ModelAndView boardView(@RequestParam("bnumber") int bnumber,
@@ -45,6 +47,7 @@ public class BoardController {
 		mav = bs.boardView(bnumber, page); 
 		return mav;
 	}
+	
 	// 게시글 수정
 	@RequestMapping(value="/boardupdate")
 	public ModelAndView boardUpdate(@RequestParam("bnumber") int bnumber) {
@@ -58,6 +61,7 @@ public class BoardController {
 		mav = bs.boardUpdateProcess(board);
 		return mav;
 	}
+	
 	// 게시글 삭제
 	@RequestMapping(value="/boarddelete")
 	public ModelAndView boardDelete(@RequestParam("bnumber") int bnumber) {

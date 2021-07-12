@@ -7,7 +7,7 @@
 <!-- 	집에서는 시퀀스 이름 COT1_SEQ.NEXTVAL -->
 	<insert id="adminmenu" parameterType="contentsdto">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 		INSERT INTO CONTENTSTB(CBRAND, CNUMBER, CNAME, CPRICE, CSIZE, CALL, CSCRI, CPICNAME) 
-			VALUES (#{cbrand}, COT_SEQ.NEXTVAL, #{cname}, #{cprice}, #{csize}, #{call}, #{cscri}, #{cpicname})
+			VALUES (#{cbrand}, COT1_SEQ.NEXTVAL, #{cname}, #{cprice}, #{csize}, #{call}, #{cscri}, #{cpicname})
 	</insert>
 	
 	<select id="contentslist" parameterType="contentspagedto" resultType="contentsdto">
@@ -56,7 +56,7 @@
 
 
 	<select id="brandlist" parameterType="contentsdto" resultType="contentsdto">
-		SELECT*FROM CONTENTSTB WHERE CBRAND=#{cbrand}
+		SELECT*FROM WHERE CBRAND=#{cbrand}
 	</select>
  </mapper>
  

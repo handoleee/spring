@@ -11,10 +11,7 @@
 	<select id="idcheck" parameterType="String" resultType="String">
 		SELECT MID FROM MEMBERTB WHERE MID=#{mid}
 	</select>
-	<!-- 
-	<select id="pwcheck" parameterType="String" resultType="String">
-		SELECT MID FROM MEMBERTB WHERE MID=#{mid}
-	</select> -->
+	
 	<select id="memberlogin" parameterType="memberdto" resultType="String">
 		SELECT MID FROM MEMBERTB WHERE MID=#{mid} AND MPASSWORD=#{mpassword}
 	</select>
@@ -30,14 +27,7 @@
 	<update id="memberupdateprocess" parameterType="memberdto">
 		UPDATE MEMBERTB SET MPASSWORD=#{mpassword}, MNAME=#{mname}, MPHONE=#{mphone} WHERE MID=#{mid}
 	</update>
-	
-	<!-- <select id="likelist" parameterType="int" resultType="likedto">
-		SELECT*FROM LIKETB WHERE LWRITER=#{lwriter}
-	</select>
-	
-	<update id="likelistprocess" parameterType="String">
-		UPDATE LIKETB SET LNUMBER=#{lnumber}, LBRANDNUM=#{lbrandnum} WHERE LWRITER=#{lwriter}
-	</update> -->
+
  </mapper>
  
  
