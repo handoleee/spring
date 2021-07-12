@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="cm"> 	
+	
+<!-- 	집에서는 시퀀스 이름 COT1_SEQ.NEXTVAL -->
+	<insert id="adminmenu" parameterType="contentsdto">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+		INSERT INTO CONTENTSTB(CBRAND, CNUMBER, CNAME, CPRICE, CSIZE, CALL, CSCRI, CPICNAME) 
+			VALUES (#{cbrand}, COT1_SEQ.NEXTVAL, #{cname}, #{cprice}, #{csize}, #{call}, #{cscri}, #{cpicname})
+	</insert>
+	
+	<select id="contentslist" parameterType="contentspagedto" resultType="contentsdto">
+		SELECT*FROM (SELECT C.*, ROW_NUMBER() OVER(ORDER BY CNUMBER DESC)
+			AS RN FROM CONTENTSTB C) WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<select id="listcount" resultType="int">
+		SELECT COUNT(CNUMBER) FROM CONTENTSTB 
+	</select>
+	
+	<select id="menuupdate" parameterType="int" resultType="contentsdto">
+		SELECT*FROM CONTENTSTB WHERE CNUMBER=#{cnumber}
+	</select>
+	
+	<update id="menuupdateprocess" parameterType="contentsdto">
+		UPDATE CONTENTSTB SET CNAME=#{cname}, CPRICE=#{cprice}, CSIZE=#{csize}, CALL=#{call}, CSCRI=#{cscri} WHERE CNUMBER=#{cnumber}
+	</update>
+	
+	<delete id="menudelete" parameterType="int">
+		DELETE FROM CONTENTSTB WHERE CNUMBER=#{cnumber}
+	</delete>
+	
+	<select id="menuview" parameterType="int" resultType="contentsdto">
+		SELECT*FROM CONTENTSTB WHERE CNUMBER=#{cnumber}
+	</select>
+	
+	<select id="menusearch" parameterType="java.util.HashMap" resultType="contentsdto">
+		SELECT*FROM CONTENTSTB
+		<include refid="search"></include>
+	</select>
+	<sql id="search">
+		<choose>
+			<when test="type=='cbrand'">
+        		 WHERE CBRAND LIKE '%'||#{word}||'%'
+      		</when>
+      		<when test="type=='cname'">
+        		 WHERE CNAME LIKE '%'||#{word}||'%'
+      		</when>
+   		</choose>
+	</sql>
+	
+	<!-- <select id="selectbrand" resultType="contentsdto">
+		SELECT*FROM CONTENTSTB WHERE CBRAND=#{cbrand}
+	</select> -->
+
+
+	<select id="brandlist" parameterType="contentsdto" resultType="contentsdto">
+		SELECT*FROM WHERE CBRAND=#{cbrand}
+	</select>
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

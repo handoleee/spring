@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="mm"> 
+	<insert id="memberjoin" parameterType="memberdto">
+		INSERT INTO MEMBERTABLE(
+			MID, MPASSWORD, MNAME, MPHONE, MEMAIL, MPROFILENAME) 
+				VALUES(#{mid}, #{mpassword}, #{mname}, #{mphone}, #{memail}, #{mprofilename})
+	</insert>
+	<!-- ,jdbcType=VARCHAR -->
+	<select id="memberlogin" parameterType="memberdto" resultType="String">
+		SELECT MID FROM MEMBERTABLE WHERE MID=#{mid} AND MPASSWORD=#{mpassword}
+	</select>
+	
+	<select id="idcheck" parameterType="String" resultType="String">
+		SELECT MID FROM MEMBERTABLE WHERE MID=#{mid}
+	</select>
+	
+	<select id="memberupdate" parameterType="String" resultType="memberdto">
+		SELECT*FROM MEMBERTABLE WHERE MID=#{mid}
+	</select>
+	
+	<update id="updateprocess" parameterType="memberdto">
+		UPDATE MEMBERTABLE SET MEMAIL=#{memail}, MNAME=#{mname}, MPHONE=#{mphone} WHERE MID=#{mid}
+	</update>
+	
+	<select id="memberlist" resultType="memberdto">
+		SELECT*FROM MEMBERTABLE ORDER BY MID ASC	
+	</select>
+	
+	<select id="memberview" parameterType="String" resultType="memberdto">
+		SELECT*FROM MEMBERTABLE WHERE MID=#{mid}
+	</select>
+	
+	<delete id="memberdelete" parameterType="String">
+		DELETE FROM MEMBERTABLE WHERE MID=#{mid}
+	</delete>
+ </mapper>

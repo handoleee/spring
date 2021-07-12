@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.icia.member.dto.MemberDTO;
@@ -94,4 +95,26 @@ public class MemberController {
 		  mav = ms.memberDelete(mid);
 		  return mav;
 	  }
+	  
+	  // 아이디 중복확인 메소드
+	  @RequestMapping(value="/idcheck")
+	  public @ResponseBody String idCheck(@RequestParam("mid") String mid) {
+		  System.out.println("idCheck 메소드 호출됨");
+		  System.out.println("입력 id값 "+mid);
+		  String result = ms.idCheck(mid);
+		  
+		  return result;
+	  }
+	  
+	  // ajax로 상세조회
+	  @RequestMapping(value="/memberviewajax")
+	  public @ResponseBody MemberDTO memberViewAjax(
+			  @RequestParam("mid") String mid) {
+		  System.out.println("memberViewAjax 메소드 호출됨");
+		  System.out.println("전달 id값 "+mid);
+		  MemberDTO member = ms.memberViewAjax(mid);
+		  System.out.println(member);
+		  return member;
+	  }
+		  
 }

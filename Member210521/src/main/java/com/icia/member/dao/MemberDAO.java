@@ -40,8 +40,11 @@ public class MemberDAO {
 	}
 
 	public void memberDelete(String mid) {
-		sql.delete("mm.memberdelete",mid);
+		sql.delete("mm.memberdelete", mid);
 		
 	}
-
+	
+	public String idCheck(String mid) {
+		return sql.selectOne("mm.idcheck", mid);
+	}
 }
