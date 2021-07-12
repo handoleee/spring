@@ -107,11 +107,11 @@
                         <div class="header__top__right">
                             <div class="header__top__right__menu">
                                 <div>Menu</div>
-                                <span class="arrow_carrot-down"></span>
+                                <!-- <span class="arrow_carrot-down"></span>
                                 <ul>
                                     <li><a href="#">레시피등록</a></li>
                                     <li><a href="#">찜한레시피</a></li>
-                                </ul>
+                                </ul> -->
                             </div>
                             <div class="header__top__right__join">
               					<a href="memberjoinform"><i class="fa fa-user"></i> join</a>
@@ -139,14 +139,15 @@
                             <li class="active"><a href="./index.html">Home</a></li>
                             <li><a href="recipelist">Recipe</a></li>
                            	<li><a href="shoppage">Shop</a></li>
+                           	<c:if test="${sessionScope.loginMember eq ('admin')}">
                             <li><a href="#">admin</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="memberlist">회원목록</a></li>
                                     <li><a href="memberview">회원상세조회</a></li>
                                     <li><a href="reportlist">회원신고내역</a></li>
-                                    <li><a href="memberview">memberview</a></li>
                                 </ul>
                             </li>
+                            </c:if>
                             <!-- <li><a href="./blog.html">Blog</a></li>
                             <li><a href="./contact.html">Contact</a></li> -->
                         </ul>

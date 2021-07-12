@@ -153,11 +153,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-<<<<<<< HEAD
-      <Context docBase="Spring202105188" path="/myapple" reloadable="true" source="org.eclipse.jst.jee.server:Spring202105188"/><Context docBase="Spring202105200" path="/banana" reloadable="true" source="org.eclipse.jst.jee.server:Spring202105200"/><Context docBase="Test20210517" path="/test" reloadable="true" source="org.eclipse.jst.jee.server:Test20210517"/><Context docBase="Test202105177" path="/myapp" reloadable="true" source="org.eclipse.jst.jee.server:Test202105177"/><Context docBase="Spring210521" path="/ex" reloadable="true" source="org.eclipse.jst.jee.server:Spring210521"/><Context docBase="Member210521" path="/member" reloadable="true" source="org.eclipse.jst.jee.server:Member210521"/><Context docBase="Spring20210518" path="/example" reloadable="true" source="org.eclipse.jst.jee.server:Spring20210518"/><Context docBase="Spring20210520" path="/study" reloadable="true" source="org.eclipse.jst.jee.server:Spring20210520"/></Host>
-=======
       <Context docBase="RecipeShop" path="/mall" reloadable="true" source="org.eclipse.jst.jee.server:RecipeShop"/></Host>
->>>>>>> branch 'master' of https://github.com/handoleee/spring.git
     </Engine>
   </Service>
 </Server>
