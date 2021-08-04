@@ -10,6 +10,9 @@
 	<script>
 		function deletefn(id) {
 			location.href="memberdelete?mid="+id;
+			if(confirm("탈퇴하시겠습니까?") == true){
+				alert('탈퇴되었습니다.');
+			}
 		}
 	</script>
 	<style>

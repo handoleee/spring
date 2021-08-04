@@ -41,7 +41,7 @@ public class MemberDAO {
 	public int memberUpdateProcess(MemberDTO member) {
 		return sql.update("mm.memberupdateprocess", member);
 	}
-
+	
 //	public MemberDTO myPage(String loginId) {
 //		return sql.selectOne("mm.mypage", loginId);
 //	}

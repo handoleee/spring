@@ -2,7 +2,14 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<settings> 
+    	<setting name="cacheEnabled" value="false" />
+    	<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
 	<typeAliases>
 		<typeAlias type="recipe.shop.mall.dto.MemberDTO" alias="memberdto"/>
+		<typeAlias type="recipe.shop.mall.dto.PurchaserDTO" alias="purchaserdto"/>
+		<typeAlias type="recipe.shop.mall.dto.RecipeDTO" alias="recipedto"/>
+		<typeAlias type="recipe.shop.mall.dto.ReportDTO" alias="reportdto"/>
 	</typeAliases>
 </configuration>

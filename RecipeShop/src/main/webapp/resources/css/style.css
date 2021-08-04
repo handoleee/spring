@@ -94,6 +94,10 @@ textarea:focus {
 	outline: none;
 }
 
+a:link {
+	text-decoration: none;
+}
+
 a:hover,
 a:focus {
 	text-decoration: none;
@@ -295,7 +299,7 @@ ol {
 	padding: 10px 0 13px;
 }
 
-.header__top__right__social {
+/* .header__top__right__social {
 	position: relative;
 	display: inline-block;
 	margin-right: 35px;
@@ -321,22 +325,22 @@ ol {
 
 .header__top__right__social a:last-child {
 	margin-right: 0;
-}
+} */
 
-.header__top__right__language {
+.header__top__right__menu {
 	position: relative;
 	display: inline-block;
 	margin-right: 40px;
 	cursor: pointer;
 }
 
-.header__top__right__language:hover ul {
+.header__top__right__menu:hover ul {
 	top: 23px;
 	opacity: 1;
 	visibility: visible;
 }
 
-.header__top__right__language:after {
+.header__top__right__menu:after {
 	position: absolute;
 	right: -21px;
 	top: 1px;
@@ -347,25 +351,25 @@ ol {
 	content: "";
 }
 
-.header__top__right__language img {
+.header__top__right__menu img {
 	margin-right: 6px;
 }
 
-.header__top__right__language div {
+.header__top__right__menu div {
 	font-size: 14px;
 	color: #1c1c1c;
 	display: inline-block;
 	margin-right: 4px;
 }
 
-.header__top__right__language span {
+.header__top__right__menu span {
 	font-size: 14px;
 	color: #1c1c1c;
 	position: relative;
 	top: 2px;
 }
 
-.header__top__right__language ul {
+.header__top__right__menu ul {
 	background: #222222;
 	width: 100px;
 	text-align: left;
@@ -383,14 +387,29 @@ ol {
 	transition: all, 0.3s;
 }
 
-.header__top__right__language ul li {
+.header__top__right__menu ul li {
 	list-style: none;
 }
 
-.header__top__right__language ul li a {
+.header__top__right__menu ul li a {
 	font-size: 14px;
 	color: #ffffff;
 	padding: 5px 10px;
+}
+
+.header__top__right__join {
+	display: inline-block;
+	margin-right: 40px;
+}
+
+.header__top__right__join a {
+	display: block;
+	font-size: 14px;
+	color: #1c1c1c;
+}
+
+.header__top__right__join a i {
+	margin-right: 6px;
 }
 
 .header__top__right__auth {
@@ -586,6 +605,75 @@ ol {
 	margin-bottom: 0;
 }
 
+.hero__search__categories {
+	position: relative;
+	display: inline-block;
+	margin-right: 40px;
+	cursor: pointer;
+}
+
+.hero__search__categories:hover select {
+	top: 23px;
+	opacity: 1;
+	visibility: visible;
+}
+
+.hero__search__categories:after {
+	position: absolute;
+	right: -21px;
+	top: 1px;
+	height: 20px;
+	width: 1px;
+	background: #000000;
+	opacity: 0.1;
+	content: "";
+}
+
+.hero__search__categories img {
+	margin-right: 6px;
+}
+
+.hero__search__categories div {
+	font-size: 14px;
+	color: #1c1c1c;
+	display: inline-block;
+	margin-right: 4px;
+}
+
+.hero__search__categories span {
+	font-size: 14px;
+	color: #1c1c1c;
+	position: relative;
+	top: 2px;
+}
+
+.hero__search__categories select {
+	background: #222222;
+	width: 100px;
+	text-align: left;
+	padding: 5px 0;
+	position: absolute;
+	left: 0;
+	top: 43px;
+	z-index: 9;
+	opacity: 0;
+	visibility: hidden;
+	-webkit-transition: all, 0.3s;
+	-moz-transition: all, 0.3s;
+	-ms-transition: all, 0.3s;
+	-o-transition: all, 0.3s;
+	transition: all, 0.3s;
+}
+
+.hero__search__categories select option {
+	list-style: none;
+}
+
+.hero__search__categories select option {
+	font-size: 14px;
+	color: #ffffff;
+	padding: 5px 10px;
+}
 .hero__categories__all {
 	background: #7fad39;
 	position: relative;
@@ -3081,7 +3169,7 @@ ol {
 	.humberger__menu__widget {
 		margin-bottom: 20px;
 	}
-	.humberger__menu__widget .header__top__right__language {
+	.humberger__menu__widget .header__top__right__menu {
 		margin-right: 20px;
 	}
 	.humberger__menu__nav {
@@ -3339,7 +3427,7 @@ ol {
 	.humberger__menu__widget {
 		margin-bottom: 20px;
 	}
-	.humberger__menu__widget .header__top__right__language {
+	.humberger__menu__widget .header__top__right__menu {
 		margin-right: 20px;
 	}
 	.humberger__menu__nav {

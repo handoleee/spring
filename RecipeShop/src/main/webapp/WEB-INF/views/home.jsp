@@ -4,12 +4,17 @@
 <html>
 <head>
 	<title>Home</title>
-	
+	<style>
+	h1{color: #db7093;}
+	</style>
 </head>
 <body>
+	<h1>
+레시피
+	</h1>
 
 	<P> 현재 시간 : ${serverTime}. </P>
-	<a href="memberjoinform">회원가입</a>
-	<a href="memberloginform">로그인</a>
+	
+	
 </body>
 </html>

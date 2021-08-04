@@ -4,10 +4,12 @@
  
  <mapper namespace="mm"> 
 	<insert id="memberjoin" parameterType="memberdto">
-		INSERT INTO MEMBERTB(
-			MID, MPASSWORD, MPHONE, MNAME, MPHONE, MADDRESS, MPOINT, MEMAIL) VALUES(
-			{#mid}, {#mpassword}, {#mphone}, {#maddress}, 0, {#memail})
+		INSERT INTO MEMBERTB(MID, MPASSWORD, MNAME, MPHONE, MADDR1, MADDR2, MADDR3, MPOINT, MEMAIL) VALUES(#{mid}, #{mpassword}, #{mname}, #{mphone}, #{maddr1}, #{maddr2}, #{maddr3}, 0, #{memail})
 	</insert>
+	
+	<select id="idcheck" parameterType="String" resultType="String">
+		SELECT MID FROM MEMBERTB WHERE MID=#{mid}
+	</select>
 	
 	<select id="memberlogin" parameterType="memberdto" resultType="String">
 		SELECT MID FROM MEMBERTB WHERE MID=#{mid} AND MPASSWORD=#{mpassword}
@@ -22,8 +24,25 @@
 	</select>
 	
 	<update id="memberupdateprocess" parameterType="memberdto">
-		UPDATE MEMERTB SET MPASSWORD=#{mpassword}, MPHONE=#{mphone} WHERE MID=#{mid}
+		UPDATE MEMBERTB SET MPASSWORD=#{mpassword}, MPHONE=#{mphone} WHERE MID=#{mid}
 	</update>
+	
+	<select id="memberview" parameterType="String" resultType="memberdto">
+		SELECT*FROM MEMBERTB WHERE MID=#{mid}
+	</select>
+	
+	<delete id="memberdelete" parameterType="String">
+		DELETE FROM MEMBERTB WHERE MID=#{mid}
+	</delete>
+	
+	<select id="adminpoint" parameterType="String" resultType="memberdto">
+		SELECT*FROM MEMBERTB WHERE MID=#{mid}
+	</select>
+	
+	<update id="adminpointprocess" parameterType="memberdto">
+		UPDATE MEMBERTB SET MPOINT = MPOINT+#{mpoint} WHERE MID=#{mid}
+	</update>
+	
  </mapper>
  
  

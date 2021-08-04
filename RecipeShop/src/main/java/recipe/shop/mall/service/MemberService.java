@@ -10,6 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import recipe.shop.mall.dao.MemberDAO;
 import recipe.shop.mall.dto.MemberDTO;
+import recipe.shop.mall.dto.PurchaserDTO;
+import recipe.shop.mall.dto.RecipeDTO;
+import recipe.shop.mall.dto.ReportDTO;
 
 @Service
 public class MemberService {
@@ -24,7 +27,6 @@ public class MemberService {
 	
 	public ModelAndView memberJoin(MemberDTO member) {
 		mav = new ModelAndView();
-		
 		int insertResult = 0;
 		insertResult = mdao.memberJoin(member);
 		if(insertResult > 0) {
@@ -39,9 +41,9 @@ public class MemberService {
 		String CheckResult = mdao.idCheck(mid);
 		String result = "";
 		if(CheckResult == null) {
-			result="ok";
+			result = "ok";
 		} else {
-			result="no";
+			result = "no";
 		}
 		return result;
 	}
@@ -51,7 +53,7 @@ public class MemberService {
 		String loginId = mdao.memberLogin(member);
 		if(loginId != null) {
 			session.setAttribute("loginMember", loginId);
-			mav.setViewName("redirect:/home");
+			mav.setViewName("redirect:/");
 		} else {
 			mav.setViewName("memberlogin");
 		}
@@ -62,7 +64,6 @@ public class MemberService {
 		mav = new ModelAndView();
 		String loginId = (String) session.getAttribute("loginMember");
 		MemberDTO memberUpdate = mdao.memberUpdate(loginId);
-		
 		mav.addObject("memberupdate", memberUpdate);
 		mav.setViewName("memberupdate");
 		return mav;
@@ -81,11 +82,46 @@ public class MemberService {
 
 	public ModelAndView memberDelete(String mid) {
 		mav = new ModelAndView();
+		String loginId = (String) session.getAttribute("loginMember");
 		mdao.memberDelete(mid);
-		mav.setViewName("redirect:/memberlist");
+		if(loginId == "admin") {
+			mav.setViewName("memberlist");
+		}
+		else {
+			mav.setViewName("redirect:/");
+		}
+		session.invalidate();
 		return mav;
 	}
 
+	public ModelAndView myReport() {
+		mav = new ModelAndView();
+		String loginId = (String) session.getAttribute("loginMember");
+		List<ReportDTO> myReport = mdao.myReport(loginId);
+		mav.addObject("myreport", myReport);
+		mav.setViewName("myreport");
+		return mav;
+	}
+
+	public ModelAndView myRecipeList() {
+		mav = new ModelAndView();
+		List<RecipeDTO> myRecipeList = mdao.myRecipeList();
+		mav.addObject("myrecipelist", myRecipeList);
+		mav.setViewName("myrecipelist");
+		return mav;
+	}
+
+	public ModelAndView myBuyRecipe() {
+		mav = new ModelAndView();
+		String loginId = (String) session.getAttribute("loginMember");
+		List<PurchaserDTO> myBuyRecipe = mdao.myBuyRecipe(loginId);
+		mav.addObject("mybuyrecipe", myBuyRecipe);
+		mav.setViewName("mybuyrecipe");
+		return mav;
+	}
+	
+	// 여기부터 관리자페이지
+	
 	public ModelAndView memberList() {
 		mav = new ModelAndView();
 		List<MemberDTO> memberList = mdao.memberList();
@@ -101,6 +137,34 @@ public class MemberService {
 		return mav;
 	}
 
+	public ModelAndView totalReport() {
+		mav = new ModelAndView();
+		List<ReportDTO> totalReport = mdao.totalReport();
+		mav.addObject("totalreport", totalReport);
+		mav.setViewName("reportlist");
+		return mav;
+	}
 	
+	public ModelAndView adminPoint(String mid) {
+		MemberDTO adminPoint = mdao.adminPoint(mid);
+		mav.addObject("adminpoint", adminPoint);
+		mav.setViewName("adminpoint");
+		return mav;
+	}
 
+	public ModelAndView adminPointProcess(MemberDTO member) {
+		mav = new ModelAndView();
+		int pointResult = mdao.adminPointProcess(member);
+		if(pointResult > 0) {
+			mav.setViewName("redirect:/memberlist");
+		} else {
+			mav.setViewName("redirect:/adminpage");
+		}
+		return mav;
+	}
+
+	public MemberDTO memberViewAjax(String mid) {
+		MemberDTO member = mdao.memberView(mid);
+		return member;
+	}
 }

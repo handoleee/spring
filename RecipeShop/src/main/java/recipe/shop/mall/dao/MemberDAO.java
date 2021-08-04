@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import recipe.shop.mall.dto.MemberDTO;
+import recipe.shop.mall.dto.PurchaserDTO;
+import recipe.shop.mall.dto.RecipeDTO;
+import recipe.shop.mall.dto.ReportDTO;
 
 @Repository
 public class MemberDAO {
@@ -38,6 +41,18 @@ public class MemberDAO {
 		sql.delete("mm.memberdelete", mid);
 	}
 
+	public List<ReportDTO> myReport(String loginId) {
+		return sql.selectList("rm.myReport", loginId);
+	}
+
+	public List<RecipeDTO> myRecipeList() {
+		return sql.selectList("rem.myRecipeList");
+	}
+
+	public List<PurchaserDTO> myBuyRecipe(String loginId) {
+		return sql.selectList("pm.myBuyRecipe", loginId);
+	}
+	
 	public List<MemberDTO> memberList() {
 		return sql.selectList("mm.memberlist");
 	}
@@ -45,7 +60,16 @@ public class MemberDAO {
 	public MemberDTO memberView(String mid) {
 		return sql.selectOne("mm.memberview", mid);
 	}
+	
+	public List<ReportDTO> totalReport() {
+		return sql.selectList("rm.totalreport");
+	}
 
-	
-	
+	public MemberDTO adminPoint(String mid) {
+		return sql.selectOne("mm.adminpoint", mid);
+	}
+
+	public int adminPointProcess(MemberDTO member) {
+		return sql.update("mm.adminpointprocess", member);
+	}
 }

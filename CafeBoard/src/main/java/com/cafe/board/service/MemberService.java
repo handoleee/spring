@@ -17,7 +17,6 @@ public class MemberService {
 	@Autowired
 	private MemberDAO mdao;
 	
-	
 	@Autowired
 	private HttpSession session;
 	

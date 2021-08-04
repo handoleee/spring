@@ -4,11 +4,13 @@ import lombok.Data;
 
 @Data
 public class MemberDTO {
-	String mid;
-	String mpassword;
-	String mname;
-	String mphone;
-	String maddress;
-	int mpoint;
-	String memail;
+	private String mid;
+	private String mpassword;
+	private String mname;
+	private String mphone;
+	private String maddr1;
+	private String maddr2;
+	private String maddr3;
+	private int mpoint;
+	private String memail;
 }
