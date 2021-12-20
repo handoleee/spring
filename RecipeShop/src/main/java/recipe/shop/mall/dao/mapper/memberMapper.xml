@@ -3,46 +3,55 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="mm"> 
+ 	<!-- mapper의 insert 쿼리 수행 -->
 	<insert id="memberjoin" parameterType="memberdto">
 		INSERT INTO MEMBERTB(MID, MPASSWORD, MNAME, MPHONE, MADDR1, MADDR2, MADDR3, MPOINT, MEMAIL) VALUES(#{mid}, #{mpassword}, #{mname}, #{mphone}, #{maddr1}, #{maddr2}, #{maddr3}, 0, #{memail})
 	</insert>
 	
+	<!-- mapper의 select 쿼리 수행 -->
 	<select id="idcheck" parameterType="String" resultType="String">
 		SELECT MID FROM MEMBERTB WHERE MID=#{mid}
 	</select>
 	
+	<!-- mapper의 select 쿼리 수행 -->
 	<select id="memberlogin" parameterType="memberdto" resultType="String">
 		SELECT MID FROM MEMBERTB WHERE MID=#{mid} AND MPASSWORD=#{mpassword}
 	</select>
 	
+	<!-- mapper의 select 쿼리 수행 -->
 	<select id="memberlist" resultType="memberdto">
 		SELECT*FROM MEMBERTB ORDER BY MID ASC
 	</select>
 	
+	<!-- mapper의 select 쿼리 수행 -->
 	<select id="memberupdate" parameterType="String" resultType="memberdto">
 		SELECT*FROM MEMBERTB WHERE MID=#{mid}
 	</select>
 	
+	<!-- mapper의 update 쿼리 수행 -->
 	<update id="memberupdateprocess" parameterType="memberdto">
-		UPDATE MEMBERTB SET MPASSWORD=#{mpassword}, MPHONE=#{mphone} WHERE MID=#{mid}
+		UPDATE MEMBERTB SET MPASSWORD=#{mpassword}, MPHONE=#{mphone}, MADDR1=#{maddr1}, MADDR2=#{maddr2}, MADDR3=#{maddr3} WHERE MID=#{mid}
 	</update>
 	
+	<!-- mapper의 select 쿼리 수행 -->
 	<select id="memberview" parameterType="String" resultType="memberdto">
 		SELECT*FROM MEMBERTB WHERE MID=#{mid}
 	</select>
 	
+	<!-- mapper의 delete 쿼리 수행 -->
 	<delete id="memberdelete" parameterType="String">
 		DELETE FROM MEMBERTB WHERE MID=#{mid}
 	</delete>
 	
+	<!-- mapper의 select 쿼리 수행 -->
 	<select id="adminpoint" parameterType="String" resultType="memberdto">
 		SELECT*FROM MEMBERTB WHERE MID=#{mid}
 	</select>
 	
+	<!-- mapper의 update 쿼리 수행 -->
 	<update id="adminpointprocess" parameterType="memberdto">
 		UPDATE MEMBERTB SET MPOINT = MPOINT+#{mpoint} WHERE MID=#{mid}
 	</update>
-	
  </mapper>
  
  

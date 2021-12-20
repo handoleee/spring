@@ -13,8 +13,10 @@ public class RecipeDTO {
 	private String rcategory;
 	private String rperson;
 	private String rtag;
-	private int rprice;
-	private MultipartFile rpic;
-	private String rpicname;
+	private String rprice;
+	private MultipartFile rfile;
+	private String rfilename;
 	private String rlevel;
+	private int rhits;
+	private int rlikes;
 }

@@ -18,11 +18,11 @@
 			}
 		}
 			
-		function addLikeList() {
+		/* function addLikeList() {
 			location.href='addlikelist?cnumber='+${contents.cnumber}+'&loginId='+${loginMember};
 			if(confirm("즐겨찾는 메뉴에 추가하시겠습니까?") == true){
 				alert('추가되었습니다.');
-			}
+			} */
 			
 		}
 	</script>
@@ -43,10 +43,14 @@
 		메뉴설명 : ${contents.cscri}<br>
 		사진 : <img src="resources/menupicture/${contents.cpicname}" height="150" width="150"><br>
 		<a href="contentslist">목록</a>
-		<c:if test="${sessionScope.loginMember != null}">
-		<form name="addlikelist" method="post" action=addlikelist>
-			<input type="hidden" name="likenumber" value="${likelist.lbrandnum}">
-			<input type="submit" value="찜목록">
+		<c:if test="${sessionScope.loginMember ne ('admin')}">
+		<form action="like" name="form" method="get">
+			<input type="hidden" name="lid" value="${sessionScope.loginMember}">
+			<input type="hidden" name="lbrandnum" value="${contents.cnumber}">
+			<input type="submit" value="찜추가">
+			
+			<%-- <input type="hidden" name="likenumber" value="${likelist.lbrandnum}">
+			<input type="submit" value="찜추가"> --%>
 		</form>
 		</c:if>
 		<c:if test="${sessionScope.loginMember eq ('admin')}">

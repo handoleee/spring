@@ -52,7 +52,7 @@ public class ContentsDAO {
 	public List<ContentsDTO> menuSearch(Map<String, String> searchMap) {
 		return sql.selectList("cm.menusearch", searchMap);
 	}
-
+	
 	public List<BrandDTO> brandList(ContentsDTO contents) {
 		return sql.selectList("cm.brandlist", contents);
 	}

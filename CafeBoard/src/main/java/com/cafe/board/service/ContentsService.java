@@ -26,8 +26,8 @@ public class ContentsService {
 	private ModelAndView mav;
 	
 	
-	private static final int PAGE_LIMIT = 3;
-	private static final int BLOCK_LIMIT = 3;
+	private static final int PAGE_LIMIT = 2;
+	private static final int BLOCK_LIMIT = 2;
 	
 	public ModelAndView contentsList(int page) {
 		mav = new ModelAndView();
@@ -54,7 +54,6 @@ public class ContentsService {
 		paging.setMaxPage(maxPage);
 		
 		
-		
 		mav.addObject("contents", contentsList);
 		mav.setViewName("contentslist");
 		mav.addObject("paging", paging);
@@ -78,7 +77,9 @@ public class ContentsService {
 		cpicname = System.currentTimeMillis() + "-" + cpicname;
 		System.out.println("메뉴 추가 "+cpicname);
 //		String savePath = "D:\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\menupicture\\"+cpicname;
-		String savePath = "D:\\phs\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\menupicture\\"+cpicname;
+//		String savePath = "D:\\phs\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\menupicture\\"+cpicname;
+		String savePath = "D:\\2021_academy\\source_phs\\spring\\spring\\CafeBoard\\src\\main\\webapp\\resources\\menupicture\\"+cpicname;
+		
 		if(!cpic.isEmpty()) {
 			cpic.transferTo(new File(savePath));
 		}

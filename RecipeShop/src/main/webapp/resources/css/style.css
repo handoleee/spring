@@ -185,7 +185,22 @@ ol {
 	background: #7fad39;
 	border: none;
 }
-
+input[type="button" i] {
+    appearance: auto;
+    user-select: none;
+    white-space: pre;
+    align-items: flex-start;
+    text-align: center;
+    cursor: default;
+    color: -internal-light-dark(black, white);
+    background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
+    box-sizing: border-box;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+}
 /* Preloder */
 
 #preloder {
@@ -443,7 +458,7 @@ ol {
 	display: inline-block;
 	margin-right: 50px;
 	position: relative;
-}
+}	
 
 .header__menu ul li .header__menu__dropdown {
 	position: absolute;
@@ -477,8 +492,13 @@ ol {
 	font-weight: 400;
 	padding: 5px 15px;
 }
-
+/*  클릭시 초록색으로 바뀌고 유지*/
 .header__menu ul li.active a {
+	color: #7fad39;
+} 
+
+/*  체크하기...왜 안되는지*/
+.container__memlist table tr td.active a {
 	color: #7fad39;
 }
 
@@ -497,6 +517,7 @@ ol {
 }
 
 .header__menu ul li a {
+	font-family: "Cairo", sans-serif;
 	font-size: 14px;
 	color: #252525;
 	text-transform: uppercase;
@@ -734,7 +755,26 @@ ol {
 	float: left;
 }
 
+.hero__search__form__shoplist {
+	width: 610px;
+	height: 50px;
+	border: 1px solid #ebebeb;
+	position: relative;
+	
+}
+
 .hero__search__form form .hero__search__categories {
+	width: 30%;
+	float: left;
+	font-size: 16px;
+	color: #1c1c1c;
+	font-weight: 700;
+	padding-left: 18px;
+	padding-top: 11px;
+	position: relative;
+}
+
+.hero__search__form__shoplist form .hero__search__categories {
 	width: 30%;
 	float: left;
 	font-size: 16px;
@@ -756,7 +796,24 @@ ol {
 	content: "";
 }
 
+.hero__search__form__shoplist form .hero__search__categories:after {
+	position: absolute;
+	right: 0;
+	top: 14px;
+	height: 20px;
+	width: 1px;
+	background: #000000;
+	opacity: 0.1;
+	content: "";
+}
+
 .hero__search__form form .hero__search__categories span {
+	position: absolute;
+	right: 14px;
+	top: 14px;
+}
+
+.hero__search__form__shoplist form .hero__search__categories span {
 	position: absolute;
 	right: 14px;
 	top: 14px;
@@ -771,11 +828,31 @@ ol {
 	padding-left: 20px;
 }
 
+.hero__search__form__shoplist form input {
+	width: 70%;
+	border: none;
+	height: 48px;
+	font-size: 16px;
+	color: #b2b2b2;
+	padding-left: 20px;
+}
+
 .hero__search__form form input::placeholder {
 	color: #b2b2b2;
 }
 
+.hero__search__form__shoplist form input::placeholder {
+	color: #b2b2b2;
+}
+
 .hero__search__form form button {
+	position: absolute;
+	right: 0;
+	top: -1px;
+	height: 50px;
+}
+
+.hero__search__form__shoplist form button {
 	position: absolute;
 	right: 0;
 	top: -1px;
@@ -3002,6 +3079,7 @@ ol {
 	.header__menu ul li {
 		margin-right: 45px;
 	}
+	
 	.hero__search__form {
 		width: 490px;
 	}
@@ -3239,6 +3317,7 @@ ol {
 	.header__menu {
 		display: none;
 	}
+	
 	.header__cart {
 		text-align: center;
 		padding: 10px 0 24px;
@@ -3497,6 +3576,7 @@ ol {
 	.header__menu {
 		display: none;
 	}
+	
 	.header__cart {
 		text-align: center;
 		padding: 10px 0 24px;
@@ -3553,4 +3633,10 @@ ol {
 	.blog__details__hero__text h2 {
 		font-size: 24px;
 	}
+	
+	/* .title {
+		font-size: 24px;
+		font-weight: bold;
+		color: #7fad39;
+	} */
 }

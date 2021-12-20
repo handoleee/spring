@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="sp"> 
+ 
+ 	<!-- 재료등록 처리 -->
+	<insert id="shopadd" parameterType="shopdto">
+		INSERT INTO SHOPPINGTB(SNUMBER, SNAME, SPRICE, SSTOCK, SFILENAME, SORIGIN, SMAKE, SBOX, STIME, SCONTENTS) 
+		VALUES(S_NUM_SEQ.NEXTVAL, #{sname}, #{sprice}, #{sstock}, #{sfilename}, #{sorigin}, #{smake}, #{sbox}, #{stime}, #{scontents})
+	</insert>
+	
+	
+	<!-- 상품목록조회 -->
+	<select id="shoplist" resultType="shopdto">
+		SELECT * FROM SHOPPINGTB
+	</select>
+	
+	<!-- 상품상세조회 -->
+	<select id= "shopview" parameterType="int" resultType="shopdto">
+		SELECT * FROM SHOPPINGTB WHERE SNUMBER=#{snumber}
+	</select>
+	
+	<!-- 상품수정처리 -->
+	<select id= "shopupdate" parameterType="shopdto">
+		UPDATE SHOPPINGTB SET 
+		SNAME=#{sname}, 
+		SPRICE=#{sprice},
+		SSTOCK=#{sstock},
+		SFILENAME=#{sfilename},
+		SORIGIN=#{sorigin},
+		SMAKE=#{smake},
+		SBOX=#{sbox},
+		STIME=#{stime},
+		SCONTENTS=#{scontents}    
+		WHERE SNUMBER=#{snumber}
+	</select>
+	
+	<!-- 재료삭제 -->
+	 <delete id="shopdelete" parameterType="int">
+		DELETE FROM SHOPPINGTB WHERE SNUMBER=#{snumber}
+	</delete>
+	
+	<!-- 재료 검색 -->
+	<select id="shopsearch" parameterType="String" resultType="shopdto">
+		SELECT * FROM SHOPPINGTB
+			WHERE SNAME LIKE '%'||#{keyword}||'%'
+	</select>
+	
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

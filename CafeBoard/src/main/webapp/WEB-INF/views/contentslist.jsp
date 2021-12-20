@@ -55,16 +55,16 @@
 		<input type="submit" value="검색">
 	</form>
 	
-	메뉴 사진<br>
+	<%-- 메뉴 사진<br>
 	<c:forEach items="${contents}" var="i">
 	
 	<a href="menuview?cnumber=${i.cnumber}"><img src="resources/menupicture/${i.cpicname}" height="150" width="150"></a><br>
-	</c:forEach>
+	</c:forEach> --%>
 	
 		<table>		
 		<tr>
 			<th>브랜드</th>
-			<th>등록번호</th>
+			<th>사진</th>
 			<th>메뉴이름</th>
 			<th>가격</th>
 			<th>용량</th>
@@ -73,7 +73,8 @@
 		<c:forEach var="contents" items="${contents}">
 		<tr>
 			<td>${contents.cbrand}</td>
-			<td><a href="menuview?cnumber=${contents.cnumber}&page=${paging.page}">${contents.cnumber}</a></td>
+			<td><a href="menuview?cnumber=${contents.cnumber}">
+			<img src="resources/menupicture/${contents.cpicname}" height="100" width="100"></a></td>
 			<td>${contents.cname}</td>
 			<td>${contents.cprice}</td>
 			<td>${contents.csize}</td>

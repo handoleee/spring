@@ -2,21 +2,115 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
- <mapper namespace="rem"> 
+<mapper namespace="rm">
+		
+	<select id="recipelist" parameterType="pagedto" resultType="recipedto">
+		SELECT * FROM (SELECT R.*, ROW_NUMBER() OVER(ORDER BY RNUMBER DESC)
+			AS RN FROM RECIPETB R) WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
 	
-	<select id="myrecipelist" resultType="recipedto">
-		SELECT*FROM RECIPETB WHERE RNAME=#{rname}
-	</select> 
- </mapper>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+	<insert id="recipewrite" parameterType="recipedto">
+		INSERT INTO RECIPETB(RNUMBER, RNAME, RTITLE, RCONTENTS, RCATEGORY, RPERSON, RTAG, RPRICE, RFILENAME, RLEVEL, RHITS, RLIKES)	
+			VALUES(R_NUM_SEQ.NEXTVAL, #{rname}, #{rtitle}, #{rcontents}, #{rcategory}, #{rperson}, #{rtag}, #{rprice}, #{rfilename}, #{rlevel}, 0, 0)
+	</insert>
+	
+	<select id="recipewritenumber" resultType="int">
+		SELECT MAX(RNUMBER) FROM RECIPETB
+	</select>
+	
+	<insert id="materialwrite" parameterType="materialdto">
+		INSERT INTO MATERIALTB(MTNUMBER, MTRNUMBER, MTNAME1, MTVOLUME1, MTNAME2, MTVOLUME2, MTNAME3, MTVOLUME3, MTNAME4, MTVOLUME4, MTNAME5, MTVOLUME5)
+			VALUES(MT_NUM_SEQ.NEXTVAL, #{mtrnumber}, #{mtname1}, #{mtvolume1}, #{mtname2}, #{mtvolume2}, #{mtname3}, #{mtvolume3}, #{mtname4}, #{mtvolume4}, #{mtname5}, #{mtvolume5})	
+	</insert>
+	
+	<insert id="orderwrite" parameterType="orderdto">
+		INSERT INTO ORDERTB(ONUMBER, ORNUMBER, OFILENAME1, OCONTENTS1, OFILENAME2, OCONTENTS2, OFILENAME3, OCONTENTS3, OFILENAME4, OCONTENTS4, OFILENAME5, OCONTENTS5)
+			VALUES(O_NUM_SEQ.NEXTVAL, #{ornumber}, #{ofilename1}, #{ocontents1}, #{ofilename2}, #{ocontents2}, #{ofilename3}, #{ocontents3}, #{ofilename4}, #{ocontents4}, #{ofilename5}, #{ocontents5})
+	</insert>
+	
+	<select id="recipeview" parameterType="int" resultType="recipedto">
+		SELECT * FROM RECIPETB WHERE RNUMBER=#{rnumber}
+	</select>
+	
+	<select id="materialview" parameterType="int" resultType="materialdto">
+		SELECT * FROM MATERIALTB WHERE MTRNUMBER=#{rnumber}
+	</select>
+	
+	<select id="orderview" parameterType="int" resultType="orderdto">
+		SELECT * FROM ORDERTB WHERE ORNUMBER=#{rnumber}
+	</select>
+	
+	<update id="updatehits" parameterType="recipedto">
+		UPDATE RECIPETB SET RHITS=#{rhits} WHERE RNUMBER=#{rnumber}
+	</update>
+	
+	<insert id="recipereportprocess" parameterType="reportdto"> 
+		INSERT INTO REPORTTB(RPNUMBER, RPRNUMBER, RPNAME, RPCONTENTS, RPCHECK, RPANSWER)
+			VALUES(RP_NUM_SEQ.NEXTVAL, #{rprnumber}, #{rpname}, #{rpcontents}, #{rpcheck}, #{rpanswer})
+	</insert>
+	
+	<delete id="recipedelete" parameterType="int">
+		DELETE FROM RECIPETB WHERE RNUMBER=#{rnumber}
+	</delete>
+	
+	<select id="reciperanking" resultType="recipedto">
+		SELECT * FROM RECIPETB ORDER BY RHITS DESC
+	</select>
+	
+	<select id="recipesearch" parameterType="String" resultType="recipedto">
+		SELECT * FROM RECIPETB
+			WHERE RTITLE LIKE '%'||#{keyword}||'%'
+	</select>
+	
+	<select id="categorysearch" parameterType="String" resultType="recipedto">
+		SELECT * FROM RECIPETB
+			WHERE RCATEGORY LIKE '%'||#{keyword}||'%'
+	</select>
+	
+	<!-- mapper의 select 쿼리 수행 -->
+	<select id="totalreport" resultType="reportdto">
+		SELECT * FROM REPORTTB
+	</select>
+	
+	<!-- mapper의 select 쿼리 수행 -->
+	<select id="myrecipelist" parameterType="String" resultType="recipedto">
+		SELECT * FROM RECIPETB WHERE RNAME=#{rname}
+	</select>
+	
+	<!-- mapper의 select 쿼리 수행 -->
+	<select id="myreport" parameterType="String" resultType="reportdto">
+		SELECT * FROM REPORTTB WHERE RPNAME=#{rpname}
+	</select>
+	
+	<select id="reportview" parameterType="int" resultType="reportdto">
+		SELECT * FROM REPORTTB WHERE RPNUMBER=#{rpnumber}
+	</select>
+	
+	<update id="reportupdateprocess" parameterType="reportdto">
+		UPDATE REPORTTB SET RPCHECK=#{rpcheck}, RPANSWER=#{rpanswer} WHERE RPNUMBER=#{rpnumber}
+	</update>
+	
+	<select id="listcount" resultType="int">
+		SELECT COUNT(RNUMBER) FROM RECIPETB
+	</select>
+	
+	<!-- <select id="mybuyrecipe" parameterType="purchaserdto" resultType="String">
+		SELECT * FROM PURCHASERTB WHERE PNAME=#{pname}
+	</select> -->
+	
+	<update id="recipeupdate" parameterType="recipedto">
+		UPDATE RECIPETB SET RTITLE=#{rtitle}, RCONTENTS=#{rcontents}, RCATEGORY=#{rcategory}, RPERSON=#{rperson}, RLEVEL=#{rlevel}, RTAG=#{rtag}, RPRICE=#{rprice}, RFILENAME=#{rfilename}
+			WHERE RNUMBER=#{rnumber}
+	</update>
+	
+	<update id="materialupdate" parameterType="materialdto">
+		UPDATE MATERIALTB SET MTNAME1=#{mtname1}, MTVOLUME1=#{mtvolume1}, MTNAME2=#{mtname2}, MTVOLUME2=#{mtvolume2}, MTNAME3=#{mtname3}, MTVOLUME3=#{mtvolume3}, MTNAME4=#{mtname4}, MTVOLUME4=#{mtvolume4}, MTNAME5=#{mtname5}, MTVOLUME5=#{mtvolume5}
+			WHERE MTRNUMBER=#{mtrnumber} 
+	</update>
+	
+	<update id="orderupdate" parameterType="orderdto">
+		UPDATE ORDERTB SET OFILENAME1=#{ofilename1}, OCONTENTS1=#{ocontents1}, OFILENAME2=#{ofilename2}, OCONTENTS2=#{ocontents2}, OFILENAME3=#{ofilename3}, OCONTENTS3=#{ocontents3}, OFILENAME4=#{ofilename4}, OCONTENTS4=#{ocontents4}, OFILENAME5=#{ofilename5}, OCONTENTS5=#{ocontents5}    
+			WHERE ORNUMBER=#{ornumber} 
+	</update>
+	
+</mapper>

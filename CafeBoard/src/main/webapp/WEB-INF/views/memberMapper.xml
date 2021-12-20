@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="mm"> 
+	<insert id="memberjoin" parameterType="memberdto">
+		INSERT INTO MEMBERTB(
+			MID, MPASSWORD, MPHONE, MNAME) VALUES(#{mid},#{mpassword},#{mphone},#{mname})
+	</insert>
+	
+	<select id="idcheck" parameterType="String" resultType="String">
+		SELECT MID FROM MEMBERTB WHERE MID=#{mid}
+	</select>
+	
+	<select id="memberlogin" parameterType="memberdto" resultType="String">
+		SELECT MID FROM MEMBERTB WHERE MID=#{mid} AND MPASSWORD=#{mpassword}
+	</select>
+	
+	<select id="memberlist" resultType="memberdto">
+		SELECT*FROM MEMBERTB ORDER BY MID ASC
+	</select>
+	
+	<select id="memberupdate" parameterType="String" resultType="memberdto">
+		SELECT*FROM MEMBERTB WHERE MID=#{mid}
+	</select>
+	
+	<update id="memberupdateprocess" parameterType="memberdto">
+		UPDATE MEMBERTB SET MPASSWORD=#{mpassword}, MNAME=#{mname}, MPHONE=#{mphone} WHERE MID=#{mid}
+	</update>
+
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

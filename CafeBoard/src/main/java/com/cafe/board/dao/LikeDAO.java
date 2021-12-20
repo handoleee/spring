@@ -14,9 +14,11 @@ public class LikeDAO {
 	@Autowired
 	private SqlSessionTemplate sql;
 
-	public List<LikeDTO> likeList(String lid) {
-		return sql.selectList("lm.likelist");
-	}
+	/*
+	 * public List<LikeDTO> likeList(String lid) { return
+	 * sql.selectList("lm.likelist"); }
+	 */
+	
 	
 //	public int addLikeList(LikeDTO like) {
 //		return sql.insert("lm.addlikelist", like);
@@ -30,7 +32,13 @@ public class LikeDAO {
 //		return sql.selectList("lm.likelist", lid);
 //	}
 //
-	
+	public int like(LikeDTO like) {
+		return sql.insert("lm.like", like);
+	}
+
+	public List<LikeDTO> likeList(String lid) {
+		return sql.selectList("lm.likelist", lid);
+	}
 
 	
 

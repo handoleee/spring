@@ -5,11 +5,18 @@
 	<settings> 
     	<setting name="cacheEnabled" value="false" />
     	<setting name="jdbcTypeForNull" value="NULL" />
-	</settings>
+	</settings> 
 	<typeAliases>
 		<typeAlias type="recipe.shop.mall.dto.MemberDTO" alias="memberdto"/>
 		<typeAlias type="recipe.shop.mall.dto.PurchaserDTO" alias="purchaserdto"/>
 		<typeAlias type="recipe.shop.mall.dto.RecipeDTO" alias="recipedto"/>
 		<typeAlias type="recipe.shop.mall.dto.ReportDTO" alias="reportdto"/>
+		<typeAlias type="recipe.shop.mall.dto.MaterialDTO" alias="materialdto"/>
+		<typeAlias type="recipe.shop.mall.dto.OrderDTO" alias="orderdto"/>
+		<typeAlias type="recipe.shop.mall.dto.CommentDTO" alias="commentdto"/>
+		<typeAlias type="recipe.shop.mall.dto.ShopDTO" alias="shopdto"/>
+		<typeAlias type="recipe.shop.mall.dto.CartDTO" alias="cartdto"/>
+		<typeAlias type="recipe.shop.mall.dto.PageDTO" alias="pagedto"/>
+		<typeAlias type="recipe.shop.mall.dto.ShopCommentDTO" alias="shopcommentdto"/>
 	</typeAliases>
 </configuration>

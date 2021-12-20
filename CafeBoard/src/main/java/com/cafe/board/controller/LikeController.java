@@ -1,17 +1,14 @@
 package com.cafe.board.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cafe.board.dto.LikeDTO;
-import com.cafe.board.dto.MemberDTO;
 import com.cafe.board.service.LikeService;
 
 @Controller
@@ -23,17 +20,19 @@ public class LikeController {
 	private ModelAndView mav;
 	
 	// 찜목록 이동
-	@RequestMapping(value="/likelistpage")
-	public String likeListPage() {
-		return "likelist";
-	}
-	// 찜목록
-	@RequestMapping(value="/likelist")
-	public ModelAndView likeList(String lid) {
-		mav = ls.likeList(lid);
-		return mav;
-	}
+//	@RequestMapping(value="/likelistpage")
+//	public String likeListPage() {
+//		return "likelist";
+//	}
+//	// 찜목록
+//	@RequestMapping(value="/likelist")
+//	public ModelAndView likeList(String lid) {
+//		mav = ls.likeList(lid);
+//		return mav;
+//	}
 
+	
+	
 //	// 장바구니 추가
 //	@RequestMapping(value="/addlikelist")
 //	public ModelAndView addLikeList(@ModelAttribute LikeDTO like) {
@@ -69,6 +68,20 @@ public class LikeController {
 //		mav = ls.addLikeListProcess(like);
 //		return mav;
 //	}
+	
+	//장바구니 담기
+	@RequestMapping(value="/like")
+	public ModelAndView like(@ModelAttribute LikeDTO like) {
+		mav = ls.like(like);
+		return mav;
+	}
+	
+	//내 장바구니
+	@RequestMapping(value="/likelist")
+	public ModelAndView likeList(@RequestParam("lid") String lid) {
+		mav = ls.likeList(lid);
+		return mav;
+	}
 	
 
 }

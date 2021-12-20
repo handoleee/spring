@@ -13,4 +13,5 @@ public class MemberDTO {
 	private String maddr3;
 	private int mpoint;
 	private String memail;
+	
 }

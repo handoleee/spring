@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="rcm">
+	<insert id="recipecommentwrite" parameterType="commentdto">
+		INSERT INTO COMMENTTB(CNUMBER, CRNUMBER, CNAME, CCONTENTS, CGRADE)
+			VALUES(C_NUM_SEQ.NEXTVAL, #{crnumber}, #{cname}, #{ccontents}, #{cgrade})
+	</insert>
+	
+	<select id="recipecommentlist" parameterType="int" resultType="commentdto">
+		SELECT * FROM COMMENTTB WHERE CRNUMBER=#{crnumber} ORDER BY CNUMBER DESC
+	</select>
+	
+	<delete id="recipecommentdelete" parameterType="commentdto">
+		DELETE FROM COMMENTTB WHERE CNUMBER=#{cnumber}	
+	</delete>
+	
+	<select id="recipecommentupdate" parameterType="int">
+		SELECT * FROM COMMENTTB WHERE CNUMBER=#{cnumber}
+	</select>
+	
+	<update id="recipecommentupdateprocess" parameterType="commentdto">
+		UPDATE COMMENTTB SET CCONTENTS=#{ccontents}, CGRADE=#{cgrade} WHERE CNUMBER=#{cnumber}
+	</update>
+</mapper>

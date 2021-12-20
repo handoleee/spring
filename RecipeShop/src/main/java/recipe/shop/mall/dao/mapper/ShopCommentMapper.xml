@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="srcm">
+	<insert id="shopcommentwrite" parameterType="shopcommentdto">
+		INSERT INTO SHOPCOMMENTTB(SRNUMBER, SRSNUMBER, SRNAME, SRCONTENTS, SRGRADE)
+			VALUES(SC_NUM_SEQ.NEXTVAL, #{srsnumber}, #{srname}, #{srcontents}, #{srgrade})
+	</insert>
+	
+	<select id="shopcommentlist" parameterType="int" resultType="shopcommentdto">
+		SELECT * FROM SHOPCOMMENTTB WHERE SRSNUMBER=#{srsnumber} ORDER BY SRNUMBER DESC
+	</select>
+	
+	
+</mapper>

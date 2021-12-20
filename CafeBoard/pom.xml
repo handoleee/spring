@@ -170,6 +170,7 @@
 			<artifactId>spring-test</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		
 	</dependencies>
 	
 	<repositories>

@@ -14,25 +14,32 @@
 <body>
 	<h2>즐겨찾는 메뉴</h2>
 	
-	<table>		
+	 <table>		
 		<tr>
-			<th>브랜드</th>
+			<!-- <th>브랜드</th>
 			<th>등록번호</th>
 			<th>메뉴이름</th>
+			<th>가격</th>
+			<th>용량</th> -->
+			<th>브랜드</th>
+			<th>메뉴</th>
 			<th>가격</th>
 			<th>용량</th>
 		</tr>
 		
-		<c:forEach var="likelist" items="${likelist}">
-		<tr>
-			<td>${likelist.cbrand}</td>
-			<td><a href="menuview?cnumber=${likelist.cnumber}">${likelist.cnumber}</a></td>
-			<td>${likelist.cname}</td>
-			<td>${likelist.cprice}</td>
-			<td>${likelist.csize}</td>
-		</tr>
+		<c:forEach var="likelist" items="${likelist}" varStatus="i">
+			<tr>
+				<td>${likelist.cbrand}</td>
+				<td>${likelist.cname}</td>
+				<td>${likelist.cprice}</td>
+				<td>${likelist.csize}</td>
+				<%-- <td><a href="menuview?cnumber=${likelist.cnumber}">${likelist.cnumber}</a></td>
+				<td>${likelist.name}</td>
+				<td>${likelist.cprice}</td>
+				<td>${likelist.csize}</td> --%>
+			</tr>
 		</c:forEach>
-		</table>
+		</table> 
 	
 </body>
 </html>

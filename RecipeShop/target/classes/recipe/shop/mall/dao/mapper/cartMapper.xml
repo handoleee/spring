@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="cart"> 
+	<insert id="shopcart" parameterType="cartdto">
+		INSERT INTO SBASKETTB(SBNUMBER, SBMID, SBNAME, SBSNUMBER, SBQUANTITY, SBPRICE, SUM) 
+		VALUES(SB_NUM_SEQ.NEXTVAL, #{sbmid}, #{sbname}, #{sbsnumber}, #{sbquantity}, #{sbprice}, #{sum})
+	</insert>
+	
+	<!-- 내 장바구니 -->
+ 	<select id="bsaklist" parameterType="String" resultType="cartdto">
+		SELECT * FROM SBASKETTB WHERE SBMID=#{sbmid}
+	</select>
+	
+	<select id= "cartview" parameterType="int" resultType="cartdto">
+		SELECT * FROM SBASKETTB WHERE SbNUMBER=#{sbnumber}
+	</select>
+	
+	<!-- 장바구니 취소 -->
+	<delete id="cartdelete" parameterType="int">
+		DELETE FROM SBASKETTB WHERE SBNUMBER=#{sbnumber}
+	</delete>
+	
+	<!-- 수정 요청 -->
+	<update id="cartupdate" parameterType="cartdto">
+		UPDATE SBASKETTB 
+		SET 
+		SBMID=#{sbmid}, 
+		SBNAME=#{sbname},
+		SBPRICE=#{sbprice},
+		SBQUANTITY=#{sbquantity},
+		SUM=#{sum}
+		WHERE 
+		SBNUMBER=#{sbnumber}
+	</update>
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
